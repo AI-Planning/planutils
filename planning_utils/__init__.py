@@ -17,7 +17,15 @@ def setup():
     from planning_utils.planner_installation import PLANNERS
     for p in PLANNERS:
         script  = "#!/bin/bash\n"
-        script += "echo 'Planner not installed! Run planning-utils --install %s'\n" % p
+        script += "echo\n"
+        script += "echo 'Planner not installed!'\n"
+        script += "echo 'Download & install? [y/n] '\n"
+        script += "read choice\n"
+        script += "if (\"$choice\" == \"y\")\n"
+        script += "then\n"
+        script += "  planning-utils --install " + p + "\n"
+        script += "fi\n"
+        script += "echo"
         with open(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', p), 'w') as f:
             f.write(script)
         os.chmod(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', p), 0o0755)

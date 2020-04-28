@@ -7,14 +7,14 @@ def setup():
     assert not_setup_yet(), "Error: planning-utils is already setup."
 
     print("Creating ~/.planning-utils...")
-    os.mkdir(os.join('~', '.planning-utils'))
-    os.mkdir(os.join('~', '.planning-utils', 'bin'))
+    os.mkdir(os.path.join('~', '.planning-utils'))
+    os.mkdir(os.path.join('~', '.planning-utils', 'bin'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     os.system('echo "export PATH=\\"$HOME/.planning-utils/bin:$PATH\\" >> ~/.bashrc')
 
 def not_setup_yet():
-    return not os.path.exists(os.join('~', '.planning-utils'))
+    return not os.path.exists(os.path.join('~', '.planning-utils'))
 
 def main():
     parser = argparse.ArgumentParser()

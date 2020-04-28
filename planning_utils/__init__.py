@@ -4,8 +4,6 @@ import argparse, os
 
 def setup():
 
-    import stat
-    
     assert not_setup_yet(), "Error: planning-utils is already setup. Remove ~/.planning-utils to reset (warning: all cached planners will be lost)."
 
     print("\nCreating ~/.planning-utils...")
@@ -19,10 +17,10 @@ def setup():
     from planning_utils.planner_installation import PLANNERS
     for p in PLANNERS:
         script  = "#!/bin/bash\n"
-        script += "echo 'Planner not installed! Run planning-utils --install %s\n" % p
+        script += "echo 'Planner not installed! Run planning-utils --install %s'\n" % p
         with open(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', p), 'w') as f:
             f.write(script)
-        os.chmod(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', p), stat.S_IEXEC)
+        os.chmod(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', p), 0o0755)
 
 
     print("\nAll set! Be sure to start a new bash session or update your PATH variable to include ~/.planning-utils/bin\n")
@@ -44,7 +42,7 @@ def main():
     if args.setup:
         setup()
     elif not_setup_yet():
-        print("Please run 'planning-utils --setup' before using utility.")
+        print("\nPlease run 'planning-utils --setup' before using utility.\n")
         exit()
 
     if args.install:

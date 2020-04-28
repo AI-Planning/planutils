@@ -6,7 +6,7 @@ PLANNERS = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
-for conf_file in glob.glob(os.path.join(CUR_DIR, 'planner_configs', '*')):
+for conf_file in glob.glob(os.path.join(CUR_DIR, 'planner_configs', '*.json')):
     with open(conf_file, 'r') as f:
         config = json.load(f)
     assert config['shortname'] not in PLANNERS, "Error: Duplicate planner config -- %s" % config['shortname']
@@ -39,7 +39,7 @@ def install(target):
 
 
 def binary_path(planner):
-    return os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin')
+    return os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', planner)
 
 def install_planners(planner_set):
     raise NotImplementedError
@@ -57,8 +57,8 @@ def install_planner(planner):
             (PLANNERS[planner]['details']['name'], PLANNERS[planner]['details']['shub']))
         cmd = "singularity run %s" % PLANNERS[planner]['details']['name']
     
-    script = "#!/bin/bash\n"
-    script = "%s $@\n"
+    script  = "#!/bin/bash\n"
+    script += "%s $@\n" % cmd
 
     with open(binary_path(planner), 'w') as f:
         f.write(script)

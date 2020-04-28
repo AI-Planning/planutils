@@ -21,4 +21,5 @@ setuptools.setup(name='python-utils',
           "Operating System :: Linux",
       ],
       python_requires='>=3.6',
+      include_package_data=True,
       zip_safe=False)

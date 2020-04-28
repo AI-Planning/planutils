@@ -13,7 +13,7 @@ setuptools.setup(name='python-utils',
       author='',
       author_email='',
       license='MIT',
-      packages=['planning-utils'],
+      packages=['planning_utils'],
       scripts=['bin/planning-utils'],
       classifiers=[
           "Programming Language :: Python :: 3",

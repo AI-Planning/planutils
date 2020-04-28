@@ -1,13 +1,14 @@
 # planning-utils
+
 General library for setting up linux-based environments for developing, running, and evaluating planners.
 
-
 ## Usage
+
 This doesn't work yet, but gives a general sense of where the project may be headed.
 
-```
+```bash
 $ planning-utils --install-planners ipc-2018
-This will require 3Gb of storage. Proceed? [Y/n] 
+This will require 3Gb of storage. Proceed? [Y/n]
 Fetching all of the planners from IPC-2018 for use on the command line...
 
 $ planning-utils --setup-server-environment

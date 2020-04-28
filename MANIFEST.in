@@ -1,1 +1,1 @@
-include planning_utils/planner_configs/*.json
+include planutils/planner_configs/*.json

@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 
-import planning_utils
-planning_utils.main()
+import planutils
+planutils.main()

@@ -33,8 +33,8 @@ RUN wget -O- http://neuro.debian.net/lists/bionic.us-nh.full | tee /etc/apt/sour
 RUN apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
 RUN apt-get update && apt-get install -y singularity-container
 
-# install the planning-utils
-RUN pip3 install planning-utils
+# install the planutils
+RUN pip3 install planutils
 
 # default command to execute when container starts
 CMD /bin/bash

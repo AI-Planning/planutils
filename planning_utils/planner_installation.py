@@ -34,10 +34,6 @@ def install(target):
         install_planners(target)
     
 
-# singularity pull --name downward.simg shub://aibasel/downward
-# singularity run downward.simg --alias lama-first $BENCHMARKS/gripper/prob01.pddl
-
-
 def binary_path(planner):
     return os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin', planner)
 

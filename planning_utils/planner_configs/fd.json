@@ -1,6 +1,7 @@
 {
     "name": "FastDownward",
     "shortname": "fd",
+    "description": "Coming soon...",
     "method": "singularity",
     "details": {
         "type": "hub",

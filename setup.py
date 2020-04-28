@@ -18,7 +18,7 @@ setuptools.setup(name='python-utils',
       classifiers=[
           "Programming Language :: Python :: 3",
           "License :: OSI Approved :: MIT License",
-          "Operating System :: Linux",
+          "Operating System :: POSIX :: Linux",
       ],
       python_requires='>=3.6',
       include_package_data=True,

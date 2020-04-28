@@ -1,6 +1,7 @@
 {
     "name": "Lama First",
     "shortname": "lama",
+    "description": "Coming soon...",
     "method": "proxy",
     "details": {
         "base": "fd",

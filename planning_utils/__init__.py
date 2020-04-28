@@ -10,18 +10,17 @@ def setup():
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planning-utils'))
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin'))
 
-    print("\nAdding bin folder to path (assuming ~/.bashrc exists)...")
+    print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     os.system('echo \'export PATH="$HOME/.planning-utils/bin:$PATH"\' >> ~/.bashrc')
 
-    print("\nInstalling planner scripts...")
+    print("Installing planner scripts...")
     from planning_utils.planner_installation import PLANNERS
     for p in PLANNERS:
         script  = "#!/bin/bash\n"
         script += "echo\n"
         script += "echo 'Planner not installed!'\n"
-        script += "echo 'Download & install? [y/n] '\n"
-        script += "read choice\n"
-        script += "if (\"$choice\" == \"y\")\n"
+        script += "read -p \"Download & install? [y/n] \" varchoice\n"
+        script += "if [ $varchoice == \"y\" ]\n"
         script += "then\n"
         script += "  planning-utils --install " + p + "\n"
         script += "fi\n"

@@ -39,7 +39,7 @@ def install(target):
 
 
 def binary_path(planner):
-    return os.path.join('~', '.planning-utils', 'bin')
+    return os.path.join(os.path.expanduser('~'), '.planning-utils', 'bin')
 
 def install_planners(planner_set):
     raise NotImplementedError

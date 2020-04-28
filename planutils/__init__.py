@@ -14,7 +14,7 @@ def setup():
     os.system('echo \'export PATH="$HOME/.planutils/bin:$PATH"\' >> ~/.bashrc')
 
     print("Installing planner scripts...")
-    from planning_utils.planner_installation import PLANNERS
+    from planutils.planner_installation import PLANNERS
     for p in PLANNERS:
         script  = "#!/bin/bash\n"
         script += "echo\n"
@@ -53,5 +53,5 @@ def main():
         exit()
 
     if args.install:
-        from planning_utils.planner_installation import install
+        from planutils.planner_installation import install
         install(args.install)

@@ -4,7 +4,9 @@ import json, os, glob
 
 PLANNERS = {}
 
-for conf_file in glob.glob('planner_configs/*'):
+CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+
+for conf_file in glob.glob(os.path.join(CUR_DIR, 'planner_configs', '*')):
     with open(conf_file, 'r') as f:
         config = json.load(f)
     assert config['shortname'] not in PLANNERS, "Error: Duplicate planner config -- %s" % config['shortname']
@@ -22,6 +24,8 @@ def install(target):
         print("\nPlanners:")
         for p in PLANNERS:
             print(" - %s: %s" % (p, PLANNERS[p]['name']))
+        
+        print()
 
     elif target in PLANNERS:
         install_planner(target)
@@ -35,7 +39,7 @@ def install(target):
 
 
 def binary_path(planner):
-    pass
+    return os.path.join('~', '.planning-utils', 'bin')
 
 def install_planners(planner_set):
     raise NotImplementedError

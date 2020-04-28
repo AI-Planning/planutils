@@ -37,3 +37,9 @@ Ready! Please try running the planner again.
 $ lama domain.pddl problem.pddl
 Parsing...
 ```
+
+### Docker
+
+The included Docker file will come with planutils pre-installed. Note that in order to
+run a number of the planners (all those that are based on singularity), you will need
+to run the docker with the `--privileged` option.

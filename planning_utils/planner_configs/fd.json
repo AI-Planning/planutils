@@ -1,0 +1,10 @@
+{
+    "name": "FastDownward",
+    "shortname": "fd",
+    "method": "singularity",
+    "details": {
+        "type": "hub",
+        "name": "downward.simg",
+        "shub": "shub://aibasel/downward"
+    }
+}

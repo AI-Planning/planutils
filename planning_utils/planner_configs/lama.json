@@ -1,0 +1,9 @@
+{
+    "name": "Lama First",
+    "shortname": "lama",
+    "method": "proxy",
+    "details": {
+        "base": "fd",
+        "suffix": "--alias lama-first"
+    }
+}

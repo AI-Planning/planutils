@@ -9,6 +9,7 @@ def setup():
     print("\nCreating ~/.planutils...")
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils'))
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
+    os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', 'images'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     os.system('echo \'export PATH="$HOME/.planutils/bin:$PATH"\' >> ~/.bashrc')

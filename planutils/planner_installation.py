@@ -34,8 +34,11 @@ def install(target):
         install_planners(target)
     
 
+def bin_path():
+    return os.path.join(os.path.expanduser('~'), '.planutils', 'bin')
+
 def binary_path(planner):
-    return os.path.join(os.path.expanduser('~'), '.planutils', 'bin', planner)
+    return os.path.join(bin_path(), planner)
 
 def install_planners(planner_set):
     raise NotImplementedError
@@ -49,7 +52,7 @@ def install_planner(planner):
         cmd = "%s %s" % (PLANNERS[planner]['details']['base'], PLANNERS[planner]['details']['suffix'])
     
     elif PLANNERS[planner]['method'] == 'singularity':
-        image_path = os.path.join(binary_path(planner), 'images', PLANNERS[planner]['details']['name'])
+        image_path = os.path.join(bin_path(), 'images', PLANNERS[planner]['details']['name'])
         os.system("singularity pull --name %s %s" % \
             (PLANNERS[planner]['details']['name'], PLANNERS[planner]['details']['shub']))
         os.system("mv %s %s" % (PLANNERS[planner]['details']['name'], image_path))

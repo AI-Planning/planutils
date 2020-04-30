@@ -49,9 +49,10 @@ def install_planner(planner):
         cmd = "%s %s" % (PLANNERS[planner]['details']['base'], PLANNERS[planner]['details']['suffix'])
     
     elif PLANNERS[planner]['method'] == 'singularity':
+        image_path = os.path.join(binary_path(planner), 'images', PLANNERS[planner]['details']['name'])
         os.system("singularity pull --name %s %s" % \
             (PLANNERS[planner]['details']['name'], PLANNERS[planner]['details']['shub']))
-        image_path = os.path.join(binary_path(planner), 'images', PLANNERS[planner]['details']['name'])
+        os.system("mv %s %s" % (PLANNERS[planner]['details']['name'], image_path))
         cmd = "singularity run %s" % image_path
     
     script  = "#!/bin/bash\n"

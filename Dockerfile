@@ -1,61 +1,55 @@
+# Stage 1: Build singularity
+FROM golang:1.14 AS singularitybuilder
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive  apt-get install --no-install-recommends -y \
+    build-essential \
+    cryptsetup-bin \
+    git \
+    libgpgme-dev \
+    libseccomp-dev \
+    libssl-dev \
+    pkg-config \
+    squashfs-tools \
+    uuid-dev \
+    wget
+
+ENV VERSION=3.5.0
+RUN wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz
+RUN tar -xzf singularity-${VERSION}.tar.gz
+WORKDIR /go/singularity
+RUN ./mconfig -p /usr/local/singularity
+RUN make -C ./builddir
+RUN make -C ./builddir install
+
+
+
+# Stage 2: Build main container
 FROM ubuntu:18.04
 
-#maintainer information
 LABEL maintainer="Christian Muise (christian.muise@queensu.ca)"
 
-# update the apt package manager
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN apt-get update && apt-get -y install locales
+COPY --from=singularitybuilder /usr/local/singularity /usr/local/singularity
+RUN echo 'source /etc/bash_completion\nsource /usr/local/singularity/etc/bash_completion.d/singularity' >> ~/.bashrc
+ENV PATH="/usr/local/singularity/bin:$PATH"
 
 # Install required packages
-RUN apt-get update && apt-get install --no-install-recommends -y \
-	build-essential \
-    libssl-dev \
-    uuid-dev \
-    libgpgme11-dev \
-    squashfs-tools \
-    libseccomp-dev \
-	ca-certificates \
-    pkg-config \
-	curl \
-	scons \
-	gcc-multilib \
-	flex \
-	bison \
-    vim \
-    git \
-	cmake \
-	unzip \
-	g++-multilib \
-	wget \
-    cryptsetup
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+        bash-completion \
+        ca-certificates \
+        libseccomp-dev \
+        python3 \
+        python3-pip \
+        python3-venv \
+        squashfs-tools \
+        tzdata \
+        vim \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
-
-
-# install python and related
-RUN apt-get install -y python3 python3-dev python3-pip python3-venv
 RUN pip3 install --upgrade pip
 
-# get a recent version of singularity
-RUN export VERSION=1.13 OS=linux ARCH=amd64 && \
-    wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && \
-    tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && \
-    rm go$VERSION.$OS-$ARCH.tar.gz
-ENV GOPATH="${HOME}/go"
-ENV PATH="/usr/local/go/bin:${PATH}:${GOPATH}/bin"
-
-RUN export VERSION=3.5.0 && \
-    wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-    tar -xzf singularity-${VERSION}.tar.gz
-
-WORKDIR /singularity
-RUN ./mconfig && make -C ./builddir && make -C ./builddir install
-
-RUN echo '. /usr/local/etc/bash_completion.d/singularity' >> ~/.bashrc
-
-# install & setup the planutils
+# Install & setup the planutils
 RUN pip3 install planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org
 RUN planutils --setup
 

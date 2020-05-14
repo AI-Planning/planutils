@@ -37,7 +37,6 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         bash-completion \
         ca-certificates \
-        curl \
         git \
         libseccomp-dev \
         python3 \

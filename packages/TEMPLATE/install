@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# To use if root is required
+[ "$UID" -eq 0 ] || (echo "installation requires root access"; exec sudo "$0" "$@")
+
+# Install general linux dependencies
+
+# General setup / configuration
+
+# No need to install planutils dependencies
+# No need to check if already installed

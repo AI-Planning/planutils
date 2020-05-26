@@ -7,4 +7,8 @@
 
 # Remove general setup / configuration
 
+# Recipe for singularity images
+rm ~/.planutils/bin/images/<image name>
+
 # No need to uninstall planutils dependencies
+# No need to revert the "run" script if it exists

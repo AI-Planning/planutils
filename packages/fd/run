@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity run ~/.planutils/bin/images/downward.simg $@

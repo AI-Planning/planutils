@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm ~/.planutils/bin/images/downward.simg

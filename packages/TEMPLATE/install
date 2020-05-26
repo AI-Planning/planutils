@@ -7,5 +7,15 @@
 
 # General setup / configuration
 
+
+# Recipe for singularity images
+## Fetch the image
+singularity pull --name <image name> <singularity shub url>
+
+## Move it to the right place
+mv <image name> ~/.planutils/bin/images/
+
+
+# No need to move the "run" script -- if it exists, this will be handled for you
 # No need to install planutils dependencies
 # No need to check if already installed

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+singularity pull --name downward.simg shub://aibasel/downward
+mv downward.simg ~/.planutils/bin/images/

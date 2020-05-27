@@ -6,10 +6,15 @@ def setup():
 
     assert not_setup_yet(), "Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached planners will be lost)."
 
+    CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+
     print("\nCreating ~/.planutils...")
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils'))
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', 'images'))
+
+    os.symlink(os.path.join(CUR_DIR, 'packages'),
+               os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     os.system("echo 'export PLANUTILS_PREFIX=\"%s\"' >> ~/.bashrc" % prefix)
@@ -19,14 +24,19 @@ def setup():
     from planutils.planner_installation import PLANNERS
     for p in PLANNERS:
         script  = "#!/bin/bash\n"
-        script += "echo\n"
-        script += "echo 'Planner not installed!'\n"
-        script += "read -p \"Download & install? [y/n] \" varchoice\n"
-        script += "if [ $varchoice == \"y\" ]\n"
+        script += "if [ \"$(planutils --check-installed %s)\" == \"True\" ]\n" % p
         script += "then\n"
-        script += "  planutils --install " + p + "\n"
-        script += "fi\n"
-        script += "echo"
+        script += "  $PLANUTILS_PREFIX/packages/%s/run $@\n" % p
+        script += "else\n"
+        script += "  echo\n"
+        script += "  echo 'Planner not installed!'\n"
+        script += "  read -p \"Download & install? [y/n] \" varchoice\n"
+        script += "  if [ $varchoice == \"y\" ]\n"
+        script += "  then\n"
+        script += "    planutils --install " + p + "\n"
+        script += "  fi\n"
+        script += "  echo\n"
+        script += "fi"
         with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 'w') as f:
             f.write(script)
         os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
@@ -44,6 +54,8 @@ def main():
                         help="install an individual or collection of planners ('list' shows the options)",
                         metavar="{planner or collection or list}")
     
+    parser.add_argument("--check_installed", help="check if a package is installed")
+    
     parser.add_argument("-s", "--setup", help="setup planutils for current user", action="store_true")
     
     args = parser.parse_args()
@@ -53,6 +65,9 @@ def main():
     elif not_setup_yet():
         print("\nPlease run 'planutils --setup' before using utility.\n")
         exit()
+    
+    if args.check_installed:
+        raise NotImplementedError
 
     if args.install:
         from planutils.planner_installation import install

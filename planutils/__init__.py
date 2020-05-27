@@ -17,7 +17,7 @@ def setup():
                os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
-    os.system("echo 'export PLANUTILS_PREFIX=\"%s\"' >> ~/.bashrc" % prefix)
+    os.system("echo 'export PLANUTILS_PREFIX=\"~/.planutils\"' >> ~/.bashrc")
     os.system("echo 'export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"' >> ~/.bashrc")
 
     print("Installing planner scripts...")

@@ -2,5 +2,5 @@
     "name": "LAMA",
     "shortname": "lama",
     "description": "http://fast-downward.org/",
-    "dependencies": ["fd"]
+    "dependencies": ["downward"]
 }

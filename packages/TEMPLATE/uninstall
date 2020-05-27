@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# No need to uninstall planutils dependencies
+# The uninstall script will be run from the package's directory
+
 # To use if root is required
 #[ "$UID" -eq 0 ] || (echo "installation requires root access"; exec sudo "$0" "$@")
 
@@ -8,7 +11,4 @@
 # Remove general setup / configuration
 
 # Recipe for singularity images
-#rm $PLANUTILS_PREFIX/bin/images/<image name>
-
-# No need to uninstall planutils dependencies
-# No need to revert the "run" script if it exists
+#rm <image name>

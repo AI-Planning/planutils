@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# No need to move the "run" script -- if it exists, this will be handled for you
 # No need to install planutils dependencies
 # No need to check if already installed
+# The install script will be run from the package's directory
 
 # To use if root is required
 #[ "$UID" -eq 0 ] || (echo "installation requires root access"; exec sudo "$0" "$@")
@@ -15,6 +15,3 @@
 # Recipe for singularity images
 ## Fetch the image
 #singularity pull --name <image name> <singularity shub url>
-
-## Move it to the right place
-#mv <image name> $PLANUTILS_PREFIX/bin/images/

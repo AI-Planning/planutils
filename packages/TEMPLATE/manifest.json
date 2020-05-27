@@ -1,6 +1,5 @@
 {
     "name": "Full name of package",
-    "shortname": "code-used-to-isntall-run-etc",
     "description": "General description of the package",
     "dependencies": ["list", "of", "dependencies"]
 }

@@ -12,7 +12,8 @@ def setup():
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', 'images'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
-    os.system('echo \'export PATH="$HOME/.planutils/bin:$PATH"\' >> ~/.bashrc')
+    os.system("echo 'export PLANUTILS_PREFIX=\"%s\"' >> ~/.bashrc" % prefix)
+    os.system("echo 'export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"' >> ~/.bashrc")
 
     print("Installing planner scripts...")
     from planutils.planner_installation import PLANNERS

@@ -1,1 +1,1 @@
-include planutils/packages/
+recursive-include planutils/packages *

@@ -1,65 +1,30 @@
 
-import json, os, glob
+import json, os, glob, subprocess
 
 
-PLANNERS = {}
+PACKAGES = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
-for conf_file in glob.glob(os.path.join(CUR_DIR, 'planner_configs', '*.json')):
-    with open(conf_file, 'r') as f:
-        config = json.load(f)
-    assert config['shortname'] not in PLANNERS, "Error: Duplicate planner config -- %s" % config['shortname']
-    PLANNERS[config['shortname']] = config
+for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
+    base = os.path.basename(conf_file)
+    if base not in ['README.md', 'TEMPLATE']:
+        with open(os.path.join(conf_file, 'manifest.json'), 'r') as f:
+            config = json.load(f)
+        assert base not in PACKAGES, "Error: Duplicate package config -- %s" % base
+        PACKAGES[base] = config
 
-# TODO: Pull in the collection configs and setup the dict
-COLLECTIONS = {}
 
 def install(target):
     if 'list' == target:
-        print("\nCollections:")
-        for c in COLLECTIONS:
-            print(" - %s" % c)
-
-        print("\nPlanners:")
-        for p in PLANNERS:
-            print(" - %s: %s" % (p, PLANNERS[p]['name']))
-        
+        print("\nPackages:")
+        for p in PACKAGES:
+            print(" - %s: %s" % (p, PACKAGES[p]['name']))
         print()
 
-    elif target in PLANNERS:
-        install_planner(target)
+    assert target in PACKAGES, "Error: Package not found -- %s" % target
 
-    elif target in COLLECTIONS:
-        install_planners(target)
+    for dep in PACKAGES[target]['dependencies']:
+        install(dep)
     
-
-def bin_path():
-    return os.path.join(os.path.expanduser('~'), '.planutils', 'bin')
-
-def binary_path(planner):
-    return os.path.join(bin_path(), planner)
-
-def install_planners(planner_set):
-    raise NotImplementedError
-
-def install_planner(planner):
-
-    assert planner in PLANNERS, "Error: Planner not found -- %s" % planner
-    
-    if PLANNERS[planner]['method'] == 'proxy':
-        install_planner(PLANNERS[planner]['details']['base'])
-        cmd = "%s %s" % (PLANNERS[planner]['details']['base'], PLANNERS[planner]['details']['suffix'])
-    
-    elif PLANNERS[planner]['method'] == 'singularity':
-        image_path = os.path.join(bin_path(), 'images', PLANNERS[planner]['details']['name'])
-        os.system("singularity pull --name %s %s" % \
-            (PLANNERS[planner]['details']['name'], PLANNERS[planner]['details']['shub']))
-        os.system("mv %s %s" % (PLANNERS[planner]['details']['name'], image_path))
-        cmd = "singularity run %s" % image_path
-    
-    script  = "#!/bin/bash\n"
-    script += "%s $@\n" % cmd
-
-    with open(binary_path(planner), 'w') as f:
-        f.write(script)
+    subprocess.Popen('install', cwd=os.path.join(CUR_DIR, 'packages', target))

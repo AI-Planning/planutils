@@ -1,2 +1,1 @@
-include planutils/planner_configs/*.json
-include packages/
+include planutils/packages/

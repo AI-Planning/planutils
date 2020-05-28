@@ -4,7 +4,7 @@ import argparse, os
 
 def setup():
 
-    assert not_setup_yet(), "Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached planners will be lost)."
+    assert not_setup_yet(), "Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached packages will be lost)."
 
     CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,16 +20,16 @@ def setup():
     os.system("echo 'export PLANUTILS_PREFIX=\"~/.planutils\"' >> ~/.bashrc")
     os.system("echo 'export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"' >> ~/.bashrc")
 
-    print("Installing planner scripts...")
-    from planutils.planner_installation import PLANNERS
-    for p in PLANNERS:
+    print("Installing package scripts...")
+    from planutils.package_installation import PACKAGES
+    for p in PACKAGES:
         script  = "#!/bin/bash\n"
         script += "if [ \"$(planutils --check-installed %s)\" == \"True\" ]\n" % p
         script += "then\n"
         script += "  $PLANUTILS_PREFIX/packages/%s/run $@\n" % p
         script += "else\n"
         script += "  echo\n"
-        script += "  echo 'Planner not installed!'\n"
+        script += "  echo 'Package not installed!'\n"
         script += "  read -p \"Download & install? [y/n] \" varchoice\n"
         script += "  if [ $varchoice == \"y\" ]\n"
         script += "  then\n"
@@ -51,8 +51,8 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-i", "--install",
-                        help="install an individual or collection of planners ('list' shows the options)",
-                        metavar="{planner or collection or list}")
+                        help="install an individual package such as a planner ('list' shows the options)",
+                        metavar="{package name}")
     
     parser.add_argument("--check_installed", help="check if a package is installed")
     
@@ -70,5 +70,5 @@ def main():
         raise NotImplementedError
 
     if args.install:
-        from planutils.planner_installation import install
+        from planutils.package_installation import install
         install(args.install)

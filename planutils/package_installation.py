@@ -21,10 +21,11 @@ def install(target):
         for p in PACKAGES:
             print(" - %s: %s" % (p, PACKAGES[p]['name']))
         print()
+        return
 
     assert target in PACKAGES, "Error: Package not found -- %s" % target
 
     for dep in PACKAGES[target]['dependencies']:
         install(dep)
     
-    subprocess.Popen('install', cwd=os.path.join(CUR_DIR, 'packages', target))
+    subprocess.Popen('./install', cwd=os.path.join(CUR_DIR, 'packages', target))

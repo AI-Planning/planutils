@@ -1,6 +1,8 @@
 
 import argparse, os
 
+from planutils import settings
+
 
 def setup():
 
@@ -11,7 +13,10 @@ def setup():
     print("\nCreating ~/.planutils...")
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils'))
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
-    os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', 'images'))
+
+    settings.save({
+        'installed': []
+    })
 
     os.symlink(os.path.join(CUR_DIR, 'packages'),
                os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
@@ -24,9 +29,9 @@ def setup():
     from planutils.package_installation import PACKAGES
     for p in PACKAGES:
         script  = "#!/bin/bash\n"
-        script += "if [ \"$(planutils --check-installed %s)\" == \"True\" ]\n" % p
+        script += "if [ \"$(planutils --check_installed %s)\" == \"True\" ]\n" % p
         script += "then\n"
-        script += "  $PLANUTILS_PREFIX/packages/%s/run $@\n" % p
+        script += "  ~/.planutils/packages/%s/run $@\n" % p
         script += "else\n"
         script += "  echo\n"
         script += "  echo 'Package not installed!'\n"
@@ -67,7 +72,8 @@ def main():
         exit()
     
     if args.check_installed:
-        raise NotImplementedError
+        from planutils.package_installation import check_installed
+        print(check_installed(args.check_installed))
 
     if args.install:
         from planutils.package_installation import install

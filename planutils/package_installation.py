@@ -1,6 +1,7 @@
 
 import json, os, glob, subprocess
 
+from planutils import settings
 
 PACKAGES = {}
 
@@ -13,6 +14,10 @@ for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
             config = json.load(f)
         assert base not in PACKAGES, "Error: Duplicate package config -- %s" % base
         PACKAGES[base] = config
+
+
+def check_installed(target):
+    return target in settings.load()['installed']
 
 
 def install(target):
@@ -28,4 +33,10 @@ def install(target):
     for dep in PACKAGES[target]['dependencies']:
         install(dep)
     
-    subprocess.Popen('./install', cwd=os.path.join(CUR_DIR, 'packages', target))
+    if check_installed(target):
+        print("%s is already installed." % target)
+    else:
+        subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', target))
+        s = settings.load()
+        s['installed'].append(target)
+        settings.save(s)

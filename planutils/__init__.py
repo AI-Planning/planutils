@@ -59,6 +59,10 @@ def main():
                         help="install an individual package such as a planner ('list' shows the options)",
                         metavar="{package name}")
     
+    parser.add_argument("-u", "--uninstall",
+                        help="uninstall a package, and any dependencies that are no longer required ('list' shows those that are installed)",
+                        metavar="{package name}")
+    
     parser.add_argument("--check_installed", help="check if a package is installed")
     
     parser.add_argument("-s", "--setup", help="setup planutils for current user", action="store_true")
@@ -78,3 +82,7 @@ def main():
     if args.install:
         from planutils.package_installation import install
         install(args.install)
+    
+    if args.uninstall:
+        from planutils.package_installation import uninstall
+        uninstall(args.uninstall)

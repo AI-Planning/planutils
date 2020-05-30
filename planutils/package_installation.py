@@ -20,22 +20,62 @@ def check_installed(target):
     return target in settings.load()['installed']
 
 
+def uninstall(target):
+    if 'list' == target:
+        print("\nInstalled Packages:")
+        for p in PACKAGES:
+            if check_installed(p):
+                print(" - %s: %s" % (p, PACKAGES[p]['name']))
+        print()
+        return
+    
+    if target not in PACKAGES:
+        print("Error: Package not found -- %s" % target)
+        return
+
+    if not check_installed(target):
+        print("%s isn't installed." % target)
+    else:
+        print ("Uninstalling %s..." % target)
+        s = settings.load()
+        # map a package to all those that depend on it
+        deps = {}
+        for p in s['installed']:
+            for dep in PACKAGES[p]['dependencies']:
+                if dep not in deps:
+                    deps[dep] = set()
+                deps[dep].add(p)
+
+        if target in deps and len(deps[target]) > 0:
+            print("Error: Package is required for the following: %s" % ', '.join(deps[target]))
+            return
+        subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', target))
+        s['installed'].remove(target)
+        settings.save(s)
+
+
+
 def install(target):
     if 'list' == target:
         print("\nPackages:")
         for p in PACKAGES:
-            print(" - %s: %s" % (p, PACKAGES[p]['name']))
+            print(" - %s: %s (installed: %s)" % \
+                    (p, PACKAGES[p]['name'], str(check_installed(p))))
         print()
         return
 
-    assert target in PACKAGES, "Error: Package not found -- %s" % target
+    if target not in PACKAGES:
+        print("Error: Package not found -- %s" % target)
+        return
 
     for dep in PACKAGES[target]['dependencies']:
-        install(dep)
+        if not check_installed(dep):
+            install(dep)
     
     if check_installed(target):
         print("%s is already installed." % target)
     else:
+        print("Installing %s..." % target)
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', target))
         s = settings.load()
         s['installed'].append(target)

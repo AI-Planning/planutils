@@ -1,5 +1,6 @@
 
 import json, os, glob, subprocess
+from collections import defaultdict
 
 from planutils import settings
 
@@ -33,15 +34,13 @@ def uninstall(target):
         print ("Uninstalling %s..." % target)
         s = settings.load()
         # map a package to all those that depend on it
-        deps = {}
+        dependency_mapping = defaultdict(set)
         for p in s['installed']:
             for dep in PACKAGES[p]['dependencies']:
-                if dep not in deps:
-                    deps[dep] = set()
-                deps[dep].add(p)
+                dependency_mapping[dep].add(p)
 
-        if target in deps and len(deps[target]) > 0:
-            print("Error: Package is required for the following: %s" % ', '.join(deps[target]))
+        if target in dependency_mapping and len(dependency_mapping[target]) > 0:
+            print("Error: Package is required for the following: %s" % ', '.join(dependency_mapping[target]))
             return
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', target))
         s['installed'].remove(target)

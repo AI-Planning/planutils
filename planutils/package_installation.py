@@ -14,6 +14,7 @@ for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
             config = json.load(f)
         assert base not in PACKAGES, "Error: Duplicate package config -- %s" % base
         PACKAGES[base] = config
+        PACKAGES[base]['runnable'] = os.path.exists(os.path.join(conf_file, 'run'))
 
 
 def check_installed(target):
@@ -21,7 +22,7 @@ def check_installed(target):
 
 
 def uninstall(target):
-    
+
     if target not in PACKAGES:
         print("Error: Package not found -- %s" % target)
         return

@@ -21,13 +21,6 @@ def check_installed(target):
 
 
 def uninstall(target):
-    if 'list' == target:
-        print("\nInstalled Packages:")
-        for p in PACKAGES:
-            if check_installed(p):
-                print(" - %s: %s" % (p, PACKAGES[p]['name']))
-        print()
-        return
     
     if target not in PACKAGES:
         print("Error: Package not found -- %s" % target)
@@ -53,16 +46,14 @@ def uninstall(target):
         s['installed'].remove(target)
         settings.save(s)
 
-
+def package_list():
+    print("\nPackages:")
+    for p in PACKAGES:
+        print(" - %s: %s (installed: %s)" % \
+                (p, PACKAGES[p]['name'], str(check_installed(p))))
+    print()
 
 def install(target):
-    if 'list' == target:
-        print("\nPackages:")
-        for p in PACKAGES:
-            print(" - %s: %s (installed: %s)" % \
-                    (p, PACKAGES[p]['name'], str(check_installed(p))))
-        print()
-        return
 
     if target not in PACKAGES:
         print("Error: Package not found -- %s" % target)

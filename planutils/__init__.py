@@ -2,11 +2,14 @@
 import argparse, os
 
 from planutils import settings
+from planutils.package_installation import PACKAGES
 
 
 def setup():
 
-    assert not_setup_yet(), "Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached packages will be lost)."
+    if not not_setup_yet():
+        print("Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached packages will be lost).")
+        return
 
     CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -52,37 +55,45 @@ def setup():
 def not_setup_yet():
     return not os.path.exists(os.path.join(os.path.expanduser('~'), '.planutils'))
 
-def main():
-    parser = argparse.ArgumentParser()
 
-    parser.add_argument("-i", "--install",
-                        help="install an individual package such as a planner ('list' shows the options)",
-                        metavar="{package name}")
-    
-    parser.add_argument("-u", "--uninstall",
-                        help="uninstall a package, and any dependencies that are no longer required ('list' shows those that are installed)",
-                        metavar="{package name}")
-    
-    parser.add_argument("--check_installed", help="check if a package is installed")
-    
-    parser.add_argument("-s", "--setup", help="setup planutils for current user", action="store_true")
+def main():
+    parser = argparse.ArgumentParser(prog="planutils")
+    subparsers = parser.add_subparsers(help='sub-command help', dest='command')
+
+    parser_install = subparsers.add_parser('install', help='install an individual package such as a planner')
+    parser_install.add_argument('package', help='package name')
+
+    parser_uninstall = subparsers.add_parser('uninstall', help='uninstall an individual package')
+    parser_uninstall.add_argument('package', help='package name')
+
+    parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
+    parser_uninstall.add_argument('package', help='package name')
+
+    parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
+    parser_list = subparsers.add_parser('list', help='list the available packages')
     
     args = parser.parse_args()
 
-    if args.setup:
+    if 'setup' == args.command:
         setup()
     elif not_setup_yet():
         print("\nPlease run 'planutils --setup' before using utility.\n")
-        exit()
-    
-    if args.check_installed:
-        from planutils.package_installation import check_installed
-        print(check_installed(args.check_installed))
 
-    if args.install:
+    elif 'check-installed' == args.command:
+        from planutils.package_installation import check_installed
+        print(check_installed(args.package))
+
+    elif 'install' == args.command:
         from planutils.package_installation import install
-        install(args.install)
+        install(args.package)
     
-    if args.uninstall:
+    elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall
-        uninstall(args.uninstall)
+        uninstall(args.package)
+    
+    elif 'list' == args.command:
+        from planutils.package_installation import package_list
+        package_list()
+    
+    else:
+        parser.print_help()

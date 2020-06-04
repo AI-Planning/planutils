@@ -83,7 +83,7 @@ def main():
 
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_list = subparsers.add_parser('list', help='list the available packages')
-    
+
     args = parser.parse_args()
 
     if 'setup' == args.command:
@@ -98,14 +98,14 @@ def main():
     elif 'install' == args.command:
         from planutils.package_installation import install
         install(args.package)
-    
+
     elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall
         uninstall(args.package)
-    
+
     elif 'list' == args.command:
         from planutils.package_installation import package_list
         package_list()
-    
+
     else:
         parser.print_help()

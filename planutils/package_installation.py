@@ -62,7 +62,7 @@ def install(target):
     for dep in PACKAGES[target]['dependencies']:
         if not check_installed(dep):
             install(dep)
-    
+
     if check_installed(target):
         print("%s is already installed." % target)
     else:

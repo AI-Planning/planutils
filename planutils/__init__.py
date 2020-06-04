@@ -29,22 +29,33 @@ def setup():
     os.system("echo 'export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"' >> ~/.bashrc")
 
     print("Installing package scripts...")
-    from planutils.package_installation import PACKAGES
     for p in PACKAGES:
         script  = "#!/bin/bash\n"
-        script += "if [ \"$(planutils --check_installed %s)\" == \"True\" ]\n" % p
+        script += "if [ \"$(planutils check-installed %s)\" == \"True\" ]\n" % p
         script += "then\n"
         script += "  ~/.planutils/packages/%s/run $@\n" % p
         script += "else\n"
         script += "  echo\n"
         script += "  echo 'Package not installed!'\n"
-        script += "  read -p \"Download & install? [y/n] \" varchoice\n"
-        script += "  if [ $varchoice == \"y\" ]\n"
+        script += "  read -r -p \"Download & install? [y/N] \" varchoice\n"
+        script += "  varchoice=${varchoice,,}\n" # tolower
+        script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
         script += "  then\n"
-        script += "    planutils --install " + p + "\n"
+        script += "    planutils install " + p + "\n"
+        script += "    if [ \"$(planutils check-installed %s)\" == \"True\" ]\n" % p
+        script += "    then\n"
+        script += "      echo 'Successfully installed %s!'\n" % p
+        script += "      echo \"Original command: %s $@\"\n" % p
+        script += "      read -r -p \"Re-run command? [Y/n] \" varchoice\n"
+        script += "      varchoice=${varchoice,,}\n" # tolower
+        script += "      if ! [[ \"$varchoice\" =~ ^(no|n)$ ]]\n"
+        script += "      then\n"
+        script += "        ~/.planutils/packages/%s/run $@\n" % p
+        script += "      fi\n"
+        script += "    fi\n"
         script += "  fi\n"
         script += "  echo\n"
-        script += "fi"
+        script += "fi\n"
         with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 'w') as f:
             f.write(script)
         os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
@@ -77,7 +88,7 @@ def main():
     if 'setup' == args.command:
         setup()
     elif not_setup_yet():
-        print("\nPlease run 'planutils --setup' before using utility.\n")
+        print("\nPlease run 'planutils setup' before using utility.\n")
 
     elif 'check-installed' == args.command:
         from planutils.package_installation import check_installed

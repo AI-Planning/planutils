@@ -78,7 +78,7 @@ def main():
     parser_uninstall.add_argument('package', help='package name')
 
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
-    parser_uninstall.add_argument('package', help='package name')
+    parser_checkinstalled.add_argument('package', help='package name')
 
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_list = subparsers.add_parser('list', help='list the available packages')

@@ -89,7 +89,7 @@ def install(target):
                 print("Installing %s..." % package)
                 try:
                     installed.append(package)
-                    subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+                    subprocess.check_call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
                 except subprocess.CalledProcessError:
                     print("Error installing %s. Rolling back changes..." % package)
                     for p in installed:

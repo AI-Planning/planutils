@@ -55,10 +55,15 @@ def uninstall(target):
             settings.save(s)
 
 def package_list():
-    print("\nPackages:")
+    print("\nInstalled:")
+    installed = set(settings.load()['installed'])
+    for p in installed:
+        print("  %s: %s" % (p, PACKAGES[p]['name']))
+
+    print("\nAvailable:")
     for p in PACKAGES:
-        print(" - %s: %s (installed: %s)" % \
-                (p, PACKAGES[p]['name'], str(check_installed(p))))
+        if p not in installed:
+            print("  %s: %s" % (p, PACKAGES[p]['name']))
     print()
 
 def upgrade():

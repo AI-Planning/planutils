@@ -31,7 +31,6 @@ def uninstall(target):
     if not check_installed(target):
         print("%s isn't installed." % target)
     else:
-        print ("Uninstalling %s..." % target)
         s = settings.load()
         # map a package to all those that depend on it
         dependency_mapping = defaultdict(set)
@@ -39,12 +38,21 @@ def uninstall(target):
             for dep in PACKAGES[p]['dependencies']:
                 dependency_mapping[dep].add(p)
 
-        if target in dependency_mapping and len(dependency_mapping[target]) > 0:
-            print("Error: Package is required for the following: %s" % ', '.join(dependency_mapping[target]))
-            return
-        subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', target))
-        s['installed'].remove(target)
-        settings.save(s)
+        # compute all the packages that will be removed
+        to_check = [target]
+        to_remove = set()
+        while to_check:
+            check = to_check.pop(0)
+            to_remove.add(check)
+            to_check.extend(list(dependency_mapping[check]))
+
+        print("\nAbout to remove the following packages: %s" % ', '.join(to_remove))
+        if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
+            for package in to_remove:
+                print ("Uninstalling %s..." % package)
+                subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
+                s['installed'].remove(package)
+            settings.save(s)
 
 def package_list():
     print("\nPackages:")

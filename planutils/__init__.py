@@ -84,8 +84,9 @@ def main():
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')
 
-    parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_list = subparsers.add_parser('list', help='list the available packages')
+    parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
+    parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
     args = parser.parse_args()
 
@@ -109,6 +110,10 @@ def main():
     elif 'list' == args.command:
         from planutils.package_installation import package_list
         package_list()
+
+    elif 'upgrade' == args.command:
+        from planutils.package_installation import upgrade
+        upgrade()
 
     else:
         parser.print_help()

@@ -61,6 +61,13 @@ def package_list():
                 (p, PACKAGES[p]['name'], str(check_installed(p))))
     print()
 
+def upgrade():
+    s = settings.load()
+    for package in s['installed']:
+        print("Upgrading %s..." % package)
+        subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
+        subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+
 def install(target):
 
     if target not in PACKAGES:

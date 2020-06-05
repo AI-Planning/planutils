@@ -59,15 +59,31 @@ def install(target):
         print("Error: Package not found -- %s" % target)
         return
 
-    for dep in PACKAGES[target]['dependencies']:
-        if not check_installed(dep):
-            install(dep)
+    # Compute all those that will need to be installed
+    done = set()
+    to_check = [target]
+    to_install = []
+    while to_check:
+        check = to_check.pop(0)
+        if check not in done:
+            done.add(check)
+            if not check_installed(check):
+                to_install.append(check)
+                to_check.extend(PACKAGES[check]['dependencies'])
 
-    if check_installed(target):
-        print("%s is already installed." % target)
+    to_install.reverse()
+
+    if to_install:
+        print("\nAbout to install the following packages: %s" % ', '.join(to_install))
+        if input("Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
+            s = settings.load()
+            for package in to_install:
+                print("Installing %s..." % package)
+                subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+                s['installed'].append(package)
+            settings.save(s)
+        else:
+            print("Aborting installation.")
     else:
-        print("Installing %s..." % target)
-        subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', target))
-        s = settings.load()
-        s['installed'].append(target)
-        settings.save(s)
+        print("%s is already installed." % target)
+

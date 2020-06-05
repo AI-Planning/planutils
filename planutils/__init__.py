@@ -8,8 +8,11 @@ from planutils.package_installation import PACKAGES
 def setup():
 
     if not not_setup_yet():
-        print("Error: planutils is already setup. Remove ~/.planutils to reset (warning: all cached packages will be lost).")
-        return
+        print("\nError: planutils is already setup. Setting up again will wipe all cached packages and settings.")
+        if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
+            os.system("rm -rf %s" % os.path.join(os.path.expanduser('~'), '.planutils'))
+        else:
+            return
 
     CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -38,7 +41,7 @@ def setup():
             script += "else\n"
             script += "  echo\n"
             script += "  echo 'Package not installed!'\n"
-            script += "  read -r -p \"Download & install? [y/N] \" varchoice\n"
+            script += "  read -r -p \"  Download & install? [y/N] \" varchoice\n"
             script += "  varchoice=${varchoice,,}\n" # tolower
             script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
             script += "  then\n"
@@ -47,7 +50,7 @@ def setup():
             script += "    then\n"
             script += "      echo 'Successfully installed %s!'\n" % p
             script += "      echo \"Original command: %s $@\"\n" % p
-            script += "      read -r -p \"Re-run command? [Y/n] \" varchoice\n"
+            script += "      read -r -p \"  Re-run command? [Y/n] \" varchoice\n"
             script += "      varchoice=${varchoice,,}\n" # tolower
             script += "      if ! [[ \"$varchoice\" =~ ^(no|n)$ ]]\n"
             script += "      then\n"

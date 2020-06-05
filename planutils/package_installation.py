@@ -75,12 +75,21 @@ def install(target):
 
     if to_install:
         print("\nAbout to install the following packages: %s" % ', '.join(to_install))
-        if input("Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
-            s = settings.load()
+        if input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
+            installed = []
             for package in to_install:
                 print("Installing %s..." % package)
-                subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
-                s['installed'].append(package)
+                try:
+                    installed.append(package)
+                    subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+                except subprocess.CalledProcessError:
+                    print("Error installing %s. Rolling back changes..." % package)
+                    for p in installed:
+                        subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', p))
+                    return
+
+            s = settings.load()
+            s['installed'].extend(installed)
             settings.save(s)
         else:
             print("Aborting installation.")

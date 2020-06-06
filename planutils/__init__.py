@@ -1,5 +1,5 @@
 
-import argparse, os
+import argparse, os, sys
 
 from planutils import settings
 from planutils.package_installation import PACKAGES
@@ -7,7 +7,7 @@ from planutils.package_installation import PACKAGES
 
 def setup():
 
-    if not not_setup_yet():
+    if setup_done():
         print("\nError: planutils is already setup. Setting up again will wipe all cached packages and settings.")
         if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
             os.system("rm -rf %s" % os.path.join(os.path.expanduser('~'), '.planutils'))
@@ -28,14 +28,15 @@ def setup():
                os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
-    os.system("echo 'export PLANUTILS_PREFIX=\"~/.planutils\"' >> ~/.bashrc")
-    os.system("echo 'export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"' >> ~/.bashrc")
+    with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:
+        f.write("export PLANUTILS_PREFIX=\"~/.planutils\"")
+        f.write("export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"")
 
     print("Installing package scripts...")
     for p in PACKAGES:
         if PACKAGES[p]['runnable']:
             script  = "#!/bin/bash\n"
-            script += "if [ \"$(planutils check-installed %s)\" == \"True\" ]\n" % p
+            script += "if [ $(planutils check-installed %s) ]\n" % p
             script += "then\n"
             script += "  ~/.planutils/packages/%s/run $@\n" % p
             script += "else\n"
@@ -46,7 +47,7 @@ def setup():
             script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
             script += "  then\n"
             script += "    planutils install " + p + "\n"
-            script += "    if [ \"$(planutils check-installed %s)\" == \"True\" ]\n" % p
+            script += "    if [ $(planutils check-installed %s) ]\n" % p
             script += "    then\n"
             script += "      echo 'Successfully installed %s!'\n" % p
             script += "      echo \"Original command: %s $@\"\n" % p
@@ -67,8 +68,8 @@ def setup():
 
     print("\nAll set! Be sure to start a new bash session or update your PATH variable to include ~/.planutils/bin\n")
 
-def not_setup_yet():
-    return not os.path.exists(os.path.join(os.path.expanduser('~'), '.planutils'))
+def setup_done():
+    return os.path.exists(os.path.join(os.path.expanduser('~'), '.planutils'))
 
 
 def main():
@@ -92,12 +93,12 @@ def main():
 
     if 'setup' == args.command:
         setup()
-    elif not_setup_yet():
+    elif not setup_done():
         print("\nPlease run 'planutils setup' before using utility.\n")
 
     elif 'check-installed' == args.command:
         from planutils.package_installation import check_installed
-        print(check_installed(args.package))
+        sys.exit({True:0, False:1}[check_installed(args.package)])
 
     elif 'install' == args.command:
         from planutils.package_installation import install

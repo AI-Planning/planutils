@@ -13,7 +13,7 @@ def check_package(target, manifest):
     assert os.path.exists(manifest), "Error: Manifest must be defined for %s" % target
     with open(manifest, 'r') as f:
         config = json.load(f)
-    for key in ['name', 'description', 'dependencies']:
+    for key in ['name', 'description', 'dependencies', 'size']:
         assert key in config, "Error: Manifest for %s must include '%s'" % (base, key)
 
 
@@ -114,16 +114,23 @@ def install(targets):
     to_install.reverse()
 
     if to_install:
-        print("\nAbout to install the following packages: %s" % ', '.join(to_install))
+        to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['size']) for pkg in to_install]
+        print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
         if input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
             installed = []
             for package in to_install:
-                print("Installing %s..." % package)
+                package_path = os.path.join(CUR_DIR, 'packages', package)
+                print("Installing %s..." % package, end='')
                 try:
                     installed.append(package)
-                    subprocess.check_call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+                    subprocess.check_call('./install', cwd=package_path)
+                    size = subprocess.check_output('du -sh .',
+                                                   cwd=package_path,
+                                                   shell=True,
+                                                   encoding='utf-8').split('\t')[0]
+                    print("done. (size: %s)" % size)
                 except subprocess.CalledProcessError:
-                    print("Error installing %s. Rolling back changes..." % package)
+                    print("\nError installing %s. Rolling back changes..." % package)
                     for p in installed:
                         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', p))
                     return False

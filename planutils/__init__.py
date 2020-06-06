@@ -75,11 +75,11 @@ def main():
     parser = argparse.ArgumentParser(prog="planutils")
     subparsers = parser.add_subparsers(help='sub-command help', dest='command')
 
-    parser_install = subparsers.add_parser('install', help='install an individual package such as a planner')
-    parser_install.add_argument('package', help='package name')
+    parser_install = subparsers.add_parser('install', help='install package(s) such as a planner')
+    parser_install.add_argument('package', help='package name', nargs='+')
 
-    parser_uninstall = subparsers.add_parser('uninstall', help='uninstall an individual package')
-    parser_uninstall.add_argument('package', help='package name')
+    parser_uninstall = subparsers.add_parser('uninstall', help='uninstall package(s)')
+    parser_uninstall.add_argument('package', help='package name', nargs='+')
 
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')

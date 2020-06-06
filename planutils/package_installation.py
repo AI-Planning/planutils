@@ -22,37 +22,41 @@ def check_installed(target):
     return target in settings.load()['installed']
 
 
-def uninstall(target):
+def uninstall(targets):
 
-    if target not in PACKAGES:
-        print("Error: Package not found -- %s" % target)
-        return
+    for target in targets:
+        if target not in PACKAGES:
+            print("Error: Package not found -- %s" % target)
+            return
 
-    if not check_installed(target):
-        print("%s isn't installed." % target)
-    else:
-        s = settings.load()
-        # map a package to all those that depend on it
-        dependency_mapping = defaultdict(set)
-        for p in s['installed']:
-            for dep in PACKAGES[p]['dependencies']:
-                dependency_mapping[dep].add(p)
+    to_check = []
+    for target in targets:
+        if check_installed(target):
+            to_check.append(target)
+        else:
+            print("%s isn't installed." % target)
 
-        # compute all the packages that will be removed
-        to_check = [target]
-        to_remove = set()
-        while to_check:
-            check = to_check.pop(0)
-            to_remove.add(check)
-            to_check.extend(list(dependency_mapping[check]))
+    s = settings.load()
+    # map a package to all those that depend on it
+    dependency_mapping = defaultdict(set)
+    for p in s['installed']:
+        for dep in PACKAGES[p]['dependencies']:
+            dependency_mapping[dep].add(p)
 
-        print("\nAbout to remove the following packages: %s" % ', '.join(to_remove))
-        if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
-            for package in to_remove:
-                print ("Uninstalling %s..." % package)
-                subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
-                s['installed'].remove(package)
-            settings.save(s)
+    # compute all the packages that will be removed
+    to_remove = set()
+    while to_check:
+        check = to_check.pop(0)
+        to_remove.add(check)
+        to_check.extend(list(dependency_mapping[check]))
+
+    print("\nAbout to remove the following packages: %s" % ', '.join(to_remove))
+    if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
+        for package in to_remove:
+            print ("Uninstalling %s..." % package)
+            subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
+            s['installed'].remove(package)
+        settings.save(s)
 
 def package_list():
     print("\nInstalled:")
@@ -73,15 +77,21 @@ def upgrade():
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
 
-def install(target):
-
-    if target not in PACKAGES:
-        print("Error: Package not found -- %s" % target)
-        return False
+def install(targets):
+    for target in targets:
+        if target not in PACKAGES:
+            print("Error: Package not found -- %s" % target)
+            return False
 
     # Compute all those that will need to be installed
+    to_check = []
+    for target in targets:
+        if check_installed(target):
+            print("%s is already installed." % target)
+        else:
+            to_check.append(target)
+
     done = set()
-    to_check = [target]
     to_install = []
     while to_check:
         check = to_check.pop(0)
@@ -115,7 +125,7 @@ def install(target):
         else:
             print("Aborting installation.")
     else:
-        print("%s is already installed." % target)
+        print("Nothing left to install.")
 
     return False
 

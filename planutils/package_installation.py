@@ -77,7 +77,7 @@ def install(target):
 
     if target not in PACKAGES:
         print("Error: Package not found -- %s" % target)
-        return
+        return False
 
     # Compute all those that will need to be installed
     done = set()
@@ -106,13 +106,16 @@ def install(target):
                     print("Error installing %s. Rolling back changes..." % package)
                     for p in installed:
                         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', p))
-                    return
+                    return False
 
             s = settings.load()
             s['installed'].extend(installed)
             settings.save(s)
+            return True
         else:
             print("Aborting installation.")
     else:
         print("%s is already installed." % target)
+
+    return False
 

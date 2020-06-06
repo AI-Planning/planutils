@@ -46,8 +46,7 @@ def setup():
             script += "  varchoice=${varchoice,,}\n" # tolower
             script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
             script += "  then\n"
-            script += "    planutils install " + p + "\n"
-            script += "    if $(planutils check-installed %s)\n" % p
+            script += "    if planutils install %s;\n" % p
             script += "    then\n"
             script += "      echo 'Successfully installed %s!'\n" % p
             script += "      echo \"Original command: %s $@\"\n" % p
@@ -102,7 +101,7 @@ def main():
 
     elif 'install' == args.command:
         from planutils.package_installation import install
-        install(args.package)
+        exit({True:0, False:1}[install(args.package)])
 
     elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall

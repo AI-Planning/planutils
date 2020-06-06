@@ -8,12 +8,22 @@ PACKAGES = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
+def check_package(target, manifest):
+    assert os.path.exists(manifest), "Error: Manifest must be defined for %s" % target
+    with open(manifest, 'r') as f:
+        config = json.load(f)
+    for key in ['name', 'description', 'dependencies']:
+        assert key in config, "Error: Manifest for %s must include '%s'" % (base, key)
+
+
 for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
     base = os.path.basename(conf_file)
     if base not in ['README.md', 'TEMPLATE']:
+        assert base not in PACKAGES, "Error: Duplicate package config -- %s" % base
+        check_package(base, os.path.join(conf_file, 'manifest.json'))
         with open(os.path.join(conf_file, 'manifest.json'), 'r') as f:
             config = json.load(f)
-        assert base not in PACKAGES, "Error: Duplicate package config -- %s" % base
         PACKAGES[base] = config
         PACKAGES[base]['runnable'] = os.path.exists(os.path.join(conf_file, 'run'))
 

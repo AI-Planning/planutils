@@ -1,6 +1,9 @@
 
 import setuptools
 
+# Will force a check on the packages setup
+from planutils.package_installation import PACKAGES
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 

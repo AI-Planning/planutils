@@ -1,6 +1,6 @@
 {
     "name": "Fast Downward",
     "description": "http://fast-downward.org/",
-    "size": "36M",
+    "install-size": "36M",
     "dependencies": []
 }

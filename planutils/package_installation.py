@@ -13,7 +13,7 @@ def check_package(target, manifest):
     assert os.path.exists(manifest), "Error: Manifest must be defined for %s" % target
     with open(manifest, 'r') as f:
         config = json.load(f)
-    for key in ['name', 'description', 'dependencies', 'size']:
+    for key in ['name', 'description', 'dependencies', 'install-size']:
         assert key in config, "Error: Manifest for %s must include '%s'" % (base, key)
 
 
@@ -114,7 +114,7 @@ def install(targets):
     to_install.reverse()
 
     if to_install:
-        to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['size']) for pkg in to_install]
+        to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['install-size']) for pkg in to_install]
         print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
         if input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
             installed = []

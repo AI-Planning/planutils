@@ -1,5 +1,5 @@
 
-import argparse, os, sys
+import argparse, os
 
 from planutils import settings
 from planutils.package_installation import PACKAGES
@@ -36,7 +36,7 @@ def setup():
     for p in PACKAGES:
         if PACKAGES[p]['runnable']:
             script  = "#!/bin/bash\n"
-            script += "if [ $(planutils check-installed %s) ]\n" % p
+            script += "if $(planutils check-installed %s)\n" % p
             script += "then\n"
             script += "  ~/.planutils/packages/%s/run $@\n" % p
             script += "else\n"
@@ -47,7 +47,7 @@ def setup():
             script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
             script += "  then\n"
             script += "    planutils install " + p + "\n"
-            script += "    if [ $(planutils check-installed %s) ]\n" % p
+            script += "    if $(planutils check-installed %s)\n" % p
             script += "    then\n"
             script += "      echo 'Successfully installed %s!'\n" % p
             script += "      echo \"Original command: %s $@\"\n" % p
@@ -98,7 +98,7 @@ def main():
 
     elif 'check-installed' == args.command:
         from planutils.package_installation import check_installed
-        sys.exit({True:0, False:1}[check_installed(args.package)])
+        exit({True:0, False:1}[check_installed(args.package)])
 
     elif 'install' == args.command:
         from planutils.package_installation import install

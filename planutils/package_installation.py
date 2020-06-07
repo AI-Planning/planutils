@@ -63,10 +63,32 @@ def uninstall(targets):
     print("\nAbout to remove the following packages: %s" % ', '.join(to_remove))
     if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
         for package in to_remove:
-            print ("Uninstalling %s..." % package)
+            print ("Uninstalling %s..." % package, end='')
             subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
+            print ("done.")
             s['installed'].remove(package)
-        settings.save(s)
+
+    # Search for any packages that may be no longer required
+    dependency_mapping = defaultdict(set)
+    for p in PACKAGES:
+        for dep in PACKAGES[p]['dependencies']:
+            dependency_mapping[dep].add(p)
+
+    possible_deletions = [d for p in to_remove for d in PACKAGES[p]['dependencies']]
+    while possible_deletions:
+        package = possible_deletions.pop(0)
+        # Consider removing if (1) it's installed; and (2) nothing that requires this is installed
+        if (package in s['installed']) and (not any([p in s['installed'] for p in dependency_mapping[package]])):
+            print("\nPackage may no longer be required: %s" % package)
+            if input("  Remove? [y/N] ").lower() in ['y', 'yes']:
+                print ("Uninstalling %s..." % package, end='')
+                subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
+                print ("done.")
+                s['installed'].remove(package)
+                possible_deletions.extend(PACKAGES[package]['dependencies'])
+
+    settings.save(s)
+
 
 def package_list():
     print("\nInstalled:")

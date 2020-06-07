@@ -7,7 +7,7 @@ apt install curl
 
 # Install docker
 curl -fsSL https://get.docker.com | sh
-
+docker service start
 
 
 # Write the example Docker and Singularity files.
@@ -76,7 +76,7 @@ EOM
 
 cat > example/Singularity <<- EOM
 Bootstrap: docker-daemon
-From: whatever-your-docker-image-is-called:latest
+From: planner:latest
 
 %setup
     # Just for diagnosis purposes
@@ -100,6 +100,9 @@ EOM
 
 echo
 echo "Setup complete."
-echo "- See example/ for the template Dockerfile and Singularity image."
-echo "- It roughly corresponds to instructions for a FastDownward planner."
+echo " - See example/ for the template Dockerfile and Singularity image."
+echo " - It roughly corresponds to instructions for a FastDownward planner."
+echo " - Once ready, build the docker image with 'docker build . -t planner'"
+echo " - Once the docker builds, do the singularity with 'singularity build planner.sif Singularity'"
+echo " - planner.sif can now be uploaded anywhere that is publicly accessible."
 echo

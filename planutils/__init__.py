@@ -42,13 +42,14 @@ def setup():
             script += "else\n"
             script += "  echo\n"
             script += "  echo 'Package not installed!'\n"
-            script += "  read -r -p \"  Download & install? [y/N] \" varchoice\n"
+            script += "  read -r -p \"  Download & install? [Y/n] \" varchoice\n"
             script += "  varchoice=${varchoice,,}\n" # tolower
-            script += "  if [[ \"$varchoice\" =~ ^(yes|y)$ ]]\n"
+            script += "  if [[ \"$varchoice\" =~ ^(yes|y|)$ ]]\n"
             script += "  then\n"
             script += "    if planutils install %s;\n" % p
             script += "    then\n"
             script += "      echo 'Successfully installed %s!'\n" % p
+            script += "      echo\n"
             script += "      echo \"Original command: %s $@\"\n" % p
             script += "      read -r -p \"  Re-run command? [Y/n] \" varchoice\n"
             script += "      varchoice=${varchoice,,}\n" # tolower

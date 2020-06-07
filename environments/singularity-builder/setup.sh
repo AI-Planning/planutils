@@ -6,8 +6,7 @@ apt update
 apt install curl
 
 # Install docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+curl -fsSL https://get.docker.com | sh
 
 
 
@@ -98,3 +97,9 @@ Name        YourAwesomePlanner
 Description Your very own awesome description.
 Authors     Whoever <whoever@whatever.com>
 EOM
+
+echo
+echo "Setup complete."
+echo "- See example/ for the template Dockerfile and Singularity image."
+echo "- It roughly corresponds to instructions for a FastDownward planner."
+echo

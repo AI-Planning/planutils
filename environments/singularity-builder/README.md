@@ -10,4 +10,4 @@ curl -fsSL https://raw.githubusercontent.com/AI-Planning/planutils/master/enviro
 
 ## Note
 
-If using inside of the `planutils` docker imagine, you must run it with `--privileged` mode.
+If using inside of the `planutils` docker image, you must run it with `--privileged` mode.

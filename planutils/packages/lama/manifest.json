@@ -1,0 +1,6 @@
+{
+    "name": "LAMA",
+    "description": "http://fast-downward.org/",
+    "install-size": "20K",
+    "dependencies": ["downward"]
+}

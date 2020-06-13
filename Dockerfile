@@ -50,6 +50,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip
+RUN pip3 install setuptools
 
 # Install & setup the planutils
 RUN pip3 install planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org

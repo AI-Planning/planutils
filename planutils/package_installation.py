@@ -46,6 +46,9 @@ def uninstall(targets):
         else:
             print("%s isn't installed." % target)
 
+    if not to_check:
+        return
+
     s = settings.load()
     # map a package to all those that depend on it
     dependency_mapping = defaultdict(set)
@@ -63,9 +66,9 @@ def uninstall(targets):
     print("\nAbout to remove the following packages: %s" % ', '.join(to_remove))
     if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
         for package in to_remove:
-            print ("Uninstalling %s..." % package, end='')
+            print ("Uninstalling %s..." % package)
             subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
-            print ("done.")
+            print ("Finished uninstalling %s" % package)
             s['installed'].remove(package)
 
     # Search for any packages that may be no longer required
@@ -81,9 +84,9 @@ def uninstall(targets):
         if (package in s['installed']) and (not any([p in s['installed'] for p in dependency_mapping[package]])):
             print("\nPackage may no longer be required: %s" % package)
             if input("  Remove? [y/N] ").lower() in ['y', 'yes']:
-                print ("Uninstalling %s..." % package, end='')
+                print ("Uninstalling %s..." % package)
                 subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
-                print ("done.")
+                print ("Finished uninstalling %s" % package)
                 s['installed'].remove(package)
                 possible_deletions.extend(PACKAGES[package]['dependencies'])
 
@@ -142,7 +145,7 @@ def install(targets):
             installed = []
             for package in to_install:
                 package_path = os.path.join(CUR_DIR, 'packages', package)
-                print("Installing %s..." % package, end='')
+                print("Installing %s..." % package)
                 try:
                     installed.append(package)
                     subprocess.check_call('./install', cwd=package_path)
@@ -150,7 +153,7 @@ def install(targets):
                                                    cwd=package_path,
                                                    shell=True,
                                                    encoding='utf-8').split('\t')[0]
-                    print("done. (size: %s)" % size)
+                    print("Finished installing %s (size: %s)" % (package, size))
                 except subprocess.CalledProcessError:
                     print("\nError installing %s. Rolling back changes..." % package)
                     for p in installed:

@@ -44,7 +44,7 @@ def setup():
             script += "  echo 'Package not installed!'\n"
             script += "  read -r -p \"  Download & install? [Y/n] \" varchoice\n"
             script += "  varchoice=${varchoice,,}\n" # tolower
-            script += "  if [[ \"$varchoice\" =~ ^(yes|y|)$ ]]\n"
+            script += "  if ! [[ \"$varchoice\" =~ ^(no|n)$ ]]\n"
             script += "  then\n"
             script += "    if planutils install %s;\n" % p
             script += "    then\n"

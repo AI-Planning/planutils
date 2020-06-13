@@ -29,8 +29,8 @@ def setup():
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:
-        f.write("export PLANUTILS_PREFIX=\"~/.planutils\"")
-        f.write("export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"")
+        f.write("export PLANUTILS_PREFIX=\"~/.planutils\"\n")
+        f.write("export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"\n")
 
     print("Installing package scripts...")
     for p in PACKAGES:

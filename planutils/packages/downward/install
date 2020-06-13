@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name downward.sif shub://aibasel/downward

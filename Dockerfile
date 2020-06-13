@@ -54,7 +54,7 @@ RUN pip3 install setuptools
 
 # Install & setup the planutils
 RUN pip3 install planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org
-RUN planutils --setup
+RUN planutils setup
 
 WORKDIR /root
 

@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
 
     # install & setup the planutils for the vagrant user
     runuser -l vagrant -c "pip3 install --user planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org"
-    runuser -l vagrant -c "planutils --setup"
+    runuser -l vagrant -c "planutils setup"
 SHELL
 
   config.ssh.forward_x11 = true

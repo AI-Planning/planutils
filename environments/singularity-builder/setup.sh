@@ -8,7 +8,7 @@ echo " - Installing docker given the quickstart script at get.docker.com"
 echo " - Creating an 'example' directory to house starter Dockerfile and Singularity files"
 read -r -p "Proceed? [y/N]" varchoice
 varchoice=${varchoice,,}
-if ! [[ \"$varchoice\" =~ ^(yes|y)$ ]]
+if ! [[ "$varchoice" =~ ^(yes|y)$ ]]
 then
     echo "Cancelling setup."
     exit 0

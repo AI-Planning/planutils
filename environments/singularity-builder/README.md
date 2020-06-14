@@ -5,7 +5,9 @@ Configuration of the environment to build planners and related software through 
 ## To run
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/AI-Planning/planutils/master/environments/singularity-builder/setup.sh | sh
+wget https://raw.githubusercontent.com/AI-Planning/planutils/master/environments/singularity-builder/setup.sh
+chmod u+x setup.sh
+./setup.sh
 ```
 
 ## Note

@@ -11,6 +11,7 @@ varchoice=${varchoice,,}
 if ! [[ \"$varchoice\" =~ ^(yes|y)$ ]]
 then
     echo "Cancelling setup."
+    exit 0
 else
     echo "Setting up environment..."
 fi

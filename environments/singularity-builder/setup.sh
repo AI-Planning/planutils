@@ -2,8 +2,22 @@
 
 [ "$UID" -eq 0 ] || (echo "installation requires root access"; exec sudo "$0" "$@")
 
+echo "Setting up your environment for building singularity containers requires the following:"
+echo " - Installing curl and ca-certificates from apt"
+echo " - Installing docker given the quickstart script at get.docker.com"
+echo " - Creating an 'example' directory to house starter Dockerfile and Singularity files"
+read -r -p "Proceed? [y/N]" varchoice
+varchoice=${varchoice,,}
+if ! [[ \"$varchoice\" =~ ^(yes|y)$ ]]
+then
+    echo "Cancelling setup."
+else
+    echo "Setting up environment..."
+fi
+
+
 apt update
-apt install curl
+apt install curl ca-certificates
 
 # Install docker
 curl -fsSL https://get.docker.com | sh

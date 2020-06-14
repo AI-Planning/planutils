@@ -22,7 +22,7 @@ apt install curl ca-certificates
 
 # Install docker
 curl -fsSL https://get.docker.com | sh
-docker service start
+service docker start
 
 
 # Write the example Docker and Singularity files.

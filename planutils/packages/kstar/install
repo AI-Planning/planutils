@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name kstar.sif shub://ctpelok77/kstar

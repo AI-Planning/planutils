@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name cerberus.sif shub://ctpelok77/fd-red-black-postipc2018

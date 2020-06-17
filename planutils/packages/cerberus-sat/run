@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity run $(dirname $0)/cerberus.sif --transform-task preprocess --alias seq-sat-cerberus2018 $@

@@ -4,4 +4,4 @@
 # $2 problem
 # $3 number of plans (k)
 
-forbiditerative /workspace/forbiditerative/plan_diverse_agl.sh $@
+forbiditerative --alias diverse-agl $@

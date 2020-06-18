@@ -6,4 +6,4 @@
 # $4 metric (stability, state, uniqueness, stability-state, stability-uniqueness, state-uniqueness, stability-state-uniqueness, top-cost)
 # $5 total number of plans (optional, 1000 by default)
 
-forbiditerative /workspace/forbiditerative/plan_diverse_sat.sh $@
+forbiditerative --alias diverse-sat $@

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name delfi.sif shub://ctpelok77/delfi-deploy

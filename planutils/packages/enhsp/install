@@ -1,17 +1,3 @@
 #!/bin/bash
 
-# To use if root is required
-[ "$UID" -eq 0 ] || (echo "installation requires root access"; exec sudo "$0" "$@")
-
-# Install general linux dependencies
-sudo apt install openjdk-8-jre openjdk-8-jdk
-
-# General setup / configuration
-wget https://gitlab.com/enricos83/ENHSP-Public/-/archive/master/ENHSP-Public-master.zip
-unzip ENHSP-Public-master.zip
-rm ENHSP-Public-master.zip
-mv ENHSP-Public-master/ enhsp
-cd enhsp
-./compile
-./install
-sudo chmod +x enhsp
+# Nothing to do

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./enhsp --domain $1 --problem $2

@@ -16,7 +16,8 @@ About to install the following packages: downward (36M), lama (20K)
   Proceed? [Y/n] y
 Installing downward...
 INFO:    Downloading shub image
- 35.88 MiB / 35.88 MiB [===================================================================================================================] 100.00% 3.99 MiB/s 8sFinished installing downward (size: 36M)
+ 35.88 MiB / 35.88 MiB [=======================================] 100.00% 3.99 MiB/s 8s
+Finished installing downward (size: 36M)
 Installing lama...
 Finished installing lama (size: 20K)
 Successfully installed lama!

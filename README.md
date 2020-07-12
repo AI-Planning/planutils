@@ -4,38 +4,57 @@ General library for setting up linux-based environments for developing, running,
 
 ## Usage
 
-This doesn't work yet, but gives a general sense of where the project may be headed.
+### Example of currently working functionality
 
 ```bash
-$ planutils --install-planners ipc-2018
+$ lama domain.pddl problem.pddl
+
+Package not installed!
+  Download & install? [Y/n] y
+
+About to install the following packages: downward (36M), lama (20K)
+  Proceed? [Y/n] y
+Installing downward...
+INFO:    Downloading shub image
+ 35.88 MiB / 35.88 MiB [===================================================================================================================] 100.00% 3.99 MiB/s 8sFinished installing downward (size: 36M)
+Installing lama...
+Finished installing lama (size: 20K)
+Successfully installed lama!
+
+Original command: lama
+  Re-run command? [Y/n] y
+
+Parsing...
+$
+```
+
+### Example of upcoming functionality
+
+```bash
+$ planutils install ipc-2018
+Installing planners
 This will require 3Gb of storage. Proceed? [Y/n]
 Fetching all of the planners from IPC-2018 for use on the command line...
 
-$ planutils --setup-server-environment
+$ planutils install server-environment
 Setting up a webserver to call the installed planners...
 
-$ planutils --setup-development-environment
+$ planutils install development-environment
 Installing common dependencies for building planners...
 Installing common planning libraries...
 
-$ planutils install-planning-domains
+$ planutils install planning-domains
 Installing the command-line utilities...
 Installing the python library...
 Fetching default benchmarks...
 
-$ planutils --setup-evaluation configuration.json
+$ planutils setup-evaluation configuration.json
 Installing Lab...
 Configuring Lab...
 Ready!
 Run eval.py to evaluate
 
-$ lama domain.pddl problem.pddl
-The lama planner requires the FastDownward to be installed. Install now (30Mb)? [Y/n] Y
-Installing FastDownward...
-Ready! Please try running the planner again.
-
-$ lama domain.pddl problem.pddl
-Parsing...
+$
 ```
 
 ### Docker

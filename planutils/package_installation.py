@@ -112,7 +112,7 @@ def upgrade():
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
 
-def install(targets):
+def install(targets, forced=False):
     for target in targets:
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
@@ -141,14 +141,20 @@ def install(targets):
     if to_install:
         to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['install-size']) for pkg in to_install]
         print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
-        if input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']:
+
+        if forced:
+            user_response = True
+        else:
+            user_response = input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']
+
+        if user_response:
             installed = []
             for package in to_install:
                 package_path = os.path.join(CUR_DIR, 'packages', package)
                 print("Installing %s..." % package)
                 try:
                     installed.append(package)
-                    subprocess.check_call('./install', cwd=package_path)
+                    subprocess.check_call('./install', cwd=package_path, shell=True)
                     size = subprocess.check_output('du -sh .',
                                                    cwd=package_path,
                                                    shell=True,

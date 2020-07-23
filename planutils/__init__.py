@@ -77,6 +77,7 @@ def main():
     subparsers = parser.add_subparsers(help='sub-command help', dest='command')
 
     parser_install = subparsers.add_parser('install', help='install package(s) such as a planner')
+    parser_install.add_argument('-f', '--force', help='force installation', action='store_true')
     parser_install.add_argument('package', help='package name', nargs='+')
 
     parser_uninstall = subparsers.add_parser('uninstall', help='uninstall package(s)')
@@ -102,7 +103,7 @@ def main():
 
     elif 'install' == args.command:
         from planutils.package_installation import install
-        exit({True:0, False:1}[install(args.package)])
+        exit({True:0, False:1}[install(args.package, args.force)])
 
     elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall

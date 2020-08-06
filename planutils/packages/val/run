@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$1" = "help" ]
+then
+    cat $(dirname $0)/README.md
+elif [ "$1" = "" ]
+then
+    echo
+    echo "  val [help|<command>]"
+    echo
+    echo " <command> can be any of the following:"
+    echo
+    ls $(dirname $0)/bin/
+    echo
+else
+    $(dirname $0)/bin/$1 ${@:2}
+fi

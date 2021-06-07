@@ -13,10 +13,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive  apt-get install --no-insta
     uuid-dev \
     wget
 
-ENV VERSION=3.5.0
-RUN wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz
-RUN tar -xzf singularity-${VERSION}.tar.gz
-WORKDIR /go/singularity
+ENV VERSION=3.5.2
+RUN git clone https://github.com/sylabs/singularity.git
+WORKDIR singularity
+RUN git checkout v${VERSION}
 RUN ./mconfig -p /usr/local/singularity
 RUN make -C ./builddir
 RUN make -C ./builddir install

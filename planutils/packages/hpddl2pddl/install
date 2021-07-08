@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wget -c https://github.com/ronwalf/HTN-Translation/releases/download/hpddl-0.1/htntranslation-hpddl-0.1.tar.gz -O - | tar -xz

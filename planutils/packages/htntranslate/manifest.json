@@ -2,5 +2,6 @@
     "name": "HTNTranslate: Translate HPDDL to PDDL",
     "description": "https://github.com/ronwalf/HTN-Translation",
     "install-size": "28M",
-    "dependencies": []
+    "dependencies": [],
+    "author": "Ron Alford"
 }

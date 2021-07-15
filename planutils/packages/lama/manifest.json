@@ -2,5 +2,8 @@
     "name": "LAMA",
     "description": "http://fast-downward.org/",
     "install-size": "20K",
-    "dependencies": ["downward"]
+    "dependencies": ["downward"],
+    "generic":true,
+    "executable":"downward --alias lama-first",
+    "extra_args":["lalala"]
 }

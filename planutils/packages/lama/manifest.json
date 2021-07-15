@@ -5,5 +5,5 @@
     "dependencies": ["downward"],
     "generic":true,
     "executable":"downward --alias lama-first",
-    "extra_args":["lalala"]
+    "extra_args":["new git push"]
 }

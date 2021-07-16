@@ -5,5 +5,6 @@
     "dependencies": ["downward"],
     "solver":true,
     "executable":"downward --alias lama-first",
-    "extra_args":["new git push"]
+    "extra_args":[""],
+    "return-files":["sas_plan"]
 }

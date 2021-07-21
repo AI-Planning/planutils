@@ -2,5 +2,17 @@
     "name": "LAMA-FIRST",
     "description": "http://fast-downward.org/",
     "install-size": "20K",
-    "dependencies": ["downward"]
+    "dependencies": ["downward"],
+
+    "endpoint": {
+        "type": "solver",
+        "args": [
+            {"name": "whatever",
+            "description": "this is just a random argument added to show things"}
+        ],
+        "return": {
+            "type": "generic",
+            "file": "sas_plan"
+        }
+    }
 }

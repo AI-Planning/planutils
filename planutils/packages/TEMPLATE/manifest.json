@@ -1,6 +1,45 @@
 {
-    "name": "Full name of package",
-    "description": "General description of the package",
-    "install-size": "unknown",
-    "dependencies": ["list", "of", "dependencies"]
+    "name": "macq",
+    "description": "A library for model acquisition",
+    "install-size": "20M",
+    "dependencies": [],
+
+
+    "endpoint": {
+        "type": "custom",
+        "args": [
+            {"name": "domain",
+            "type": "file",
+            "description": "domain file"},
+
+            {"name": "problem",
+            "type": "file",
+            "description": "problem file"},
+
+            {"name": "num_plans",
+            "type": "cmd-arg",
+            "description": "number of plans to generate"},
+        ],
+        "call": "macq --domain {domain} --problem {problem} --num {num_plans} --out plans.json",
+        "return": {
+            "type": "json",
+            "file": "plans.json"
+        },
+        "services": {
+            "analyze": {
+                "args": [
+                    {"name": "trace",
+                    "type": "file",
+                    "description": "number of plans to generate"}
+                ],
+
+                "call": "macq --analyze {trace} --out output.txt",
+            
+                "return": {
+                    "type": "generic",
+                    "file": "output.txt"
+                }
+            }
+        }
+    }
 }

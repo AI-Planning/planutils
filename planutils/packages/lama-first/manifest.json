@@ -7,8 +7,9 @@
     "endpoint": {
         "type": "solver",
         "args": [
-            {"name": "whatever",
-            "description": "this is just a random argument added to show things"}
+            {"name": "domain",
+            "description": "domain file in PDDL"},
+            {"name": "problem", "description":"problem file in PDDL"}
         ],
         "return": {
             "type": "generic",

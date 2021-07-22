@@ -2,5 +2,17 @@
     "name": "K* planner for the top-k planning problem",
     "description": "https://github.com/ctpelok77/kstar",
     "install-size": "36M",
-    "dependencies": []
+    "dependencies": ["downward"],
+
+    "endpoint": {
+        "type": "not-solver",
+        "args": [
+            {"name": "domain", "description": "domain file in PDDL"},
+            {"name": "problem", "description":"problem file in PDDL"}
+        ],
+        "return": {
+            "type": "generic",
+            "file": "sas_plan"
+        }
+    }
 }

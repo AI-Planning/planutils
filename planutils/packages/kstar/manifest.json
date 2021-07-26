@@ -3,34 +3,30 @@
     "description": "Kstar planner",
     "install-size": "36M",
     "dependencies": [],
-  
-  
+   
     "endpoint": {
   
-      "type": "custom",
+        "type": "custom",
   
-      "args": [
+        "args": [
+            {"name": "domain",
+            "type": "file",
+            "description": "domain file"},
+
+            {"name": "problem",
+            "type": "file",
+            "description": "problem file"}
+        ],      
   
-          {"name": "domain",
-           "type": "file",
-           "description": "domain file"},
-  
-          {"name": "problem",
-           "type": "file",
-           "description": "problem file"}
-  
-      ],
-  
-      "services": {
-  
-        "solve": {
-          "call": "kstar {domain} {problem}",
-      
-          "return": {
-              "type": "generic",
-              "file": "output.sas"
-          }
+        "services": {
+            "solve": {
+                "call": "kstar {domain} {problem}",
+        
+                "return": {
+                    "type": "generic",
+                    "file": "output.sas"
+                }
+            }
         }
-    }
-  }
+    }   
 }

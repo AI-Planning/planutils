@@ -1,18 +1,36 @@
 {
-    "name": "K* planner for the top-k planning problem",
-    "description": "https://github.com/ctpelok77/kstar",
+    "name": "kstar",
+    "description": "Kstar planner",
     "install-size": "36M",
-    "dependencies": ["downward"],
-
+    "dependencies": [],
+  
+  
     "endpoint": {
-        "type": "not-solver",
-        "args": [
-            {"name": "domain", "description": "domain file in PDDL"},
-            {"name": "problem", "description":"problem file in PDDL"}
-        ],
-        "return": {
-            "type": "generic",
-            "file": "sas_plan"
+  
+      "type": "custom",
+  
+      "args": [
+  
+          {"name": "domain",
+           "type": "file",
+           "description": "domain file"},
+  
+          {"name": "problem",
+           "type": "file",
+           "description": "problem file"}
+  
+      ],
+  
+      "services": {
+  
+        "solve": {
+          "call": "kstar {domain} {problem}",
+      
+          "return": {
+              "type": "generic",
+              "file": "output.sas"
+          }
         }
     }
+  }
 }

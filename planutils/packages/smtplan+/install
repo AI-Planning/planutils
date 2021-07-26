@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+## Fetch the image
+singularity pull --name smtplan.sif library://jdekarske/default/smtplan:latest 

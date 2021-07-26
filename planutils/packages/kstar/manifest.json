@@ -20,7 +20,8 @@
   
         "services": {
             "solve": {
-                "call": "kstar {domain} {problem}",
+
+                "call": ["kstar", "domain", "problem"],
         
                 "return": {
                     "type": "generic",

@@ -28,7 +28,8 @@
 
                     {"name":"k",
                     "type":"int",
-                    "description":"Number of plans"}
+                    "description":"Number of plans",
+                    "default":10}
                 ],
 
                 "call": "kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)",

@@ -20,8 +20,18 @@
   
         "services": {
             "solve": {
+                "args": [
+                    {"name": "heuristic",
+                    "type": "string",
+                    "description": "specification for which heuristic to use",
+                    "default":"blind()"},
 
-                "call": "kstar domain problem",
+                    {"name":"k",
+                    "type":"int",
+                    "description":"Number of plans"}
+                ],
+
+                "call": "kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)",
         
                 "return": {
                     "type": "generic",

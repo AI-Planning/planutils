@@ -35,8 +35,8 @@
                 "call": "kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)'",
         
                 "return": {
-                    "type": "generic",
-                    "file": "output.sas"
+                    "type": "json",
+                    "file": "result.json"
                 }
             }
         }

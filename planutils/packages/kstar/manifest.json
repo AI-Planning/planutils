@@ -32,7 +32,7 @@
                     "default":10}
                 ],
 
-                "call": "kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)",
+                "call": "kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)'",
         
                 "return": {
                     "type": "generic",

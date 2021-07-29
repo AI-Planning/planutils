@@ -6,14 +6,14 @@
 
     "endpoint": {
         "type": "solver",
-        "args": [
-            {"name": "domain",
-            "description": "domain file in PDDL"},
-            {"name": "problem", "description":"problem file in PDDL"}
-        ],
-        "return": {
-            "type": "generic",
-            "file": "sas_plan"
+        "services": {
+            "solve": {
+                "call":"lama-first {domain} {problem}",
+                "return": {
+                    "type": "generic",
+                    "file": "sas_plan"
+                }
+            }
         }
     }
 }

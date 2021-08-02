@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag aiplanning/planutils:$(date +%s)
+      run: docker build . --file Dockerfile --tag aiplanning/planutils:latest
     - name: Docker Push
-      run: docker push aiplanning/planutils
+      run: docker push aiplanning/planutils:latest

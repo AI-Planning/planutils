@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git clone git@github.com:AI-Planning/api-tools.git
+

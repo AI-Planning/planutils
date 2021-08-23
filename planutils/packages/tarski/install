@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install general linux dependencies
-echo "Warning: For grounding, make sure you install gringo."
+echo "\n\n   Warning: For grounding, make sure you install gringo.\n\n"
 
 # General setup / configuration
 pip3 install tarski

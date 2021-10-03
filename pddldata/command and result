@@ -1,0 +1,189 @@
+1. lama-first
+cmd: lama-first domain.pddl problem.pddl
+outputs: sas_plan
+output format: text file
+
+2. lama
+cmd: lama domain.pddl problem.pddl
+outputs: [sas_plan.1, sas_plan.2, sas_plan.3]
+output format: text file
+
+Issue: cmd will not finish automatically
+
+
+3. forbiditerative-topk
+
+<domain> <problem> <number-of-plans>
+cmd: forbiditerative-topk domain.pddl problem.pddl number-of-plans
+outputs: [found_plans/done/sas_plan.1,..,found_plans/done/sas_plan.number-of-plans]
+
+
+4. forbiditerative-diverse-sat
+
+cmd:forbiditerative-diverse-sat <domain> <problem> <number-of-plans> <diversity-metric> <larger-number-of-plans>
+./plan_diverse_sat.sh examples/logistics00/domain.pddl examples/logistics00/probLOGISTICS-4-0.pddl 10 stability 20
+
+outputs:[found_plans/done/sas_plan.1,..,found_plans/done/sas_plan.number-of-plans]
+
+[found_plans/sas_plan.1,..,found_plans/sas_plan.larger-number-of-plans]
+
+5. forbiditerative-diverse-agl
+
+<domain> <problem> <number-of-plans>
+cmd: forbiditerative-diverse-agl domain.pddl problem.pddl number-of-plans
+
+outputs: [found_plans/sas_plan.1,..,found_plans/sas_plan.number-of-plans]
+
+
+6. kstar - slow
+
+# ./fast-downward.py --build release64 <domain_file> <problem_file> --search "kstar(heuristic,k=<number-of-plans>)"
+
+./fast-downward.py --build release64 examples/gripper/domain.pddl examples/gripper/prob01.pddl --search "kstar(blind(),k=100)"
+
+
+cmd: kstar {domain} {problem} --search 'kstar({heuristic},k={k},json_file_to_dump=result.json)'
+
+error
+
+root@254e75701f63:/home# kstar domain.pddl problem.pddl --search "kstar(blind(),k=1)"
+INFO     Running translator.
+INFO     translator input: ['domain.pddl', 'problem.pddl']
+INFO     translator arguments: []
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     callstring: /usr/bin/python3 /workspace/kstar/builds/release64/bin/translate/translate.py domain.pddl problem.pddl
+Parsing...
+Parsing: [0.000s CPU, 0.004s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.000s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.004s wall-clock]
+Preparing model... [0.000s CPU, 0.001s wall-clock]
+Generated 21 rules.
+Computing model... [0.000s CPU, 0.007s wall-clock]
+372 relevant atoms
+250 auxiliary atoms
+622 final queue length
+1044 total queue pushes
+Completing instantiation... [0.020s CPU, 0.013s wall-clock]
+Instantiating: [0.030s CPU, 0.026s wall-clock]
+Computing fact groups...
+Finding invariants...
+10 initial candidates
+Finding invariants: [0.000s CPU, 0.005s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.001s wall-clock]
+Collecting mutex groups... [0.010s CPU, 0.000s wall-clock]
+Choosing groups...
+11 uncovered facts
+Choosing groups: [0.000s CPU, 0.002s wall-clock]
+Building translation key... [0.000s CPU, 0.001s wall-clock]
+Computing fact groups: [0.010s CPU, 0.010s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Processing axioms: [0.000s CPU, 0.001s wall-clock]
+Translating task: [0.020s CPU, 0.017s wall-clock]
+290 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+20 propositions removed
+Detecting unreachable propositions: [0.000s CPU, 0.009s wall-clock]
+Reordering and filtering variables...
+21 of 21 variables necessary.
+11 of 21 mutex groups necessary.
+200 of 200 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.000s CPU, 0.004s wall-clock]
+Translator variables: 21
+Translator derived variables: 0
+Translator facts: 132
+Translator goal facts: 9
+Translator mutex groups: 11
+Translator total mutex groups size: 121
+Translator operators: 200
+Translator axioms: 0
+Translator task size: 1753
+Translator peak memory: 30452 KB
+Writing output... [0.010s CPU, 0.007s wall-clock]
+Done! [0.090s CPU, 0.083s wall-clock]
+INFO     Running search (release64).
+INFO     search input: output.sas
+INFO     search arguments: ['--search', 'kstar(blind(),k=1)']
+INFO     search time limit: None
+INFO     search memory limit: None
+INFO     search executable: /workspace/kstar/builds/release64/bin/downward
+INFO     callstring: /workspace/kstar/builds/release64/bin/downward --search 'kstar(blind(),k=1)' --internal-plan-file sas_plan < output.sas
+reading input... [t=0.00559238s]
+done reading input! [t=0.00664548s]
+packing state variables...done! [t=0.00669035s]
+Variables: 22
+FactPairs: 134
+Bytes per state: 8
+Building successor generator...done! [t=0.0071362s]
+done initalizing global data [t=0.00717112s]
+Initializing blind search heuristic...
+Running K* with K=1
+Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+New best heuristic value for blind: 1
+[g=0, 1 evaluated, 0 expanded, t=0.00744211s, 5296 KB]
+f = 1 [1 evaluated, 0 expanded, t=0.00755143s, 5296 KB]
+Initial heuristic value for blind: 1
+pruning method: none
+f = 2 [3 evaluated, 1 expanded, t=0.00762515s, 5296 KB]
+f = 3 [6 evaluated, 3 expanded, t=0.00767608s, 5296 KB]
+f = 4 [9 evaluated, 6 expanded, t=0.0078352s, 5296 KB]
+f = 5 [16 evaluated, 9 expanded, t=0.00789305s, 5296 KB]
+f = 6 [27 evaluated, 16 expanded, t=0.00795233s, 5296 KB]
+f = 7 [53 evaluated, 27 expanded, t=0.00811714s, 5296 KB]
+f = 8 [95 evaluated, 53 expanded, t=0.00832333s, 5296 KB]
+f = 9 [200 evaluated, 95 expanded, t=0.00877532s, 5296 KB]
+f = 10 [384 evaluated, 200 expanded, t=0.00961425s, 5296 KB]
+f = 11 [859 evaluated, 384 expanded, t=0.0113521s, 5424 KB]
+f = 12 [1727 evaluated, 859 expanded, t=0.0148582s, 5556 KB]
+f = 13 [4058 evaluated, 1727 expanded, t=0.0230467s, 6084 KB]
+f = 14 [8537 evaluated, 4058 expanded, t=0.0414073s, 7224 KB]
+f = 15 [20956 evaluated, 8537 expanded, t=0.0874801s, 9996 KB]
+f = 16 [45750 evaluated, 20956 expanded, t=0.208318s, 16328 KB]
+f = 17 [116718 evaluated, 45750 expanded, t=0.494486s, 32452 KB]
+f = 18 [263674 evaluated, 116718 expanded, t=1.29207s, 72212 KB]
+f = 19 [675485 evaluated, 263674 expanded, t=3.14532s, 171004 KB]
+f = 20 [1447731 evaluated, 675485 expanded, t=7.97227s, 384768 KB]
+f = 21 [3195252 evaluated, 1447731 expanded, t=17.9524s, 848716 KB]
+f = 22 [5954058 evaluated, 3195252 expanded, t=39.8478s, 1661660 KB]
+Command '['/workspace/kstar/builds/release64/bin/downward', '--search', 'kstar(blind(),k=1)', '--internal-plan-file', 'sas_plan']' died with <Signals.SIGKILL: 9>.
+
+
+
+4. enhsp-2019
+
+root@254e75701f63:/home# enhsp-2019 -o domain.pddl -f problem.pddl 
+Domain parsed
+java.lang.NullPointerException
+	at com.hstairs.ppmajal.problem.PddlProblem.addObjects(PddlProblem.java:311)
+	at com.hstairs.ppmajal.problem.PddlProblem.parseProblem(PddlProblem.java:269)
+	at com.hstairs.ppmajal.problem.PddlProblem.<init>(PddlProblem.java:92)
+	at com.hstairs.ppmajal.problem.EPddlProblem.<init>(EPddlProblem.java:67)
+	at planners.ENHSP.parsingDomainAndProblem(ENHSP.java:110)
+	at main.main(main.java:30)
+Light Validation Completed
+Simplification..
+java.lang.NullPointerException
+	at planners.ENHSP.simplifyModels(ENHSP.java:413)
+	at planners.ENHSP.planning(ENHSP.java:146)
+	at main.main(main.java:31)
+
+5. hpddl2pddl 
+
+multiple cmd line?
+https://github.com/ronwalf/HTN-Translation/tree/master/examples/blocksworld
+
+

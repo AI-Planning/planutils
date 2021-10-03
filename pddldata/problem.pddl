@@ -1,0 +1,6 @@
+(define (problem blocksworld-4-2)
+(:domain blocksworld)
+(:objects b d c a )
+(:init (clear a) (clear c) (clear d) (ontable a) (ontable b) (ontable d)
+ (on c b) (arm-free))
+(:goal (and (on a b) (on b c) (on c d))))

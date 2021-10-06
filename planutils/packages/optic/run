@@ -2,4 +2,4 @@
 
 # whatever command-line method needs to be used to run this package
 
-singularity run $(dirname $0)/roveri-marco-optic.latest.sif $@
+singularity run -e $(dirname $0)/optic.sif $@

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-esingularity run -e $(dirname $0)/htntranslate-hpddl.sif $@
+singularity run -e $(dirname $0)/htntranslate-hpddl.sif $@

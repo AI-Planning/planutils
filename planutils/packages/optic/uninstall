@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm roveri-marco-optic.latest.sif
+rm optic.sif

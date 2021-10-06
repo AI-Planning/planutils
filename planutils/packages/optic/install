@@ -11,4 +11,4 @@
 ## Fetch the image
 #singularity pull --name <image name> <singularity shub url>
 
-singularity pull --name optic.sif https://github.com/roveri-marco/optic/releases/download/1.0/roveri-marco-optic.latest.sif
+singularity pull --name optic.sif https://github.com/roveri-marco/optic/releases/download/1.0/roveri-marco-optic.1.0.sif

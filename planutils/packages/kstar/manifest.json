@@ -2,5 +2,28 @@
     "name": "K* planner for the top-k planning problem",
     "description": "https://github.com/ctpelok77/kstar",
     "install-size": "36M",
-    "dependencies": []
+    "dependencies": [],
+    "endpoint": {
+        "services": {
+            "solve": {
+                "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file"
+                    },
+                    {
+                        "name": "problem",
+                        "type": "file",
+                        "description": "problem file"
+                    }
+                ],
+                "call": "kstar {domain} {problem} --search 'kstar(blind(),k=1)'",
+                "return": {
+                    "type": "generic",
+                    "files": "found_plans/sas_plan.*"
+                }
+            }
+        }
+    }
 }

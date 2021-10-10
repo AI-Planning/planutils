@@ -23,7 +23,7 @@
                 "call": "lama-first {domain} {problem}",
                 "return": {
                     "type": "generic",
-                    "files": "sas_plan.*"
+                    "files": "sas_plan*"
                 }
             }
         }

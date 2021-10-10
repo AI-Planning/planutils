@@ -21,7 +21,7 @@
                 "call": "enhsp-2020 -o {domain} -f {problem} >> sas_plan.1",
                 "return": {
                     "type": "generic",
-                    "files": "sas_plan.*"
+                    "files": "sas_plan*"
                 }
             }
         }

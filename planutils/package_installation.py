@@ -1,8 +1,8 @@
 
 import json, os, glob, subprocess
 from collections import defaultdict
-import settings
-import manifest_converter
+from planutils import settings
+from planutils import manifest_converter
 
 PACKAGES = {}
 

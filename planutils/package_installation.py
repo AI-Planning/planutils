@@ -1,13 +1,14 @@
 
 import json, os, glob, subprocess
 from collections import defaultdict
-
-from planutils import settings
+import settings
+import manifest_converter
 
 PACKAGES = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
+manifest_converter.generate_manifest()
 
 def check_package(target, manifest):
     assert os.path.exists(manifest), "Error: Manifest must be defined for %s" % target

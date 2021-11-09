@@ -23,7 +23,7 @@
                 "call": "cerberus-sat {domain} {problem}",
                 "return": {
                     "type": "generic",
-                    "files": "sas_plan*"
+                    "files": "*plan*"
                 }
             }
         }

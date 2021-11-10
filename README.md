@@ -2,6 +2,14 @@
 
 General library for setting up linux-based environments for developing, running, and evaluating planners.
 
+## set up docker environment
+*build planutils images*
+`docker build -t planutils:latest . `
+
+*run the plautils container*
+`docker run -it --privileged planutils bash`
+
+
 ## Usage
 
 ### Example of currently working functionality

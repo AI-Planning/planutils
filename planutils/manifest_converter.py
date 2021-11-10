@@ -2,6 +2,7 @@ import json
 from collections import OrderedDict
 import glob
 import os
+import copy
 
 
 def load_json(f_name):
@@ -22,20 +23,15 @@ def load_template(template_dir):
         service_templates[template_name]=service_template_body
     return service_templates
 
-# def get_template(template_name):
-#     if template_name=="planner":
-#         return service_templates["planner"].copy()
-#     return False
 
 def generate_full_manifest(service_templates,manifest,package_name):
-    manifest_full=manifest.copy()
+    manifest_full=copy.deepcopy(manifest)
     for service in manifest["endpoint"]["services"]:
         service_body=manifest["endpoint"]["services"][service]
         if "template" in service_body:
             template_name=service_body["template"]
-
-            template=service_templates.get(template_name,{}).copy()
-            new_service_body=template.copy()
+            template=service_templates.get(template_name,{})
+            new_service_body=copy.deepcopy(template)
             # update addtional args
             for key in template:
                 if key in service_body:

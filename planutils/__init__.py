@@ -1,6 +1,5 @@
 
-import argparse
-import os
+import argparse, os
 from pathlib import Path
 
 from planutils import settings
@@ -14,10 +13,7 @@ def minimal_setup():
         print(f"Creating {planutils_dir}...")
         planutils_dir.mkdir()
         os.symlink(script_dir / "packages", planutils_dir / "packages")
-
-        settings.save({
-            'installed': []
-        })
+        settings.save({'installed': []})
 
 
 def setup():
@@ -29,18 +25,8 @@ def setup():
         else:
             return
 
-    CUR_DIR = os.path.dirname(os.path.abspath(__file__))
-
-    print("\nCreating ~/.planutils...")
-    os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils'))
+    minimal_setup()
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
-
-    settings.save({
-        'installed': []
-    })
-
-    os.symlink(os.path.join(CUR_DIR, 'packages'),
-               os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:

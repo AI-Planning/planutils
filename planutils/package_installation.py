@@ -178,6 +178,7 @@ def install(targets, forced=False):
 
     return False
 
+
 def run(target, options):
     if target not in PACKAGES:
         sys.exit(f"Package {target} is not installed")

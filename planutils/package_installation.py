@@ -1,6 +1,7 @@
 
-import json, os, glob, subprocess
+import json, os, glob, subprocess, sys
 from collections import defaultdict
+from pathlib import Path
 
 from planutils import settings
 
@@ -177,3 +178,9 @@ def install(targets, forced=False):
 
     return False
 
+def run(target, options):
+    if target not in PACKAGES:
+        sys.exit(f"Package {target} is not installed")
+    if not PACKAGES[target]["runnable"]:
+        sys.exit(f"Package {target} is not executable")
+    subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)

@@ -1,8 +1,23 @@
 
-import argparse, os
+import argparse
+import os
+from pathlib import Path
 
 from planutils import settings
 from planutils.package_installation import PACKAGES
+
+
+def minimal_setup():
+    cur_dir = Path(__file__).resolve().parent
+    planutils_dir = (Path.home() / ".planutils")
+    if not planutils_dir.is_dir():
+        print(f"Creating {planutils_dir}...")
+        planutils_dir.mkdir()
+        os.symlink(cur_dir / "packages", planutils_dir / "packages")
+
+        settings.save({
+            'installed': []
+        })
 
 
 def setup():
@@ -92,10 +107,10 @@ def main():
 
     args = parser.parse_args()
 
+    minimal_setup()
+
     if 'setup' == args.command:
         setup()
-    elif not setup_done():
-        print("\nPlease run 'planutils setup' before using utility.\n")
 
     elif 'check-installed' == args.command:
         from planutils.package_installation import check_installed

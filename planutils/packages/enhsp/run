@@ -1,3 +1,3 @@
 #!/bin/bash
 
-enhsp-2019 $@
+planutils run enhsp-2019 -- $@

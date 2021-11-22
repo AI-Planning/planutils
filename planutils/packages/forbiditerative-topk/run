@@ -5,4 +5,4 @@
 # $3 number of plans (k)
 # $4 (optional, default NONE) reordering (NONE, NEIGHBOURS_INTERFERE, NAIVE_ALL_DFS_NODUP)
 
-forbiditerative --alias topk $@
+planutils run forbiditerative -- --alias topk $@

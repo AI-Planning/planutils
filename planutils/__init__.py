@@ -1,8 +1,19 @@
 
 import argparse, os
+from pathlib import Path
 
 from planutils import settings
 from planutils.package_installation import PACKAGES
+
+
+def minimal_setup():
+    script_dir = Path(__file__).resolve().parent
+    planutils_dir = Path(settings.PLANUTILS_PREFIX)
+    if not planutils_dir.is_dir():
+        print(f"Creating {planutils_dir}...")
+        planutils_dir.mkdir()
+        os.symlink(script_dir / "packages", planutils_dir / "packages")
+        settings.save({'installed': []})
 
 
 def setup():
@@ -14,18 +25,8 @@ def setup():
         else:
             return
 
-    CUR_DIR = os.path.dirname(os.path.abspath(__file__))
-
-    print("\nCreating ~/.planutils...")
-    os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils'))
+    minimal_setup()
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
-
-    settings.save({
-        'installed': []
-    })
-
-    os.symlink(os.path.join(CUR_DIR, 'packages'),
-               os.path.join(os.path.expanduser('~'), '.planutils', 'packages'))
 
     print("Adding bin folder to path (assuming ~/.bashrc exists)...")
     with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:
@@ -83,6 +84,10 @@ def main():
     parser_uninstall = subparsers.add_parser('uninstall', help='uninstall package(s)')
     parser_uninstall.add_argument('package', help='package name', nargs='+')
 
+    parser_run = subparsers.add_parser('run', help='run package')
+    parser_run.add_argument('package', help='package name')
+    parser_run.add_argument('options', help='commandline options for the package', nargs="*")
+
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')
 
@@ -92,10 +97,10 @@ def main():
 
     args = parser.parse_args()
 
+    minimal_setup()
+
     if 'setup' == args.command:
         setup()
-    elif not setup_done():
-        print("\nPlease run 'planutils setup' before using utility.\n")
 
     elif 'check-installed' == args.command:
         from planutils.package_installation import check_installed
@@ -108,6 +113,10 @@ def main():
     elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall
         uninstall(args.package)
+
+    elif 'run' == args.command:
+        from planutils.package_installation import run
+        run(args.package, args.options)
 
     elif 'list' == args.command:
         from planutils.package_installation import package_list

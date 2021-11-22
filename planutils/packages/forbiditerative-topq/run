@@ -4,4 +4,4 @@
 # $2 problem
 # $3 quality bound (>= 1.0)
 
-forbiditerative --alias topq $@
+planutils run forbiditerative -- --alias topq $@

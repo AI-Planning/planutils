@@ -1,0 +1,6 @@
+{
+    "name": "The TFD temporal planner",
+    "description": "The TFD temporal planner (see https://github.com/roveri-marco/tfd)",
+    "install-size": "145MB",
+    "dependencies": []
+}

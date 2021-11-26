@@ -96,13 +96,14 @@ def main():
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
     args = parser.parse_args()
-
-    minimal_setup()
-
+    
     if 'setup' == args.command:
         setup()
+        return
+    else:
+        minimal_setup()
 
-    elif 'check-installed' == args.command:
+    if 'check-installed' == args.command:
         from planutils.package_installation import check_installed
         exit({True:0, False:1}[check_installed(args.package)])
 

@@ -189,4 +189,4 @@ def run(target, options):
         sys.exit(f"Package {target} is not installed")
     if not PACKAGES[target]["runnable"]:
         sys.exit(f"Package {target} is not executable")
-    subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)
+    subprocess.run([Path(os.path.dirname(__file__)) / "packages" / target / "run"] + options)

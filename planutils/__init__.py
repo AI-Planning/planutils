@@ -26,46 +26,6 @@ def setup():
             return
 
     minimal_setup()
-    os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
-
-    print("Adding bin folder to path (assuming ~/.bashrc exists)...")
-    with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:
-        f.write("export PLANUTILS_PREFIX=\"~/.planutils\"\n")
-        f.write("export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"\n")
-
-    print("Installing package scripts...")
-    for p in PACKAGES:
-        if PACKAGES[p]['runnable']:
-            script  = "#!/bin/bash\n"
-            script += "if $(planutils check-installed %s)\n" % p
-            script += "then\n"
-            script += "  ~/.planutils/packages/%s/run $@\n" % p
-            script += "else\n"
-            script += "  echo\n"
-            script += "  echo 'Package not installed!'\n"
-            script += "  read -r -p \"  Download & install? [Y/n] \" varchoice\n"
-            script += "  varchoice=${varchoice,,}\n" # tolower
-            script += "  if ! [[ \"$varchoice\" =~ ^(no|n)$ ]]\n"
-            script += "  then\n"
-            script += "    if planutils install %s;\n" % p
-            script += "    then\n"
-            script += "      echo 'Successfully installed %s!'\n" % p
-            script += "      echo\n"
-            script += "      echo \"Original command: %s $@\"\n" % p
-            script += "      read -r -p \"  Re-run command? [Y/n] \" varchoice\n"
-            script += "      varchoice=${varchoice,,}\n" # tolower
-            script += "      if ! [[ \"$varchoice\" =~ ^(no|n)$ ]]\n"
-            script += "      then\n"
-            script += "        ~/.planutils/packages/%s/run $@\n" % p
-            script += "      fi\n"
-            script += "    fi\n"
-            script += "  fi\n"
-            script += "  echo\n"
-            script += "fi\n"
-            with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 'w') as f:
-                f.write(script)
-            os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
-
 
     print("\nAll set! Be sure to start a new bash session or update your PATH variable to include ~/.planutils/bin\n")
 

@@ -1,0 +1,20 @@
+{
+    "name": "DUAL-BFWS using FD-parser as a front-end",
+    "args": [
+          {
+            "name": "domain",
+            "type": "file",
+            "description": "domain file"
+          },
+          {
+            "name": "problem",
+            "type": "file",
+            "description": "problem file"
+          }
+    ],
+    "call": "/planner/BFWS/fd-version/bfws.py {domain} {problem} plan",
+    "return": {
+      "type": "generic",
+      "files": "*plan*"
+    }
+  }

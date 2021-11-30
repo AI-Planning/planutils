@@ -1,3 +1,2 @@
 #!/bin/bash
-
-singularity run $(dirname $0)/kstar.sif $@
+singularity run $(dirname $0)/bfws.sif $@

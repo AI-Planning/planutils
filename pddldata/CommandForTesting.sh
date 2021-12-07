@@ -13,7 +13,7 @@ cd planutils
 git checkout manifest-new-version
 pip uninstall planutils
 python3 setup.py install --old-and-unmanageable
-planutils setupy
+planutils setup
 
 # 4.Install the package and test it
 planutils install bfws

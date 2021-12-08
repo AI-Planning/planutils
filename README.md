@@ -71,3 +71,21 @@ $
 The included Docker file will come with planutils pre-installed. Note that in order to
 run a number of the planners (all those that are based on singularity), you will need
 to run the docker with the `--privileged` option.
+
+### Singularity
+
+You need to [install singularity](https://sylabs.io/guides/3.5/admin-guide/installation.html) first in your local machine, then run the build command
+```bash
+sudo singularity build bfws.img Singularity
+```
+
+and you can test the image with the following command using the fd parser:
+```bash
+singularity run -C -H absolute_path_domains bfws.img 'python3 /planner/BFWS/fd-version/bfws.py' LAPKT-public/benchmarks/ipc-2011/blocksworld/domain.pddl LAPKT-public/benchmarks/ipc-2011/blocksworld/instances/blocksaips02.pddl foo 
+```
+
+or ff parser:
+
+```bash
+singularity run -C -H absolute_path_domains bfws.img /planner/BFWS/ff-version/bfws '--domain your_domain.pddl' '--problem your_problem.pddl' '--output foo'
+```

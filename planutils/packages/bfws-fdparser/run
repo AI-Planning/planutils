@@ -1,0 +1,2 @@
+#!/bin/bash
+singularity run -e $(dirname $0)/bfws.sif python3 /planner/BFWS/fd-version/bfws.py $@

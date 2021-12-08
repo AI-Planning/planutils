@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name bfws.sif https://github.com/nirlipo/BFWS-public/releases/download/planutils_singularity/bfws.sif

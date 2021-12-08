@@ -7,7 +7,7 @@
     "services": {
       "solve": {
         "template": "planner",
-        "call":"/planner/BFWS/fd-version/bfws.py {domain} {problem} plan"
+        "call":"python3 /planner/BFWS/fd-version/bfws.py {domain} {problem} plan"
       }
 
     }

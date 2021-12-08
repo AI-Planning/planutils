@@ -1,2 +1,2 @@
 #!/bin/bash
-singularity run -e $(dirname $0)/bfws.sif /planner/BFWS/ff-version/bfws --domain $1 --problem $2 --output $3
+lapkt /planner/BFWS/ff-version/bfws --domain $1 --problem $2 --output $3

@@ -1,0 +1,2 @@
+#!/bin/bash
+lapkt /planner/BFWS/ff-version/bfws --domain $1 --problem $2 --output $3

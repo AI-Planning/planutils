@@ -113,7 +113,7 @@ def upgrade():
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
 
-def install(targets, forced=False):
+def install(targets, forced=False, always_yes=False):
     for target in targets:
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
@@ -123,9 +123,14 @@ def install(targets, forced=False):
     to_check = []
     for target in targets:
         if check_installed(target):
-            print("%s is already installed." % target)
+            if forced:
+                to_check.append(target)
+                print("%s is present, will be re-installed (forced installation)." % target)
+            else:
+                print("%s is present, not installed." % target)
         else:
             to_check.append(target)
+            print("%s will be installed." % target)
 
     done = set()
     to_install = []
@@ -143,7 +148,7 @@ def install(targets, forced=False):
         to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['install-size']) for pkg in to_install]
         print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
 
-        if forced:
+        if always_yes:
             user_response = True
         else:
             user_response = input("  Proceed? [Y/n] ").lower() in ['', 'y', 'yes']

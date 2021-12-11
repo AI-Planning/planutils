@@ -69,6 +69,7 @@ def setup():
 
     print("\nAll set! Be sure to start a new bash session or update your PATH variable to include ~/.planutils/bin\n")
 
+
 def setup_done():
     return os.path.exists(os.path.join(os.path.expanduser('~'), '.planutils'))
 
@@ -78,7 +79,8 @@ def main():
     subparsers = parser.add_subparsers(help='sub-command help', dest='command')
 
     parser_install = subparsers.add_parser('install', help='install package(s) such as a planner')
-    parser_install.add_argument('-f', '--force', help='force installation', action='store_true')
+    parser_install.add_argument('-f', '--force', help='force reinstallation if the package is already installed', action='store_true')
+    parser_install.add_argument('-y', '--yes', help='Answer yes to all user queries automatically', action='store_true')
     parser_install.add_argument('package', help='package name', nargs='+')
 
     parser_uninstall = subparsers.add_parser('uninstall', help='uninstall package(s)')
@@ -109,7 +111,7 @@ def main():
 
     elif 'install' == args.command:
         from planutils.package_installation import install
-        exit({True:0, False:1}[install(args.package, args.force)])
+        exit({True:0, False:1}[install(args.package, args.force, args.yes)])
 
     elif 'uninstall' == args.command:
         from planutils.package_installation import uninstall

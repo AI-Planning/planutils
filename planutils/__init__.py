@@ -28,11 +28,6 @@ def setup():
     minimal_setup()
     os.mkdir(os.path.join(os.path.expanduser('~'), '.planutils', 'bin'))
 
-    print("Adding bin folder to path (assuming ~/.bashrc exists)...")
-    with open(os.path.join(os.path.expanduser('~'), '.bashrc'), "a+") as f:
-        f.write("export PLANUTILS_PREFIX=\"~/.planutils\"\n")
-        f.write("export PATH=\"$PLANUTILS_PREFIX/bin:$PATH\"\n")
-
     print("Installing package scripts...")
     for p in PACKAGES:
         if PACKAGES[p]['runnable']:
@@ -67,7 +62,7 @@ def setup():
             os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
 
 
-    print("\nAll set! Be sure to start a new bash session or update your PATH variable to include ~/.planutils/bin\n")
+    print("\nAll set! Use \"planutils activate\" to activate the environment, or run through \"planutils\" directly.\n")
 
 
 def setup_done():
@@ -98,7 +93,7 @@ def main():
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
     args = parser.parse_args()
-    
+
     if 'setup' == args.command:
         setup()
         return

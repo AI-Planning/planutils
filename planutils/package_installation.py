@@ -186,7 +186,9 @@ def install(targets, forced=False, always_yes=False):
 
 def run(target, options):
     if target not in PACKAGES:
+        sys.exit(f"Package {target} not found")
+    if not check_installed(target):
         sys.exit(f"Package {target} is not installed")
     if not PACKAGES[target]["runnable"]:
         sys.exit(f"Package {target} is not executable")
-    subprocess.run([Path(settings.PLANUTILS_PREFIX) / "bin" / target] + options)
+    subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)

@@ -25,7 +25,7 @@
             "default":"kstar(blind(),k=1)"
           }
         ],
-        "call":"{package_name} {domain} {problem} --search {search_algorithm}",
+        "call":"{package_name} {domain} {problem} --search '{search_algorithm}'",
         "return": {
           "type": "generic",
           "files": "found_plans/sas_plan.*"

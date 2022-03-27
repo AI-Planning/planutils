@@ -4,4 +4,4 @@
 # $2 problem
 # $3 number of plans (k)
 
-forbiditerative --alias diverse-agl $@
+planutils run forbiditerative -- --alias diverse-agl $@

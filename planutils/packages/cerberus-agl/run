@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cerberus --transform-task preprocess --alias seq-agl-cerberus2018 $@
+planutils run cerberus -- --transform-task preprocess --alias seq-agl-cerberus2018 $@

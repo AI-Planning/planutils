@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# whatever command-line method needs to be used to run this package
+
+singularity run -e $(dirname $0)/optic.sif $@

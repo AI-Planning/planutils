@@ -123,6 +123,7 @@ You can also create a `manifest.json` file directly if you don't need the templa
 }
 ```
 **Define Args**
+
 There are four types of Args: `file`, `int`, `string` and,`categorical`. You can add default value for `int`,`string`, and `categorical` arguments
 
 ```
@@ -163,6 +164,7 @@ There are four types of Args: `file`, `int`, `string` and,`categorical`. You can
 ]
 ```
 **Define Return Types**
+
 There are two types of return data: `generic` and `json`. The `generic` should be used for all the text based result, and the `json` should used for plan in JSON format.
 
 For the value of `files`, you will have to write a [glob](https://docs.python.org/3/library/glob.html) pattern. Planning-as-service backend uses `glob` libary to find and return all the files that matched. 

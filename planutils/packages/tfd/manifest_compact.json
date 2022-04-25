@@ -6,7 +6,11 @@
   "endpoint": {
     "services": {
       "solve": {
-        "template": "planner"
+        "template": "planner",
+        "return": {
+          "type": "log",
+          "files": "*plan*"
+        }
       }
     }
   }

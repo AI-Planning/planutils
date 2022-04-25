@@ -7,7 +7,7 @@
     "services": {
       "solve": {
         "template": "planner",
-        "call":"{package_name} -o {domain} -f {problem} >> sas_plan.1"
+        "call":"{package_name} -o {domain} -f {problem} >> plan"
       }
 
     }

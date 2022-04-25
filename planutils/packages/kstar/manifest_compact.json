@@ -7,7 +7,25 @@
     "services": {
       "solve": {
         "template": "planner",
-        "call":"{package_name} {domain} {problem} --search 'kstar(blind(),k=1)'",
+        "args":[
+          {
+            "name": "search_algorithm",
+            "type": "categorical",
+            "description": "Search Algorithm",
+            "choices":[
+              {
+                "display_value":"Kstar Blind k=1",
+                "value":"kstar(blind(),k=1)"
+              },
+              {
+                "display_value":"Kstar Blind k=2",
+                "value":"kstar(blind(),k=2)"
+              }
+            ],
+            "default":"kstar(blind(),k=1)"
+          }
+        ],
+        "call":"{package_name} {domain} {problem} --search '{search_algorithm}'",
         "return": {
           "type": "generic",
           "files": "found_plans/sas_plan.*"

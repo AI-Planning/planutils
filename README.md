@@ -165,12 +165,12 @@ There are four types of Args: `file`, `int`, `string` and,`categorical`. You can
 ```
 **Define Return Types**
 
-There are two types of return data: `generic` and `json`. The `generic` should be used for all the text based result, and the `json` should used for plan in JSON format.
+There are three types of return data: `generic`, `json` and `log`. The `generic` type should be used for all the text based result, the `log` type should be used for planner like Optic and Tfd which didn't generate a proper plan, and the type `json` should used for plan in JSON format.
 
 For the value of `files`, you will have to write a [glob](https://docs.python.org/3/library/glob.html) pattern. Planning-as-service backend uses `glob` libary to find and return all the files that matched. 
 ```
 "return": {
-                    "type": "generic/json",
+                    "type": "generic/log/json",
                     "files": "*plan*"
                 }
 ```

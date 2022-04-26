@@ -1,0 +1,9 @@
+{
+  "name": "LAPKT (Lightweight Automated Planning ToolKiT)",
+  "description": "This package contains the source code of the planners that participated in IPC-9, 2018. It contains the winner of the Agile-Track, and runner-up of tha SAT-track.",
+  "install-size": "184M",
+  "dependencies": [],
+  "endpoint": {
+    "services": { }
+  }
+}

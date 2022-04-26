@@ -1,0 +1,15 @@
+{
+  "name": "LAMA-FIRST",
+  "description": "http://fast-downward.org/",
+  "install-size": "20K",
+  "dependencies": [
+    "downward"
+  ],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner"
+      }
+    }
+  }
+}

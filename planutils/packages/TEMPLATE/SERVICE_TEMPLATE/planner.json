@@ -1,0 +1,19 @@
+{
+    "args": [
+          {
+            "name": "domain",
+            "type": "file",
+            "description": "domain file"
+          },
+          {
+            "name": "problem",
+            "type": "file",
+            "description": "problem file"
+          }
+    ],
+    "call": "{package_name} {domain} {problem}",
+    "return": {
+      "type": "generic",
+      "files": "*plan*"
+    }
+  }

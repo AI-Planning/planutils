@@ -1,0 +1,15 @@
+{
+  "name": "ENHSP (2020)",
+  "description": "Expressive Numeric Heuristic Search Planner (https://gitlab.com/enricos83/ENHSP-Public)",
+  "install-size": "86M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "call":"{package_name} -o {domain} -f {problem} >> plan"
+      }
+
+    }
+  }
+}

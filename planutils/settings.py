@@ -1,6 +1,8 @@
 
 import json, os
 
+from planutils import manifest_converter
+
 # This should eventually be changed once the prefix is customizable
 PLANUTILS_PREFIX = os.path.join(os.path.expanduser('~'), '.planutils')
 
@@ -14,3 +16,4 @@ def load():
 def save(s):
     with open(SETTINGS_FILE, 'w') as f:
         f.write(json.dumps(s))
+    manifest_converter.generate_manifest()

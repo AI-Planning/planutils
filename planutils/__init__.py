@@ -3,7 +3,6 @@ import argparse, os
 from pathlib import Path
 
 from planutils import settings
-from planutils import manifest_converter
 from planutils.package_installation import PACKAGES
 
 
@@ -14,7 +13,6 @@ def minimal_setup():
         print(f"Creating {planutils_dir}...")
         planutils_dir.mkdir()
         os.symlink(script_dir / "packages", planutils_dir / "packages")
-        manifest_converter.backup_manifest()
         settings.save({'installed': []})
 
 

@@ -3,6 +3,7 @@ from collections import OrderedDict
 import glob
 import os
 import copy
+import shutil
 
 
 def load_json(f_name):
@@ -54,14 +55,16 @@ def generate_manifest():
     for conf_file in glob.glob(os.path.join(PACKAGE_DIR, '*')):
         base = os.path.basename(conf_file)
         if base not in ['README.md', 'TEMPLATE']:
-            manifest_compact_loc=os.path.join(conf_file, 'manifest_compact.json')
-            manifest_full_loc=os.path.join(conf_file, 'manifest.json')
-            if os.path.exists(manifest_compact_loc):
-                manifest_compact=load_json(manifest_compact_loc)
+            manifest_loc=os.path.join(conf_file, 'manifest.json')
+            # Check if "template" is in manifest.json
+            with open(manifest_loc, 'r') as f:
+                contents = f.read()
+            if "template" in contents:
+                manifest_loc_bak=os.path.join(conf_file, 'manifest.json.bak')
+                if os.path.exists(manifest_loc_bak):
+                    os.remove(manifest_loc_bak)
+                shutil.copy(manifest_loc, manifest_loc_bak)
+                manifest_compact=load_json(manifest_loc)
                 manifest_full=generate_full_manifest(service_templates,manifest_compact,base)
-                save_json(manifest_full_loc,manifest_full)
+                save_json(manifest_loc,manifest_full)
 
-
-
-
-            

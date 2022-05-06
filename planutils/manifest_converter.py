@@ -57,7 +57,6 @@ def generate_manifest():
         if base not in ['README.md', 'TEMPLATE']:
             manifest_loc=os.path.join(conf_file, 'manifest.json')
             # Check if "template" is in manifest.json
-            manifest_loc=os.path.join(conf_file, 'manifest.json')
             with open(manifest_loc, 'r') as f:
                 contents = f.read()
             if "template" in contents:

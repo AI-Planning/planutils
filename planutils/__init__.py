@@ -116,6 +116,10 @@ def main():
         from planutils.package_installation import run
         run(args.package, args.options)
 
+    elif 'remote' == args.command:
+        from planutils.package_installation import remote
+        remote(args.package, args.options)
+
     elif 'list' == args.command:
         from planutils.package_installation import package_list
         package_list()

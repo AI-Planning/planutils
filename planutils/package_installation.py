@@ -4,7 +4,6 @@ from collections import defaultdict
 from pathlib import Path
 
 from planutils import settings
-from planutils import manifest_converter
 
 PACKAGES = {}
 
@@ -193,3 +192,11 @@ def run(target, options):
     if not PACKAGES[target]["runnable"]:
         sys.exit(f"Package {target} is not executable")
     subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)
+
+
+def remote(target, options):
+    # TODO: check if the target is deplyed
+    # TODO: unpack the options and target to the right json
+    # TODO: run the remote command
+    # TODO: pack the results back to the client, including any new files
+    pass

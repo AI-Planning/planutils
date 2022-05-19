@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity run -e $(dirname $0)/scorpion.sif --transform-task preprocess-h2 --alias scorpion $@

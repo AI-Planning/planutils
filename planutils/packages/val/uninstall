@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm README.md
+rm -rf bin/

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# $1 domain
+# $2 problem
+# $3 number of plans (k)
+
+planutils run forbiditerative -- --alias diverse-agl $@

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rf api-tools
+rm -rf ~/planning.domains
+rm -rf ~/.planning.domains

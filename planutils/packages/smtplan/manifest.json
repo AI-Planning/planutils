@@ -1,0 +1,6 @@
+{
+    "name": "SMTPlan+",
+    "description": "SMTPlan+ is a planner for hybrid systems. http://kcl-planning.github.io/SMTPlan/",
+    "install-size": "148M",
+    "dependencies": []
+}

@@ -1,0 +1,2 @@
+#!/bin/bash
+lapkt python3 /planner/BFWS/fd-version/bfws.py $@

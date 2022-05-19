@@ -1,0 +1,15 @@
+{
+  "name": "Best First Width Search (BFWS)",
+  "description": "This package contains the source code of the planners that participated in IPC-9, 2018. It contains the winner of the Agile-Track, and runner-up of tha SAT-track.",
+  "install-size": "0M",
+  "dependencies": ["lapkt"],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "call":"{package_name} {domain} {problem} plan"
+      }
+
+    }
+  }
+}

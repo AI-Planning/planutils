@@ -1,0 +1,6 @@
+{
+    "name": "ENHSP",
+    "description": "Expressive Numeric Heuristic Search Planner (https://gitlab.com/enricos83/ENHSP-Public)",
+    "install-size": "20K",
+    "dependencies": ["enhsp-2019"]
+}

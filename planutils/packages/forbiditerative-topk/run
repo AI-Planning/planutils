@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# $1 domain
+# $2 problem
+# $3 number of plans (k)
+# $4 (optional, default NONE) reordering (NONE, NEIGHBOURS_INTERFERE, NAIVE_ALL_DFS_NODUP)
+
+planutils run forbiditerative -- --alias topk $@

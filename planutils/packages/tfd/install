@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name tfd.sif https://github.com/roveri-marco/tfd/releases/download/0.4/roveri-marco-tfd.latest.sif

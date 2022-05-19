@@ -1,0 +1,6 @@
+{
+    "name": "Tarski",
+    "description": "Tarski is a framework for the specification, modeling and manipulation of AI planning problems.",
+    "install-size": "16K",
+    "dependencies": []
+}

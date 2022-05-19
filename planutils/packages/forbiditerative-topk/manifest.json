@@ -1,0 +1,27 @@
+{
+  "name": "Forbid-Iterative top-k planner",
+  "description": "https://github.com/IBM/forbiditerative",
+  "install-size": "20K",
+  "dependencies": ["forbiditerative"],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "args":[
+          {
+            "name": "number_of_plans",
+            "type": "int",
+            "description": "Number of Plans",
+            "default":3
+          }
+        ],
+        "call":"{package_name} {domain} {problem} {number_of_plans}",
+        "return": {
+          "type": "generic",
+          "files": "found_plans/done/sas_plan.*"
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "Forbid-Iterative diverse agile planner",
+    "description": "https://github.com/IBM/forbiditerative",
+    "install-size": "20K",
+    "dependencies": ["forbiditerative"]
+}

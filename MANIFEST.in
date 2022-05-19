@@ -1,1 +1,1 @@
-include planutils/planner_configs/*.json
+recursive-include planutils/packages *

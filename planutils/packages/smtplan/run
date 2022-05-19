@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity run -e $(dirname $0)/smtplan.sif $@

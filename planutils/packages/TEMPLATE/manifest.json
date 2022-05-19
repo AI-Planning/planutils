@@ -1,0 +1,6 @@
+{
+    "name": "Full name of package",
+    "description": "General description of the package",
+    "install-size": "unknown",
+    "dependencies": ["list", "of", "dependencies"]
+}

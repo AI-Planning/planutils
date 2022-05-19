@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity run -e $(dirname $0)/enhsp-2018.sif $@

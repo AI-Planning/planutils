@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name enhsp-2020.sif shub://enricos83/enhsp:2020

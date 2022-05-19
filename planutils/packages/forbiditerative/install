@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name forbiditerative.sif shub://ctpelok77/fi-singularity

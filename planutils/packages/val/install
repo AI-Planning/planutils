@@ -1,0 +1,10 @@
+#!/bin/bash
+
+wget "https://dev.azure.com/schlumberger/4e6bcb11-cd68-40fe-98a2-e3777bfec0a6/_apis/build/builds/64/artifacts?artifactName=linux64&api-version=6.0&%24format=zip" -O val.zip
+unzip val.zip
+ls -la linux64/
+unzip linux64/Val-20210401.1-Linux.zip
+mv Val-20210401.1-Linux/* .
+rmdir Val-20210401.1-Linux
+rm val.zip
+rm -rf linux64

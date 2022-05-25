@@ -220,7 +220,7 @@ def remote(target, options):
 
     args = {arg['name']: arg for arg in remote_package['endpoint']['services']['solve']['args']}
 
-    if len(options) != len(args)-1:
+    if len(options) != len(args):
         sys.exit(f"Call string does not match the remote call: {remote_package['endpoint']['services']['solve']['call']}")
 
     call_map = {}

@@ -85,9 +85,9 @@ def main():
     parser_run.add_argument('package', help='package name')
     parser_run.add_argument('options', help='commandline options for the package', nargs="*")
 
-    parser_run = subparsers.add_parser('remote', help='run package remotely')
-    parser_run.add_argument('package', help='package name')
-    parser_run.add_argument('options', help='commandline options for the package', nargs="*")
+    parser_remote = subparsers.add_parser('remote', help='run package remotely')
+    parser_remote.add_argument('package', help='package name')
+    parser_remote.add_argument('options', help='commandline options for the package', nargs="*")
 
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')

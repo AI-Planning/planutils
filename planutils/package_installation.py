@@ -193,6 +193,16 @@ def run(target, options):
         sys.exit(f"Package {target} is not executable")
     subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)
 
+def package_remote_list():
+
+    package_url = settings.PAAS_SERVER + "/package"
+    r = requests.get(package_url)
+    remote_packages = r.json()
+    
+    print("\nDeployed:")
+    for p in remote_packages:
+        arguments = " ".join(f'{{{a["name"]}}} ' for a in p['endpoint']['services']['solve']['args'])
+        print("  %s: %s\n\tArguments: %s" % (p['package_name'], p['name'], arguments ))
 
 def remote(target, options):
 

@@ -96,7 +96,7 @@ def main():
     parser_checkinstalled.add_argument('package', help='package name')
 
     parser_server = subparsers.add_parser('server', help='start a server for runnable packages')
-    parser_server.add_argument('port', help='port to listen on', default=8080)
+    parser_server.add_argument('-p', '--port', type=int, help='port to listen on', default=8080)
 
     parser_list = subparsers.add_parser('list', help='list the available packages')
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')

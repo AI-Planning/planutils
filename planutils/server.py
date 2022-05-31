@@ -1,7 +1,7 @@
 
 import glob, os, subprocess, tempfile
 
-from planutils.package_installation import PACKAGES, run
+from planutils.package_installation import PACKAGES, check_installed
 from planutils import settings
 
 def run_server(port):
@@ -15,103 +15,91 @@ def run_server(port):
 
     from flask import Flask, jsonify, request
     app = Flask(__name__)
+    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+
+    def _confirm_available(package):
+        if package not in PACKAGES:
+            return {"error": "Package not found"}
+        if "endpoint" not in PACKAGES[package] or not PACKAGES[package]["runnable"]:
+            return {"error": "Package not runnable as a service"}
+        if not check_installed(package):
+            return {"error": "Package not installed"}
+        return PACKAGES[package]
+
+    @app.route('/package')
+    def show_packages():
+        available = {}
+        for package in PACKAGES:
+            if "endpoint" in PACKAGES[package] and PACKAGES[package]["runnable"] and check_installed(package):
+                available[package] = PACKAGES[package]
+        return jsonify(available)
+
+    @app.route('/package/<package>')
+    def show_package(package):
+        return jsonify(_confirm_available(package))
 
     @app.route('/package/<package>/<service>', methods=['GET', 'POST'])
     def runPackage(package, service):
         # Get request
         if request.method == 'GET':
-            # This is where we will send the user to the API documentation
-            if package in PACKAGES:
-                return jsonify(PACKAGES[package])
-            else:
-                return jsonify({"Error":"That package does not exist"})
+            return show_package(package)
 
         # Post request
         elif request.method == 'POST':
-            if package in PACKAGES:
-                if service in PACKAGES[package]:
+            pkg = _confirm_available(package)
+            if 'error' in pkg:
+                return jsonify(pkg)
+            if service not in pkg["endpoint"]["services"]:
+                return jsonify({"error": "Service not found"})
+            service = pkg["endpoint"]["services"][service]
 
-                    argmap = {}
-                    for arg in PACKAGES[package][service]['args']:
-                        argmap[arg['name']] = arg
-                    callstring = PACKAGES[package][service]['call']
-                    returnconfig = PACKAGES[package][service]['return']
+            argmap = {}
+            for arg in service['args']:
+                argmap[arg['name']] = arg
+            callstring = service['call']
+            returnconfig = service['return']
 
-                    temp_dir = tempfile.TemporaryDirectory()
+            temp_dir = tempfile.mkdtemp()
 
-                    # get the arguments and compare with the arguments in the package call string
-                    args = request.get_json()
-                    for arg in args:
-                        if arg not in argmap:
-                            return jsonify({"Error":f"argument {arg} does not exist in config"})
-                        if "{"+arg+"}" not in callstring:
-                            return jsonify({"Error":f"argument {arg} does not exist in call string"})
+            # get the arguments and compare with the arguments in the package call string
+            args = request.get_json()
+            for arg in args:
+                if arg not in argmap:
+                    return jsonify({"error":f"argument {arg} does not exist in config"})
+                if "{"+arg+"}" not in callstring:
+                    return jsonify({"error":f"argument {arg} does not exist in call string"})
 
-                        if argmap[arg]['type'] == 'file':
-                            with open(os.path.join(temp_dir.name, arg), 'w') as f:
-                                f.write(args[arg])
-                            callstring.replace("{"+arg+"}", os.path.join(temp_dir.name, arg))
-                        else:
-                            callstring.replace("{"+arg+"}", args[arg])
-
-                    if '{' in callstring:
-                        return jsonify({"Error":"Not all arguments were provided - "+callstring})
-
-                    executable = os.path.join(settings.PLANUTILS_PREFIX, "packages", callstring.split()[0], "run")
-                    os.chdir(temp_dir.name)
-                    subprocess.run([executable] + callstring.split()[1:])
-                    # run(callstring.split()[0], callstring.split()[1:])
-
-                    to_return = {}
-
-                    generated_files = glob.glob(os.path.join(temp_dir.name, returnconfig['files']))
-                    for fn in generated_files:
-                        with open(fn, 'r') as f:
-                            to_return[os.path.basename(fn)] = f.read()
-
-                    # remove the temporary files
-                    temp_dir.cleanup()
-
-                    return jsonify(PACKAGES[package][service])
+                if argmap[arg]['type'] == 'file':
+                    with open(os.path.join(temp_dir, arg), 'w') as f:
+                        f.write(args[arg])
+                    callstring = callstring.replace("{"+arg+"}", os.path.join(temp_dir, arg))
                 else:
-                    return jsonify({"Error":"That service does not exist"})
-            else:
-                return jsonify({"Error":"That package does not exist"})
+                    callstring = callstring.replace("{"+arg+"}", args[arg])
+
+            if '{' in callstring:
+                return jsonify({"error":"Not all arguments were provided - "+callstring})
+
+            executable = os.path.join(settings.PLANUTILS_PREFIX, "packages", callstring.split()[0], "run")
+            call = ' '.join([executable] + callstring.split()[1:])
+
+            res = subprocess.run(call, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            executable='/bin/bash',  encoding='utf-8',
+                            shell=True, cwd=temp_dir)
+
+            to_return = {
+                "stdout": res.stdout,
+                "stderr": res.stderr,
+            }
+
+            generated_files = glob.glob(os.path.join(temp_dir, returnconfig['files']))
+            for fn in generated_files:
+                with open(fn, 'r') as f:
+                    to_return[os.path.basename(fn)] = f.read()
+
+            # remove the temporary files
+            os.system(f"rm -rf {temp_dir}")
+
+            return jsonify(to_return)
 
     app.run(port=port)
-
-"""
-{
-    "dependencies": [
-        "downward"
-    ],
-    "description": "http://fast-downward.org/",
-    "endpoint": {
-        "services": {
-            "solve": {
-                "args": [
-                    {
-                        "description": "domain file",
-                        "name": "domain",
-                        "type": "file"
-                    },
-                    {
-                        "description": "problem file",
-                        "name": "problem",
-                        "type": "file"
-                    }
-                ],
-                "call": "lama {domain} {problem}",
-                "return": {
-                    "files": "*plan*",
-                    "type": "generic"
-                }
-            }
-        }
-    },
-    "install-size": "20K",
-    "name": "LAMA",
-    "runnable": true
-}
-"""
 

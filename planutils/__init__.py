@@ -85,6 +85,13 @@ def main():
     parser_run.add_argument('package', help='package name')
     parser_run.add_argument('options', help='commandline options for the package', nargs="*")
 
+    parser_remote = subparsers.add_parser('remote', help='run package remotely')
+    parser_remote.add_argument('package', help='package name')
+    parser_remote.add_argument('options', help='commandline options for the package', nargs="*")
+
+    parser_remote_list = subparsers.add_parser('remote-list', help='list the available remote packages')
+
+
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')
 
@@ -115,6 +122,14 @@ def main():
     elif 'run' == args.command:
         from planutils.package_installation import run
         run(args.package, args.options)
+
+    elif 'remote' == args.command:
+        from planutils.package_installation import remote
+        remote(args.package, args.options)
+
+    elif 'remote-list' == args.command:
+        from planutils.package_installation import package_remote_list
+        package_remote_list()
 
     elif 'list' == args.command:
         from planutils.package_installation import package_list

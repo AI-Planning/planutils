@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# General setup / configuration
+pip3 install machetli
+

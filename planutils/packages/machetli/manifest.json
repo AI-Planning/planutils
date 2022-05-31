@@ -1,0 +1,6 @@
+{
+    "name": "Machetli",
+    "description": "Machetli is a Python package for reproducing characteristics of a program (such as bugs) with modified instances. It is meant to be helpful for debugging complex programs and narrowing down where specific behaviors are caused. Currently, Machetli handles instances for automated planners, specified either in PDDL or in the SAS+ format used by Fast Downward but adding support for other file formats is easy.",
+    "install-size": "3MB",
+    "dependencies": []
+}

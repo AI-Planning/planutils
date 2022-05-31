@@ -95,6 +95,9 @@ def main():
     parser_checkinstalled = subparsers.add_parser('check-installed', help='check if a package is installed')
     parser_checkinstalled.add_argument('package', help='package name')
 
+    parser_server = subparsers.add_parser('server', help='start a server for runnable packages')
+    parser_server.add_argument('port', help='port to listen on', default=8080)
+
     parser_list = subparsers.add_parser('list', help='list the available packages')
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
@@ -138,6 +141,10 @@ def main():
     elif 'upgrade' == args.command:
         from planutils.package_installation import upgrade
         upgrade()
+
+    elif 'server' == args.command:
+        from planutils.server import run_server
+        run_server(args.port)
 
     else:
         parser.print_help()

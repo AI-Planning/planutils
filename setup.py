@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(name='planutils',
-      version='0.4.0',
+      version='0.5.0',
       description='General library for setting up linux-based environments for developing, running, and evaluating planners.',
       long_description=long_description,
       long_description_content_type="text/markdown",

@@ -97,6 +97,7 @@ def main():
 
     parser_server = subparsers.add_parser('server', help='start a server for runnable packages')
     parser_server.add_argument('-p', '--port', type=int, help='port to listen on', default=8080)
+    parser_server.add_argument('-i', '--host', type=str, help='host to listen on', default='127.0.0.1')
 
     parser_list = subparsers.add_parser('list', help='list the available packages')
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
@@ -144,7 +145,7 @@ def main():
 
     elif 'server' == args.command:
         from planutils.server import run_server
-        run_server(args.port)
+        run_server(args.port, args.host)
 
     else:
         parser.print_help()

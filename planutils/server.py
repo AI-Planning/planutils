@@ -4,7 +4,7 @@ import glob, os, subprocess, tempfile, requests, time, sys
 from planutils.package_installation import PACKAGES, check_installed
 from planutils import settings
 
-def run_server(port):
+def run_server(port, host):
 
     # Check if flask is installed
     try:
@@ -101,7 +101,7 @@ def run_server(port):
 
             return jsonify(to_return)
 
-    app.run(port=port)
+    app.run(port=port, host=host)
 
 
 def package_remote_list():

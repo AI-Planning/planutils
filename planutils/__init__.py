@@ -127,11 +127,11 @@ def main():
         run(args.package, args.options)
 
     elif 'remote' == args.command:
-        from planutils.package_installation import remote
+        from planutils.server import remote
         remote(args.package, args.options)
 
     elif 'remote-list' == args.command:
-        from planutils.package_installation import package_remote_list
+        from planutils.server import package_remote_list
         package_remote_list()
 
     elif 'list' == args.command:

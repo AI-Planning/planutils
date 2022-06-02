@@ -2,6 +2,9 @@
 # Build the Planutils image and install the selected packages
 FROM aiplanning/planutils:latest
 
+# Needed for the server
+RUN pip3 install flask
+
 # FD Planner
 RUN planutils install -f -y lama-first
 

@@ -26,4 +26,6 @@ RUN planutils install -f -y optic
 # Temporal planning
 RUN planutils install -f -y tfd
 
-CMD planutils server --port 5555
+EXPOSE 5555
+
+CMD planutils server --port 5555 --host 0.0.0.0

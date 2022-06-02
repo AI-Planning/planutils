@@ -138,7 +138,7 @@ There are four types of Args: `file`, `int`, `string` and,`categorical`. You can
         "type": "int",
         "description": "Number of Plans",
         "default":3
-    }
+    },
     {
         "name": "search_algorithm",
         "type": "string",

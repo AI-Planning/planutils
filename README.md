@@ -140,9 +140,9 @@ There are four types of Args: `file`, `int`, `string` and,`categorical`. You can
         "default":3
     },
     {
-        "name": "search_algorithm",
+        "name": "custom_search_algorithm",
         "type": "string",
-        "description": "Search Algorithm",
+        "description": "Custom Search Algorithm",
         "default":"kstar(blind(),k=1)"
     },
     {

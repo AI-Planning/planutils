@@ -1,0 +1,6 @@
+{
+    "name": "MACQ",
+    "description": "A collection of tools for planning-like action model acquisition from state trace data",
+    "install-size": "74K",
+    "dependencies": []
+}

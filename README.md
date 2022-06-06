@@ -10,7 +10,7 @@ run a number of the planners (all those that are based on singularity), you will
 to run the docker with the `--privileged` option.
 
 **Build planutils images**
-`docker build -t planutils:latest . `
+`docker build -t planutils:latest .`
 
 **Run the plautils container**
 `docker run -it --privileged planutils bash`

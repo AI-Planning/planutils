@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# whatever command-line method needs to be used to run this package
+
+FF=$(dirname $0)/bin/ff
+if [ -z "$1" ]; then
+  cat << EOF
+Planutils:
+* First two arguments are <domain or operator> and <problem or facts>
+* Extra arguments will be passed to FF
+
+Original FF help:
+EOF
+  $FF
+  exit 1
+fi
+
+# https://stackoverflow.com/questions/4632028/how-to-create-a-temporary-directory
+WORK_DIR=`mktemp -d`
+
+# check if tmp dir was created
+if [[ ! "$WORK_DIR" || ! -d "$WORK_DIR" ]]; then
+  echo "Could not create temp dir"
+  exit 1
+fi
+
+function cleanup {
+  rm -rf "$WORK_DIR"
+  # echo "Deleted temp working directory $WORK_DIR"
+}
+# register the cleanup function to be called on the EXIT signal
+trap cleanup EXIT
+
+OUT=$WORK_DIR/ff.out
+ERR=$WORK_DIR/ff.err
+
+DOMAIN=$1
+PROBLEM=$2
+shift 2
+$FF -o $DOMAIN -f $PROBLEM $@ > $OUT 2>$ERR
+# Getting plan
+grep '[0-9]:' $OUT | cut -d : -f 2- | \
+  awk '{$1=$1;print}' | \
+  awk -F" " '{ print("(", $0, ")")}' > $PROBLEM.plan
+
+cat $OUT >&1
+cat $ERR >&2

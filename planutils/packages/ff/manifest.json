@@ -1,0 +1,13 @@
+{
+  "name": "Fast-Forward",
+  "description": "https://fai.cs.uni-saarland.de/hoffmann/ff.html",
+  "install-size": "1.1M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner"
+      }
+    }
+  }
+}

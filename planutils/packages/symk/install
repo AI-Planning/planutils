@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name symk.sif library://speckdavid/symk/symk:latest

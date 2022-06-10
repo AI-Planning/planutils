@@ -1,0 +1,37 @@
+{
+  "name": "Symk is a state-of-the-art optimal and top-k planner.",
+  "description": "https://github.com/speckdavid/symk",
+  "install-size": "40M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "args":[
+          {
+            "name": "search_algorithm",
+            "type": "categorical",
+            "description": "Search Algorithm",
+            "choices":[
+              {
+                "display_value":"Top-k plans with k=100",
+                "value":"symk-bd(plan_selection=top_k(num_plans=100))"
+              },
+              {
+                "display_value":"Optimal planning",
+                "value":"sym-bd()"
+              }
+            ],
+            "default":"symk-bd(plan_selection=top_k(num_plans=100))"
+          }
+        ],
+        "call":"{package_name} {domain} {problem} --search '{search_algorithm}'",
+        "return": {
+          "type": "generic",
+          "files": "found_plans/sas_plan.*"
+        }
+      }
+
+    }
+  }
+}

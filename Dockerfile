@@ -17,6 +17,9 @@ RUN apt-get update \
         unzip \
         vim \
         wget \
+        build-essential \
+        gcc-x86-64-linux-gnu \
+        python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/apptainer/apptainer/releases/download/v1.0.2/apptainer_1.0.2_amd64.deb \

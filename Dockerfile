@@ -47,9 +47,6 @@ RUN apt-get update \
         unzip \
         vim \
         wget \
-        build-essential \
-        gcc-x86-64-linux-gnu \
-        python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip

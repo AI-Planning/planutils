@@ -1,36 +1,6 @@
-# Stage 1: Build singularity
-FROM golang:1.14 AS singularitybuilder
-
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive  apt-get install --no-install-recommends -y \
-    build-essential \
-    cryptsetup-bin \
-    git \
-    libgpgme-dev \
-    libseccomp-dev \
-    libssl-dev \
-    pkg-config \
-    squashfs-tools \
-    uuid-dev \
-    wget
-
-ENV VERSION=3.5.2
-RUN git clone https://github.com/sylabs/singularity.git
-WORKDIR singularity
-RUN git checkout v${VERSION}
-RUN ./mconfig -p /usr/local/singularity
-RUN make -C ./builddir
-RUN make -C ./builddir install
-
-
-
-# Stage 2: Build main container
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 LABEL maintainer="Christian Muise (christian.muise@queensu.ca)"
-
-COPY --from=singularitybuilder /usr/local/singularity /usr/local/singularity
-RUN echo 'source /etc/bash_completion\nsource /usr/local/singularity/etc/bash_completion.d/singularity' >> ~/.bashrc
-ENV PATH="/usr/local/singularity/bin:$PATH"
 
 # Install required packages
 RUN apt-get update \
@@ -47,7 +17,14 @@ RUN apt-get update \
         unzip \
         vim \
         wget \
+        build-essential \
+        gcc-x86-64-linux-gnu \
+        python3-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/apptainer/apptainer/releases/download/v1.0.2/apptainer_1.0.2_amd64.deb \
+    && dpkg -i apptainer_1.0.2_amd64.deb \
+    && rm apptainer_1.0.2_amd64.deb
 
 RUN pip3 install --upgrade pip
 RUN pip3 install setuptools

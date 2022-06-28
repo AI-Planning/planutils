@@ -1,5 +1,3 @@
 #!/bin/bash
 
-
-## Fetch the image
-singularity pull --name smtplan.sif library://jdekarske/default/smtplan:latest 
+singularity pull --name smtplan.sif docker://ghcr.io/jdekarske/smtplan:latest

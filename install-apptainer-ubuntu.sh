@@ -9,9 +9,13 @@ GO_VERSION=$2
 # Install apptainer from release package on amd64
 ARCH=$(arch)
 if [ $ARCH == "x86_64" ]; then
-  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y wget
-  DEBIAN_PACKAGE_NAME=apptainer_$APPTAINER_VERSION_amd64.deb
-  wget https://github.com/apptainer/apptainer/releases/download/v$APPTAINER_VERSION/$DEBIAN_PACKAGE_NAME
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+    ca-certificates \
+    squashfs-tools \
+    wget
+  DEBIAN_PACKAGE_NAME=apptainer_${APPTAINER_VERSION}_amd64.deb
+  wget -q https://github.com/apptainer/apptainer/releases/download/v$APPTAINER_VERSION/$DEBIAN_PACKAGE_NAME
   dpkg -i $DEBIAN_PACKAGE_NAME
   rm $DEBIAN_PACKAGE_NAME
   exit
@@ -22,21 +26,18 @@ fi
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
   build-essential \
-  libssl-dev \
-  uuid-dev \
-  libgpgme11-dev \
-  squashfs-tools \
-  libseccomp-dev \
-  wget \
-  pkg-config \
-  git \
-  cryptsetup \
-  curl \
   ca-certificates \
-  squashfs-tools
+  cryptsetup \
+  git \
+  libgpgme11-dev \
+  libseccomp-dev \
+  libssl-dev \
+  pkg-config \
+  squashfs-tools \
+  uuid-dev \
+  wget
 
 # Install Golang
-# $2: GOLANG_VERSION
 if [ "$ARCH" == "aarch64" ]; then
   GO_ARCH="arm64" # go uses "arm64" whereas ubuntu uses "aarch64", but it is the same.
 fi
@@ -47,7 +48,6 @@ echo 'export PATH=/usr/local/go/bin:$PATH' >>~/.bashrc
 go version
 
 # Install Apptainer
-# $1: APPTAINER_VERSION
 APPTAINER_BASE_NAME=apptainer-$APPTAINER_VERSION
 wget -qO - https://github.com/apptainer/apptainer/releases/download/v$APPTAINER_VERSION/$APPTAINER_BASE_NAME.tar.gz | tar -xzv
 cd $APPTAINER_BASE_NAME

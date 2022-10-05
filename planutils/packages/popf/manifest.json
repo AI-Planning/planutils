@@ -1,0 +1,6 @@
+{
+    "name": "The POPF temporal planner",
+    "description": "The POPF temporal planner (see https://github.com/roveri-marco/popf)",
+    "install-size": "297MB",
+    "dependencies": []
+}

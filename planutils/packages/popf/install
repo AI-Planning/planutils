@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Fetch the image
+
+singularity pull --name popf.sif https://github.com/roveri-marco/popf/releases/download/1.0/roveri-marco-popf.latest.sif

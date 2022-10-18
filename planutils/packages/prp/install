@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build prp.sif docker://aiplanning/prp:latest

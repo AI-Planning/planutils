@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build poprp.sif docker://aiplanning/poprp:latest

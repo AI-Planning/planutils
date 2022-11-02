@@ -2,9 +2,14 @@ FROM ubuntu:22.04
 
 LABEL maintainer="Christian Muise (christian.muise@queensu.ca)"
 
+# Add files
+WORKDIR /root/install
+COPY bin bin
+COPY environments environments
+COPY planutils planutils
+COPY . .
+
 # Install required packages
-WORKDIR /root
-COPY install-apptainer-ubuntu.sh /root/install-apptainer-ubuntu.sh
 RUN bash install-apptainer-ubuntu.sh 1.0.3 1.18.3 \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -28,7 +33,12 @@ RUN pip3 install --upgrade pip
 RUN pip3 install setuptools
 
 # Install & setup the planutils
-RUN pip3 install planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org
+RUN python3 setup.py install
+
+# Remove files
+WORKDIR /root
+RUN rm -rf install
+
 RUN planutils setup
 
 # default command to execute when container starts

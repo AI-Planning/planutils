@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build fond4ltlf.sif docker://francescofuggitti/fond4ltlf:latest

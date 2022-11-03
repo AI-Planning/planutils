@@ -1,0 +1,13 @@
+{
+  "name": "Metric Fast-Forward",
+  "description": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
+  "install-size": "1.8M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner"
+      }
+    }
+  }
+}

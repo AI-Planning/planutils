@@ -1,0 +1,7 @@
+{
+    "name": "FOND4LTLf",
+    "description": "FOND4LTLf is a tool that compiles Fully Observable Non-Deterministic (FOND) planning problems with temporally extended goals, specified either in LTLf or in PLTLf, into standard FOND planning problems.",
+    "install-size": "278.3M",
+    "dependencies": []
+}
+

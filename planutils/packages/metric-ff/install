@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir bin
+cd bin
+wget -q 'https://github.com/nilsjor/fast-forward-linux-binaries/raw/main/metric-ff/ff.gz'
+gunzip ff.gz
+chmod +x ff

@@ -1,0 +1,13 @@
+{
+  "name": "LPG-td",
+  "description": "https://lpg.unibs.it/lpg/index.html",
+  "install-size": "2.2M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner"
+      }
+    }
+  }
+}

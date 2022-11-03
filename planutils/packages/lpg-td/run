@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# whatever command-line method needs to be used to run this package
+
+LPGTD=$(dirname $0)/bin/lpg-td
+if [ -z "$1" ]; then
+  cat << EOF
+Planutils:
+* First two arguments are <domain or operator> and <problem or facts>
+* Extra arguments will be passed to LPG-td
+* Unless the number of solutions are specified, the solver will run in 'Quality' mode
+
+Original LPG-td help:
+EOF
+  $LPGTD
+  exit 1
+fi
+
+# https://stackoverflow.com/questions/4632028/how-to-create-a-temporary-directory
+WORK_DIR=`mktemp -d`
+
+# check if tmp dir was created
+if [[ ! "$WORK_DIR" || ! -d "$WORK_DIR" ]]; then
+  echo "Could not create temp dir"
+  exit 1
+fi
+
+function cleanup {
+  rm -rf "$WORK_DIR"
+  # echo "Deleted temp working directory $WORK_DIR"
+}
+# register the cleanup function to be called on the EXIT signal
+trap cleanup EXIT
+
+OUT=$WORK_DIR/lpg-td.out
+ERR=$WORK_DIR/lpg-td.err
+
+DOMAIN=$1
+PROBLEM=$2
+shift 2
+
+# Insert quality argument unless specified by user
+if [[ $@ == *"-speed"* || $@ == *"-quality"* || $@ == *"-n"* ]]; then
+  $LPGTD -o $DOMAIN -f $PROBLEM -noout $@ > $OUT 2>$ERR
+else
+  $LPGTD -o $DOMAIN -f $PROBLEM -v off -noout -quality $@ > $OUT 2>$ERR
+fi
+
+# Getting plan
+grep '[0-9]:' $OUT > $PROBLEM.plan
+# grep '[0-9]:' $OUT | cut -d ':' -f 2- | cut -d '[' -f 1 > $PROBLEM.plan
+
+cat $OUT >&1
+cat $ERR >&2

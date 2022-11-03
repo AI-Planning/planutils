@@ -97,11 +97,11 @@ def uninstall(targets):
 def package_list():
     print("\nInstalled:")
     installed = set(settings.load()['installed'])
-    for p in installed:
+    for p in sorted(installed):
         print("  %s: %s" % (p, PACKAGES[p]['name']))
 
     print("\nAvailable:")
-    for p in PACKAGES:
+    for p in sorted(PACKAGES):
         if p not in installed:
             print("  %s: %s" % (p, PACKAGES[p]['name']))
     print()

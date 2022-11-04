@@ -1,6 +1,7 @@
 {
     "name": "Tarski",
-    "description": "Tarski is a framework for the specification, modeling and manipulation of AI planning problems.",
+    "description": "A framework for the specification, modeling and manipulation of AI planning problems.",
+    "homepage": "https://tarski.readthedocs.io",
     "install-size": "16K",
     "dependencies": []
 }

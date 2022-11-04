@@ -1,6 +1,7 @@
 {
-  "name": "The TFD temporal planner",
-  "description": "The TFD temporal planner (see https://github.com/roveri-marco/tfd)",
+  "name": "Temporal Fast Downward planning system",
+  "description": "TFD is based on the Fast Downward planning system and uses an adaptation of the context-enhanced additive heuristic to guide the search in the temporal state space.",
+  "homepage": "https://gki.informatik.uni-freiburg.de/tools/tfd/",
   "install-size": "145MB",
   "dependencies": [],
   "endpoint": {

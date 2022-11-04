@@ -1,6 +1,7 @@
 {
-    "name": "PRP",
-    "description": "https://github.com/QuMuLab/planner-for-relevant-policies",
+    "name": "PRP planning system for full observability",
+    "description": "Planner for Relevant Policies -- a state-of-the-art fully observable non-deterministic (FOND) planner",
+    "homepage": "https://github.com/QuMuLab/planner-for-relevant-policies/wiki",
     "install-size": "41M",
     "dependencies": []
 }

@@ -1,6 +1,7 @@
 {
-    "name": "ENHSP (2019)",
-    "description": "Expressive Numeric Heuristic Search Planner (https://gitlab.com/enricos83/ENHSP-Public)",
+    "name": "ENHSP 2019 version",
+    "description": "Stable version, contains all functionalities of ENHSP-18, with bug fixes and new data structures. Last updated May 2020.",
+    "homepage": "https://gitlab.com/enricos83/ENHSP-Public",
     "install-size": "162M",
     "dependencies": []
 }

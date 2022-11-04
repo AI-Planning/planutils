@@ -1,6 +1,7 @@
 {
-    "name": "Pyperplan",
-    "description": "https://github.com/aibasel/pyperplan/",
+    "name": "Pyperplan lightweight planner",
+    "description": "STRIPS planner written in Python, designed to be used as a teaching or prototyping tool -- emphasizing clean code over fast code.",
+    "homepage": "https://github.com/aibasel/pyperplan",
     "install-size": "16K",
     "dependencies": [],
     "endpoint": {

@@ -1,6 +1,7 @@
 {
-    "name": "Planning.Domains API",
-    "description": "API Tools for Planning.Domains",
+    "name": "planning.domains API tools",
+    "description": "This repository houses a collection of tools and scripts for interacting with the interface found at api.planning.domains",
+    "homepage": "https://github.com/AI-Planning/api-tools",
     "install-size": "368K",
     "dependencies": []
 }

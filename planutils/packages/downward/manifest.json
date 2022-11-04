@@ -1,6 +1,8 @@
 {
-    "name": "Fast Downward",
-    "description": "http://fast-downward.org/",
+    "name": "Fast Downward planning system",
+    "shortname": "fd",
+    "description": "Fast Downward is a classical planning system based on heuristic search.",
+    "homepage": "http://fast-downward.org/",
     "install-size": "36M",
     "dependencies": []
 }

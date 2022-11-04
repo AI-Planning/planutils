@@ -1,6 +1,8 @@
 {
-    "name": "Forbid-Iterative (FI) Planner is an Automated PDDL based planner suite that includes planners for top-k, top-quality, and diverse computational tasks",
-    "description": "https://github.com/IBM/forbiditerative",
+    "name": "Forbid-Iterative (FI) planning system",
+    "shortname": "fi",
+    "description": "FI planners obtain multiple solutions by iteratively restricting the set of valid plans, forbidding previously found ones.",
+    "homepage": "https://github.com/IBM/forbiditerative",
     "install-size": "41M",
     "dependencies": []
 }

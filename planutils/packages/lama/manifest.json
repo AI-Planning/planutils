@@ -1,6 +1,6 @@
 {
-  "name": "LAMA",
-  "description": "http://fast-downward.org/",
+  "name": "LAMA classical planner",
+  "description": "LAMA builds on the Fast Downward planning system, using finite-domain rather than binary state variables and multi-heuristic search.",
   "install-size": "20K",
   "dependencies": [
     "downward"

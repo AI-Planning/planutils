@@ -1,6 +1,7 @@
 {
-  "name": "LPG-td",
-  "description": "https://lpg.unibs.it/lpg/index.html",
+  "name": "The LPG-td temporal planning system",
+  "description": "Local search for Planning Graphs -- a fully-automated domain-independent planner for PDDL2.2 domains.",
+  "homepage": "https://lpg.unibs.it/lpg/index.html",
   "install-size": "2.2M",
   "dependencies": [],
   "endpoint": {

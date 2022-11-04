@@ -1,6 +1,7 @@
 {
-    "name": "Cerberus planners for satisficing and agile planning",
-    "description": "https://github.com/ctpelok77/fd-red-black-postipc2018",
+    "name": "Cerberus planners, post-IPC 2018 version",
+    "description": "Red-black planning heuristic with native support for conditional effects, h^2 mutexes, novelty heuristic for search guidance.",
+    "homepage": "https://github.com/ctpelok77/fd-red-black-postipc2018",
     "install-size": "38M",
     "dependencies": []
 }

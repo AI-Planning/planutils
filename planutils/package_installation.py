@@ -6,6 +6,7 @@ from pathlib import Path
 from planutils import settings
 
 PACKAGES = {}
+ALIASES = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,6 +26,8 @@ for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
         check_package(base, os.path.join(conf_file, 'manifest.json'))
         with open(os.path.join(conf_file, 'manifest.json'), 'r') as f:
             config = json.load(f)
+        try: ALIASES[config['shortname']] = base
+        except: pass
         PACKAGES[base] = config
         PACKAGES[base]['runnable'] = os.path.exists(os.path.join(conf_file, 'run'))
 
@@ -36,12 +39,16 @@ def check_installed(target):
 def uninstall(targets):
 
     for target in targets:
+        try: target = ALIASES[target]
+        except: pass
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
             return
 
     to_check = []
     for target in targets:
+        try: target = ALIASES[target]
+        except: pass
         if check_installed(target):
             to_check.append(target)
         else:
@@ -97,13 +104,22 @@ def uninstall(targets):
 def package_list():
     print("\nInstalled:")
     installed = set(settings.load()['installed'])
-    for p in sorted(installed):
+    installed_names = []
+    for p in installed:
+        try: installed_names.append(PACKAGES[p]['shortname'])
+        except: installed_names.append(p)
+    for p in sorted(installed_names):
         print("  %s: %s" % (p, PACKAGES[p]['name']))
 
     print("\nAvailable:")
-    for p in sorted(PACKAGES):
-        if p not in installed:
-            print("  %s: %s" % (p, PACKAGES[p]['name']))
+    packages_shortnames = []
+    for p in PACKAGES:
+        try: packages_shortnames.append(PACKAGES[p]['shortname'])
+        except: packages_shortnames.append(p)
+    for p in sorted(packages_shortnames):
+        if p not in installed_names:
+            try: print("  %s: %s" % (p, PACKAGES[p]['name']))
+            except: print("  %s: %s" % (p, PACKAGES[ALIASES[p]]['name']))
     print()
 
 def upgrade():
@@ -115,6 +131,8 @@ def upgrade():
 
 def install(targets, forced=False, always_yes=False):
     for target in targets:
+        try: target = ALIASES[target]
+        except: pass
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
             return False
@@ -122,6 +140,8 @@ def install(targets, forced=False, always_yes=False):
     # Compute all those that will need to be installed
     to_check = []
     for target in targets:
+        try: target = ALIASES[target]
+        except: pass
         if check_installed(target):
             if forced:
                 to_check.append(target)
@@ -140,12 +160,16 @@ def install(targets, forced=False, always_yes=False):
             done.add(check)
             if not check_installed(check):
                 to_install.append(check)
-                to_check.extend(PACKAGES[check]['dependencies'])
+                try: to_check.extend(PACKAGES[ALIASES[check]]['dependencies'])
+                except: to_check.extend(PACKAGES[check]['dependencies'])
 
     to_install.reverse()
 
     if to_install:
-        to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['install-size']) for pkg in to_install]
+        to_install_desc = []
+        for pkg in to_install:
+            try: to_install_desc.append("%s (%s)" % (pkg, PACKAGES[ALIASES[pkg]]['install-size']))
+            except: to_install_desc.append("%s (%s)" % (pkg, PACKAGES[pkg]['install-size']))
         print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
 
         if always_yes:
@@ -156,6 +180,8 @@ def install(targets, forced=False, always_yes=False):
         if user_response:
             installed = []
             for package in to_install:
+                try: package = ALIASES[package]
+                except: pass
                 package_path = os.path.join(CUR_DIR, 'packages', package)
                 print("Installing %s..." % package)
                 try:
@@ -185,6 +211,8 @@ def install(targets, forced=False, always_yes=False):
 
 
 def run(target, options):
+    try: target = ALIASES[target]
+    except: pass
     if target not in PACKAGES:
         sys.exit(f"Package {target} not found")
     if not check_installed(target):
@@ -192,4 +220,3 @@ def run(target, options):
     if not PACKAGES[target]["runnable"]:
         sys.exit(f"Package {target} is not executable")
     subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)
-

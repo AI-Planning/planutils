@@ -1,6 +1,7 @@
 {
   "name": "The OPTIC temporal planner",
-  "description": "The OPTIC temporal planner (see https://github.com/roveri-marco/optic)",
+  "description": "A planner for use in problems where plan cost is determined by preferences or time-dependent goal-collection costs.",
+  "homepage": "https://github.com/roveri-marco/optic",
   "install-size": "297MB",
   "dependencies": [],
   "endpoint": {

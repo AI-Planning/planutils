@@ -1,6 +1,6 @@
 {
-  "name": "LAMA-FIRST",
-  "description": "http://fast-downward.org/",
+  "name": "LAMA-first satisficing planner",
+  "description": "LAMA-first is designed to find solutions quickly without much regard for plan cost.",
   "install-size": "20K",
   "dependencies": [
     "downward"

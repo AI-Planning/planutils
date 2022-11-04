@@ -1,5 +1,6 @@
 {
-    "name": "Forbid-Iterative diverse agile planner",
+    "name": "FI diverse agile planner",
+    "shortname": "fi-diverse-agl",
     "description": "https://github.com/IBM/forbiditerative",
     "install-size": "20K",
     "dependencies": ["forbiditerative"]

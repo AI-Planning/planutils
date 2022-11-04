@@ -1,5 +1,6 @@
 {
-  "name": "Forbid-Iterative top-k planner",
+  "name": "FI top-k planner",
+  "shortname": "fi-topk",
   "description": "https://github.com/IBM/forbiditerative",
   "install-size": "20K",
   "dependencies": ["forbiditerative"],

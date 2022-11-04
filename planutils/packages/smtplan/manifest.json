@@ -1,6 +1,7 @@
 {
-    "name": "SMTPlan+",
-    "description": "SMTPlan+ is a planner for hybrid systems. http://kcl-planning.github.io/SMTPlan/",
+    "name": "SMTPlan+ planner for hybrid systems",
+    "description": "It supports all the features of PDDL+, including exogenous events and continuous processes with nonlinear polynomial change.",
+    "homepage": "http://kcl-planning.github.io/SMTPlan",
     "install-size": "148M",
     "dependencies": []
 }

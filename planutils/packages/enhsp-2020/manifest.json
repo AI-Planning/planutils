@@ -1,6 +1,7 @@
 {
-  "name": "ENHSP (2020)",
-  "description": "Expressive Numeric Heuristic Search Planner (https://gitlab.com/enricos83/ENHSP-Public)",
+  "name": "ENHSP 2020 version",
+  "description": "This version contains the new Relaxed Plan Based heuristics developed for ICAPS-20 and substantial refactoring. Constant updates.",
+  "homepage": "https://gitlab.com/enricos83/ENHSP-Public",
   "install-size": "86M",
   "dependencies": [],
   "endpoint": {

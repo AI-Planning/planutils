@@ -1,6 +1,7 @@
 {
-  "name": "K* planner for the top-k planning problem",
-  "description": "https://github.com/ctpelok77/kstar",
+  "name": "K* planner",
+  "description": "A state of the art Top-k planner integrating the K* algorithm into Fast Downward.",
+  "homepage": "https://github.com/ctpelok77/kstar",
   "install-size": "36M",
   "dependencies": [],
   "endpoint": {

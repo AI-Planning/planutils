@@ -1,7 +1,8 @@
 {
-    "name": "FI diverse agile planner",
-    "shortname": "fi-diverse-agl",
-    "description": "https://github.com/IBM/forbiditerative",
+    "name": "FI -- diverse agile planner",
+    "shortname": "fi-div-agl",
+    "description": "Diverse planning focuses on producing sets of plans with a large difference between individual plans. Agile (greedy) configuration.",
+    "homepage": "https://github.com/IBM/forbiditerative",
     "install-size": "20K",
     "dependencies": ["forbiditerative"]
 }

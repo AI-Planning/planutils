@@ -102,25 +102,30 @@ def uninstall(targets):
 
 
 def package_list():
-    print("\nInstalled:")
     installed = set(settings.load()['installed'])
     installed_names = []
-    for p in installed:
-        try: installed_names.append(PACKAGES[p]['shortname'])
-        except: installed_names.append(p)
-    for p in sorted(installed_names):
-        print("  %s: %s" % (p, PACKAGES[p]['name']))
 
-    print("\nAvailable:")
+    if installed:
+        print("{:<16} {:72}".format('Installed', 'Summary'))
+        print("{:<16} {:72}".format(''.ljust(16,'-'), ''.ljust(72,'-')))
+        for p in installed:
+            try: installed_names.append(PACKAGES[p]['shortname'])
+            except: installed_names.append(p)
+        for p in sorted(installed_names):
+            print("{:<16} {:72}".format(p, PACKAGES[p]['name']))
+        print()
+
     packages_shortnames = []
     for p in PACKAGES:
         try: packages_shortnames.append(PACKAGES[p]['shortname'])
         except: packages_shortnames.append(p)
-    for p in sorted(packages_shortnames):
-        if p not in installed_names:
-            try: print("  %s: %s" % (p, PACKAGES[p]['name']))
-            except: print("  %s: %s" % (p, PACKAGES[ALIASES[p]]['name']))
-    print()
+    if packages_shortnames:
+        print("{:<16} {:72}".format('Available', 'Summary'))
+        print("{:<16} {:72}".format(''.ljust(16,'-'), ''.ljust(72,'-')))
+        for p in sorted(packages_shortnames):
+            if p not in installed_names:
+                try: print("{:<16} {:72}".format(p, PACKAGES[p]['name']))
+                except: print("{:<16} {:72}".format(p, PACKAGES[ALIASES[p]]['name']))
 
 def upgrade():
     s = settings.load()
@@ -128,6 +133,24 @@ def upgrade():
         print("Upgrading %s..." % package)
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+
+def package_info(targets):
+    for target in targets:
+        try: target = ALIASES[target]
+        except: pass
+        if target not in PACKAGES:
+            print("Error: Package not found -- %s" % target)
+            return
+        print("Name: %s" % target)
+        try: print("Version: %s" % PACKAGES[target]['version'])
+        except: pass
+        print("Description: %s" % PACKAGES[target]['description'])
+        try: print("Homepage: %s" % PACKAGES[target]['homepage'])
+        except: pass
+        try: print("Author: %s" % PACKAGES[target]['author'])
+        except: pass
+        print("Requires: %s" % ', '.join(PACKAGES[target]['dependencies']))
+        if len(targets) > 1: print("---")
 
 def install(targets, forced=False, always_yes=False):
     for target in targets:

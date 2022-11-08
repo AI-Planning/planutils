@@ -1,5 +1,5 @@
 {
-  "name": "Metric Fast-Forward planning system",
+  "name": "Metric Fast-Forward: extended with numerical state variables",
   "description": "The system is an extension of the FF planner to numerical state variables, more precisely to PDDL2.1 level 2.",
   "homepage": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
   "install-size": "1.8M",

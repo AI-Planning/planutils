@@ -1,6 +1,6 @@
 {
-  "name": "ENHSP 2020 version",
-  "description": "This version contains the new Relaxed Plan Based heuristics developed for ICAPS-20 and substantial refactoring. Constant updates.",
+  "name": "ENHSP -- 2020 version",
+  "description": "This version contains the new relaxed plan-based heuristics developed for ICAPS-20 and substantial refactoring. Constant updates.",
   "homepage": "https://gitlab.com/enricos83/ENHSP-Public",
   "install-size": "86M",
   "dependencies": [],

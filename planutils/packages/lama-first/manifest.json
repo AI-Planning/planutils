@@ -1,6 +1,6 @@
 {
-  "name": "LAMA-first satisficing planner",
-  "description": "LAMA-first is designed to find solutions quickly without much regard for plan cost.",
+  "name": "LAMA-first: satisficing planner without solution improvement",
+  "description": "LAMA-first is designed to find solutions quickly without much regard for plan cost. As its only step, it runs a greedy best-first search, skipping the subsequent refinements performed in regular LAMA.",
   "install-size": "20K",
   "dependencies": [
     "downward"

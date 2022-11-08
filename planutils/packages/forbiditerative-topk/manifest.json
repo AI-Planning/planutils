@@ -1,7 +1,7 @@
 {
-  "name": "FI top-k planner",
+  "name": "FI -- top-k planner",
   "shortname": "fi-topk",
-  "description": "https://github.com/IBM/forbiditerative",
+  "description": "A novel iterative approach to top-k planning, exploiting any cost-optimal planner and reformulating a planning task to forbid exactly the given set of solutions.",
   "install-size": "20K",
   "dependencies": ["forbiditerative"],
   "endpoint": {

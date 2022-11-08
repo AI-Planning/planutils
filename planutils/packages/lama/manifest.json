@@ -1,6 +1,6 @@
 {
-  "name": "LAMA classical planner",
-  "description": "LAMA builds on the Fast Downward planning system, using finite-domain rather than binary state variables and multi-heuristic search.",
+  "name": "LAMA: guiding cost-based anytime planning with landmarks",
+  "description": "As a first step, it runs a greedy best-first search, aimed at finding a solution as quickly as possible. Once a plan is found, it searches for progressively better solutions.",
   "install-size": "20K",
   "dependencies": [
     "downward"

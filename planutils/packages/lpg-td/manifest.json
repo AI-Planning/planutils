@@ -1,6 +1,6 @@
 {
-  "name": "The LPG-td temporal planning system",
-  "description": "Local search for Planning Graphs -- a fully-automated domain-independent planner for PDDL2.2 domains.",
+  "name": "LPG-td: a fully automated temporal planner for PDDL2.2 domains",
+  "description": "LPG (Local search for Planning Graphs) is a planner that handles numerical quantities and durations. LPG-td is an extension to handle the new features of PDDL2.2.",
   "homepage": "https://lpg.unibs.it/lpg/index.html",
   "install-size": "2.2M",
   "dependencies": [],

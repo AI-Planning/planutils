@@ -1,7 +1,7 @@
 {
-  "name": "BFWS FF-parser version",
+  "name": "BFWS -- FF-parser version",
   "shortname": "bfws-ff",
-  "description": "Best First Width Search",
+  "description": "This package contains the FF parser version of the Best First Width Search planner.",
   "install-size": "0M",
   "dependencies": ["lapkt"],
   "endpoint": {

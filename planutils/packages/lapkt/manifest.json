@@ -1,7 +1,7 @@
 {
-  "name": "Best First Width Search (BFWS) planner",
+  "name": "BFWS: Best-First Width Search",
   "shortname": "bfws",
-  "description": "Provides FF- and FD-parser versions, implemented using the Lightweight Automated Planning ToolKiT (LAPKT).",
+  "description": "BFWS combines goal-oriented search (heuristic exploitation) and width-based search (structural exploration) in classical planning, implemented using the LAPKT toolkit.",
   "homepage": "https://github.com/nirlipo/BFWS-public",
   "install-size": "184M",
   "dependencies": [],

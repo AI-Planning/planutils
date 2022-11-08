@@ -1,7 +1,7 @@
 {
-    "name": "Forbid-Iterative (FI) planning system",
+    "name": "The Forbid-Iterative (FI) planning system",
     "shortname": "fi",
-    "description": "FI planners obtain multiple solutions by iteratively restricting the set of valid plans, forbidding previously found ones.",
+    "description": "FI includes various planning systems which obtain multiple solutions by iteratively reformulating planning tasks to restrict the set of valid plans, forbidding previously found ones.",
     "homepage": "https://github.com/IBM/forbiditerative",
     "install-size": "41M",
     "dependencies": []

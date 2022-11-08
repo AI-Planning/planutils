@@ -1,6 +1,6 @@
 {
-    "name": "Scorpion optimal classical planner",
-    "description": "Uses saturated cost partitioning to combine multiple abstraction heuristics. Based on Fast Downward.",
+    "name": "Scorpion: optimal classical planner based on saturated cost partitioning",
+    "description": "Scorpion is an optimal classical planner based on the Fast Downward planning system that uses saturated cost partitioning to combine multiple abstraction heuristics.",
     "homepage": "https://github.com/jendrikseipp/scorpion",
     "install-size": "40M",
     "dependencies": []

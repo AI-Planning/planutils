@@ -1,6 +1,6 @@
 {
-    "name": "PRP planning system for full observability",
-    "description": "Planner for Relevant Policies -- a state-of-the-art fully observable non-deterministic (FOND) planner",
+    "name": "PRP: Planning for Relevant Policies -- full observability",
+    "description": "Planner for Relevant Policies is a state-of-the-art fully observable non-deterministic (FOND) planner that supports conditional effects.",
     "homepage": "https://github.com/QuMuLab/planner-for-relevant-policies/wiki",
     "install-size": "41M",
     "dependencies": []

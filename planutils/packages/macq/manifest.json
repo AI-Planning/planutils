@@ -1,6 +1,6 @@
 {
-    "name": "The Model Acquisition Toolkit",
-    "description": "A collection of tools for planning-like action model acquisition from state trace data.",
+    "name": "MAcq: The Model Acquisition Toolkit",
+    "description": "This library is a collection of tools for planning-like action model acquisition from state trace data. It contains a reimplementation from many existing works, and generalizes some of them to new settings.",
     "homepage": "https://github.com/AI-Planning/macq",
     "install-size": "74K",
     "dependencies": []

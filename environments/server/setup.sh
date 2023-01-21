@@ -9,7 +9,7 @@ if [ "$1" = "build" ]; then
 elif [ "$1" = "run" ]; then
     # Run
     echo "Running..."
-    docker run -p 5555:5555 -d planutils-server
+    docker run --privileged -p 5555:5555 -d planutils-server
     echo "Done."
     exit 0
 else

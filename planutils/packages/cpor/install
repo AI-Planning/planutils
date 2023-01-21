@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build cpor.sif docker://aiplanning/cpor:latest

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-singularity pull --name cerberus.sif shub://ctpelok77/fd-red-black-postipc2018
+apptainer build cerberus.sif docker://ctpelok77/cerberus:latest
+

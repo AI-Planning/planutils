@@ -1,4 +1,3 @@
 #!/bin/bash
 
 apptainer build cerberus.sif docker://ctpelok77/cerberus:latest
-

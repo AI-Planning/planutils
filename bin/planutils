@@ -8,7 +8,7 @@ if [ "$1" = "activate" ]; then
     export PATH="$PATH:$PLANUTILS_PREFIX/bin"
 
     # Add a blue coloured shell prompt prefix (planutils)
-    export PS1="(\e[1;34mplanutils\e[0m) $PS1"
+    #export PS1="(\e[1;34mplanutils\e[0m) $PS1"
 
     echo
     echo "   Entering planutils environment..."
@@ -22,3 +22,5 @@ else
     python3 -c "import planutils; planutils.main()" "$@"
 fi
 
+# Clear history
+history -cw

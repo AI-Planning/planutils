@@ -95,16 +95,33 @@ def uninstall(targets):
 
 
 def package_list():
-    print("\nInstalled:")
     installed = set(settings.load()['installed'])
-    for p in sorted(installed):
-        print("  %s: %s" % (p, PACKAGES[p]['name']))
+    installed_names = []
 
-    print("\nAvailable:")
-    for p in sorted(PACKAGES):
-        if p not in installed:
-            print("  %s: %s" % (p, PACKAGES[p]['name']))
-    print()
+    terminal_width = 120
+    #https://www.geeksforgeeks.org/python-extract-length-of-longest-string-in-list
+    width_name = max(len(ele) for ele in PACKAGES)
+    width_desc = terminal_width - (width_name + 1)
+
+    if installed:
+        for p in installed:
+            installed_names.append(p)
+        print("%-*s %s" % (width_name, 'Installed', 'Summary'))
+        print("%-*s %s" % (width_name, ''.ljust(width_name,'-'), ''.ljust(width_desc,'-')))
+        for p in sorted(installed_names):
+            print("%-*s %s" % (width_name, p, PACKAGES[p]['name']))
+        print()
+
+    available_names = []
+    for p in PACKAGES:
+        try: available_names.append(PACKAGES[p]['shortname'])
+        except: available_names.append(p)
+    if available_names:
+        print("%-*s %s" % (width_name, 'Available', 'Summary'))
+        print("%-*s %s" % (width_name, ''.ljust(width_name,'-'), ''.ljust(width_desc,'-')))
+        for p in sorted(available_names):
+            if p not in installed_names:
+                print("%-*s %s" % (width_name, p, PACKAGES[p]['name']))
 
 def upgrade():
     s = settings.load()
@@ -112,6 +129,22 @@ def upgrade():
         print("Upgrading %s..." % package)
         subprocess.call('./uninstall', cwd=os.path.join(CUR_DIR, 'packages', package))
         subprocess.call('./install', cwd=os.path.join(CUR_DIR, 'packages', package))
+
+def package_info(targets):
+    for target in targets:
+        if target not in PACKAGES:
+            print("Error: Package not found -- %s" % target)
+            return
+        print("Name: %s" % target)
+        try: print("Version: %s" % PACKAGES[target]['version'])
+        except: pass
+        print("Description: %s" % PACKAGES[target]['description'])
+        try: print("Homepage: %s" % PACKAGES[target]['homepage'])
+        except: pass
+        try: print("Author: %s" % PACKAGES[target]['author'])
+        except: pass
+        print("Requires: %s" % ', '.join(PACKAGES[target]['dependencies']))
+        if len(targets) > 1: print("---")
 
 def install(targets, forced=False, always_yes=False):
     for target in targets:
@@ -192,4 +225,3 @@ def run(target, options):
     if not PACKAGES[target]["runnable"]:
         sys.exit(f"Package {target} is not executable")
     subprocess.run([Path(settings.PLANUTILS_PREFIX) / "packages" / target / "run"] + options)
-

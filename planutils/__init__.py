@@ -103,6 +103,9 @@ def main():
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
+    parser_show = subparsers.add_parser('show', help='show details about a particular package')
+    parser_show.add_argument('package', help='package name', nargs='+')
+
     args = parser.parse_args()
 
     if 'setup' == args.command:
@@ -146,6 +149,10 @@ def main():
     elif 'server' == args.command:
         from planutils.server import run_server
         run_server(args.port, args.host)
+
+    elif 'show' == args.command:
+        from planutils.package_installation import package_info
+        package_info(args.package)
 
     else:
         parser.print_help()

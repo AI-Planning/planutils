@@ -1,6 +1,7 @@
 {
-    "name": "CPOR",
-    "description": "CPOR: Contingent Planning using On-line Replanning (for any issues, please email Guy Shani <shanigu@bgu.ac.il>)",
+    "name": "CPOR: Contingent Planning using On-line Replanning",
+    "description": " For any issues, please email Guy Shani <shanigu@bgu.ac.il>",
+    "homepage": "https://github.com/aiplan4eu/up-cpor",
     "install-size": "51M",
     "dependencies": []
 }

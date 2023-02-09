@@ -1,6 +1,7 @@
 {
-  "name": "Symk is a state-of-the-art optimal and top-k planner.",
-  "description": "https://github.com/speckdavid/symk",
+  "name": "Sym-k: symbolic top-k planning",
+  "description": "A novel approach to top-k planning, called sym-k, which is based on symbolic search. The objective of top-k planning is to determine a set of k different plans with lowest cost for a given planning task.",
+  "homepage": "https://github.com/speckdavid/symk",
   "install-size": "40M",
   "dependencies": [],
   "endpoint": {

@@ -1,6 +1,7 @@
 {
-  "name": "Fast-Forward",
-  "description": "https://fai.cs.uni-saarland.de/hoffmann/ff.html",
+  "name": "The Fast-Forward (FF) planning system",
+  "description": "Fast-Forward is forward-chaining, domain-independent planning system that can handle classical STRIPS- as well as full scale ADL- planning tasks specified in PDDL.",
+  "homepage": "https://fai.cs.uni-saarland.de/hoffmann/ff.html",
   "install-size": "1.1M",
   "dependencies": [],
   "endpoint": {

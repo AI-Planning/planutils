@@ -1,6 +1,7 @@
 {
-    "name": "Forbid-Iterative diverse satisficing planner",
-    "description": "https://github.com/IBM/forbiditerative",
+    "name": "FI -- diverse satisficing planner",
+    "description": "Diverse planning focuses on producing sets of plans with a large difference between individual plans. Satisficing configuration.",
+    "homepage": "https://github.com/IBM/forbiditerative",
     "install-size": "20K",
     "dependencies": ["forbiditerative"]
 }

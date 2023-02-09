@@ -1,6 +1,6 @@
 {
-  "name": "Cerberus planner for satisficing planning",
-  "description": "https://github.com/ctpelok77/fd-red-black-postipc2018",
+  "name": "Cerberus -- satisficing planner, post-IPC18 version",
+  "description": "The configuration runs a sequence of search iterations of decreasing level of greediness. In case a solution is found in the previous iteration, its cost is passed as a pruning bound to the next iteration.",
   "install-size": "20K",
   "dependencies": ["cerberus"],
   "endpoint": {

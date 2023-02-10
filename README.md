@@ -3,23 +3,41 @@
 General library for setting up linux-based environments for developing, running, and evaluating planners.
 
 
-## 1. Docker
+## 1. Running the latest Docker release
 
-The included Docker file will come with planutils pre-installed. Note that in order to
+The released Docker image comes with the latest planutils pre-installed. Note that in order to
 run a number of the planners (all those that are based on singularity), you will need
 to run the docker with the `--privileged` option.
 
-**Build planutils images**
-`docker build -t planutils:latest .`
-
-**Run the plautils container**
-`docker run -it --privileged planutils bash`
+**Run the planutils container**
+`docker run -it --privileged aiplanning/planutils:latest bash`
 
 **Active the planutils environment**
 `planutils activate`
 
+This means that in order to run the latest release, it is not necessary to clone this repository.
 
-## 2. Usage
+## 2. Making your own image with desired solvers
+
+Below is an example for creating your own Dockerfile based on the latest release, with pre-installed solvers
+```
+FROM aiplanning/planutils:latest
+
+# Install solvers and tools
+RUN yes | planutils install val
+RUN yes | planutils install planning.domains
+RUN yes | planutils install popf
+RUN yes | planutils install optic
+RUN yes | planutils install smtplan
+```
+
+## 3. Running planutils from source
+You can also run the latest unreleased version. For this, clone this repository and run 
+```
+docker build . -t planutils-dev:latest
+```
+
+## 4. Usage
 
 ### Example of currently working functionality
 
@@ -77,7 +95,7 @@ $
 
 
 
-## 3. Add a new package
+## 5. Add a new package
 ### Package Configuration
 1. Create a folder for new pacakeg, the package name will be the used to call the planner later
 2. Set up the `install`, `run`,  `uninstall`, and manifest file. You can find the template files under packages/TEMPLATE folder

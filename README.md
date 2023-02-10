@@ -10,10 +10,14 @@ run a number of the planners (all those that are based on singularity), you will
 to run the docker with the `--privileged` option.
 
 **Run the planutils container**
-`docker run -it --privileged aiplanning/planutils:latest bash`
+```
+docker run -it --privileged aiplanning/planutils:latest bash
+```
 
 **Active the planutils environment**
-`planutils activate`
+```
+planutils activate
+```
 
 This means that in order to run the latest release, it is not necessary to clone this repository.
 

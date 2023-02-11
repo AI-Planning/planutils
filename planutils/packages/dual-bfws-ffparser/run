@@ -1,2 +1,7 @@
 #!/bin/bash
-lapkt /planner/BFWS/ff-version/bfws --domain $1 --problem $2 --output $3
+
+DOMAIN=$1
+PROBLEM=$2
+shift 2
+
+planutils run lapkt -- /planner/BFWS/ff-version/bfws --domain $DOMAIN --problem $PROBLEM --output plan $@

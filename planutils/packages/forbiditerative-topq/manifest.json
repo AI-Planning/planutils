@@ -1,5 +1,6 @@
 {
     "name": "FI -- unordered top-quality planner",
+    "shortname": "fi-topq",
     "description": "Iterative planner for a family of computational problems called top-quality planning, where solution validity is defined through plan quality bound rather than an arbitrary number of plans.",
     "homepage": "https://github.com/IBM/forbiditerative",
     "install-size": "20K",

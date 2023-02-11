@@ -1,5 +1,6 @@
 {
     "name": "The Fast Downward (FD) planning system",
+    "shortname": "fd",
     "description": "A classical planning system based on heuristic search. Since its first release in 2004, many parts have been added, including optimal planning, support for action costs, and many more heuristics.",
     "homepage": "http://fast-downward.org",
     "install-size": "36M",

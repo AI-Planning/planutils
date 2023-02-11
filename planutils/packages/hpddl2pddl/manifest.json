@@ -1,5 +1,6 @@
 {
     "name": "HTN-Translation: translating HTN planning problems to PDDL",
+    "shortname": "htntranslation",
     "description": "A program for translating Hierarchical Task Network problems into PDDL",
     "homepage": "https://github.com/ronwalf/HTN-Translation",
     "install-size": "28M",

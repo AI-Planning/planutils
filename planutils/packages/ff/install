@@ -2,6 +2,6 @@
 
 mkdir bin
 cd bin
-wget 'https://github.com/hectorpal/fast-forward-linux-binaries/raw/main/ff.gz'
+wget -q 'https://github.com/hectorpal/fast-forward-linux-binaries/raw/main/ff.gz'
 gunzip ff.gz
 chmod +x ff

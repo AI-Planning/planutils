@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm ./bin/lpg-td
+rmdir ./bin

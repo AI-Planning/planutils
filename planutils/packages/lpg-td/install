@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir bin
+cd bin
+wget -q -c https://lpg.unibs.it/lpg/lpgtd-1_4-linux.tar.gz -O - | tar -xz
+cp LPG-td-1.4/lpg-td .
+chmod +x lpg-td
+rm -rf LPG-td-1.4

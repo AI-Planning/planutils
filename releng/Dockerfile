@@ -3,8 +3,8 @@ FROM ubuntu:22.04
 LABEL maintainer="Christian Muise (christian.muise@queensu.ca)"
 
 # Install required packages
-WORKDIR /root/install
-COPY install-apptainer-ubuntu.sh .
+WORKDIR /root
+COPY install-apptainer-ubuntu.sh /root/install-apptainer-ubuntu.sh
 RUN bash install-apptainer-ubuntu.sh 1.0.3 1.18.3 \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
@@ -27,15 +27,8 @@ RUN bash install-apptainer-ubuntu.sh 1.0.3 1.18.3 \
 RUN pip3 install --upgrade pip
 RUN pip3 install setuptools
 
-# Copy files and install
-COPY . .
-RUN python3 setup.py install
-
-# Remove files
-WORKDIR /root
-RUN rm -rf install
-
-# Setup the planutils
+# Install & setup the planutils
+RUN pip3 install planutils --trusted-host pypi.org --trusted-host files.pythonhosted.org
 RUN planutils setup
 
 # default command to execute when container starts

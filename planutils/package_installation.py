@@ -106,8 +106,7 @@ def package_list():
     installed_names = []
 
     terminal_width = 120
-    #https://www.geeksforgeeks.org/python-extract-length-of-longest-string-in-list
-    width_name = max(len(ele) for ele in PACKAGES)
+    width_name = 20
     width_desc = terminal_width - (width_name + 1)
 
     if installed:

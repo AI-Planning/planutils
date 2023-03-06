@@ -1,6 +1,7 @@
 {
-    "name": "The POPF temporal planner",
-    "description": "The POPF temporal planner (see https://github.com/roveri-marco/popf)",
+    "name": "POPF: Partial Order Planning Forwards",
+    "description": "POPF is forwards-chaining temporal planner with linear continuous effects, inspited by partial-order planning. This version (POPF2) introduces any-time search, allowing it to optimise solution quality.",
+    "homepage": "https://github.com/roveri-marco/popf",
     "install-size": "297MB",
     "dependencies": []
 }

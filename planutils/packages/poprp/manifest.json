@@ -1,6 +1,7 @@
 {
-    "name": "PO-PRP",
-    "description": "https://github.com/QuMuLab/planner-for-relevant-policies/wiki/PO-PRP",
+    "name": "PO-PRP: Planning for Relevant Policies -- partial observability",
+    "description": "A version of PRP capable of solving non-deterministic planning problems with partial observability and sensing. The process is always sound, and complete for simple contingent problems.",
+    "homepage": "https://github.com/QuMuLab/planner-for-relevant-policies/wiki/PO-PRP",
     "install-size": "63M",
     "dependencies": []
 }

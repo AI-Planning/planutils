@@ -30,6 +30,9 @@ def setup():
 
     print("Installing package scripts...")
     for p in PACKAGES:
+        # TODO: RENAME EXECUTABLE HERE
+        try: s = PACKAGES[p]['shortname']
+        except: s = p
         if PACKAGES[p]['runnable']:
             script  = "#!/bin/bash\n"
             script += "if $(planutils check-installed %s)\n" % p
@@ -57,9 +60,9 @@ def setup():
             script += "  fi\n"
             script += "  echo\n"
             script += "fi\n"
-            with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 'w') as f:
+            with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', s), 'w') as f:
                 f.write(script)
-            os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
+            os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', s), 0o0755)
 
 
     print("\nAll set! Use \"planutils activate\" to activate the environment, or run through \"planutils\" directly.\n")
@@ -102,6 +105,9 @@ def main():
     parser_list = subparsers.add_parser('list', help='list the available packages')
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
+
+    parser_show = subparsers.add_parser('show', help='show details about a particular package')
+    parser_show.add_argument('package', help='package name', nargs='+')
 
     args = parser.parse_args()
 
@@ -146,6 +152,10 @@ def main():
     elif 'server' == args.command:
         from planutils.server import run_server
         run_server(args.port, args.host)
+
+    elif 'show' == args.command:
+        from planutils.package_installation import package_info
+        package_info(args.package)
 
     else:
         parser.print_help()

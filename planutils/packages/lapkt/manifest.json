@@ -1,6 +1,8 @@
 {
-  "name": "LAPKT (Lightweight Automated Planning ToolKiT)",
-  "description": "This package contains the source code of the planners that participated in IPC-9, 2018. It contains the winner of the Agile-Track, and runner-up of tha SAT-track.",
+  "name": "BFWS: Best-First Width Search",
+  "shortname": "bfws",
+  "description": "BFWS combines goal-oriented search (heuristic exploitation) and width-based search (structural exploration) in classical planning, implemented using the LAPKT toolkit.",
+  "homepage": "https://github.com/nirlipo/BFWS-public",
   "install-size": "184M",
   "dependencies": [],
   "endpoint": {

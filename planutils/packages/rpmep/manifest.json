@@ -1,0 +1,6 @@
+{
+    "name": "RP-MEP",
+    "description": "Epistemic Planner RP-MEP. https://github.com/QuMuLab/pdkb-planning",
+    "install-size": "255M",
+    "dependencies": []
+}

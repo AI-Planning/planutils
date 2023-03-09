@@ -30,9 +30,6 @@ def setup():
 
     print("Installing package scripts...")
     for p in PACKAGES:
-        # TODO: RENAME EXECUTABLE HERE
-        try: s = PACKAGES[p]['shortname']
-        except: s = p
         if PACKAGES[p]['runnable']:
             script  = "#!/bin/bash\n"
             script += "if $(planutils check-installed %s)\n" % p
@@ -60,9 +57,9 @@ def setup():
             script += "  fi\n"
             script += "  echo\n"
             script += "fi\n"
-            with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', s), 'w') as f:
+            with open(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 'w') as f:
                 f.write(script)
-            os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', s), 0o0755)
+            os.chmod(os.path.join(os.path.expanduser('~'), '.planutils', 'bin', p), 0o0755)
 
 
     print("\nAll set! Use \"planutils activate\" to activate the environment, or run through \"planutils\" directly.\n")

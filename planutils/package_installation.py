@@ -6,7 +6,6 @@ from pathlib import Path
 from planutils import settings
 
 PACKAGES = {}
-ALIASES = {}
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,8 +25,6 @@ for conf_file in glob.glob(os.path.join(CUR_DIR, 'packages', '*')):
         check_package(base, os.path.join(conf_file, 'manifest.json'))
         with open(os.path.join(conf_file, 'manifest.json'), 'r') as f:
             config = json.load(f)
-        try: ALIASES[config['shortname']] = base
-        except: pass
         PACKAGES[base] = config
         PACKAGES[base]['runnable'] = os.path.exists(os.path.join(conf_file, 'run'))
 
@@ -39,16 +36,12 @@ def check_installed(target):
 def uninstall(targets):
 
     for target in targets:
-        try: target = ALIASES[target]
-        except: pass
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
             return
 
     to_check = []
     for target in targets:
-        try: target = ALIASES[target]
-        except: pass
         if check_installed(target):
             to_check.append(target)
         else:
@@ -106,13 +99,13 @@ def package_list():
     installed_names = []
 
     terminal_width = 120
-    width_name = 20
+    #https://www.geeksforgeeks.org/python-extract-length-of-longest-string-in-list
+    width_name = max(len(ele) for ele in PACKAGES)
     width_desc = terminal_width - (width_name + 1)
 
     if installed:
         for p in installed:
-            try: installed_names.append(PACKAGES[p]['shortname'])
-            except: installed_names.append(p)
+            installed_names.append(p)
         print("%-*s %s" % (width_name, 'Installed', 'Summary'))
         print("%-*s %s" % (width_name, ''.ljust(width_name,'-'), ''.ljust(width_desc,'-')))
         for p in sorted(installed_names):
@@ -128,8 +121,7 @@ def package_list():
         print("%-*s %s" % (width_name, ''.ljust(width_name,'-'), ''.ljust(width_desc,'-')))
         for p in sorted(available_names):
             if p not in installed_names:
-                try: print("%-*s %s" % (width_name, p, PACKAGES[p]['name']))
-                except: print("%-*s %s" % (width_name, p, PACKAGES[ALIASES[p]]['name']))
+                print("%-*s %s" % (width_name, p, PACKAGES[p]['name']))
 
 def upgrade():
     s = settings.load()
@@ -140,8 +132,6 @@ def upgrade():
 
 def package_info(targets):
     for target in targets:
-        try: target = ALIASES[target]
-        except: pass
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
             return
@@ -158,8 +148,6 @@ def package_info(targets):
 
 def install(targets, forced=False, always_yes=False):
     for target in targets:
-        try: target = ALIASES[target]
-        except: pass
         if target not in PACKAGES:
             print("Error: Package not found -- %s" % target)
             return False
@@ -167,8 +155,6 @@ def install(targets, forced=False, always_yes=False):
     # Compute all those that will need to be installed
     to_check = []
     for target in targets:
-        try: target = ALIASES[target]
-        except: pass
         if check_installed(target):
             if forced:
                 to_check.append(target)
@@ -187,16 +173,12 @@ def install(targets, forced=False, always_yes=False):
             done.add(check)
             if not check_installed(check):
                 to_install.append(check)
-                try: to_check.extend(PACKAGES[ALIASES[check]]['dependencies'])
-                except: to_check.extend(PACKAGES[check]['dependencies'])
+                to_check.extend(PACKAGES[check]['dependencies'])
 
     to_install.reverse()
 
     if to_install:
-        to_install_desc = []
-        for pkg in to_install:
-            try: to_install_desc.append("%s (%s)" % (pkg, PACKAGES[ALIASES[pkg]]['install-size']))
-            except: to_install_desc.append("%s (%s)" % (pkg, PACKAGES[pkg]['install-size']))
+        to_install_desc = ["%s (%s)" % (pkg, PACKAGES[pkg]['install-size']) for pkg in to_install]
         print("\nAbout to install the following packages: %s" % ', '.join(to_install_desc))
 
         if always_yes:
@@ -207,8 +189,6 @@ def install(targets, forced=False, always_yes=False):
         if user_response:
             installed = []
             for package in to_install:
-                try: package = ALIASES[package]
-                except: pass
                 package_path = os.path.join(CUR_DIR, 'packages', package)
                 print("Installing %s..." % package)
                 try:
@@ -238,8 +218,6 @@ def install(targets, forced=False, always_yes=False):
 
 
 def run(target, options):
-    try: target = ALIASES[target]
-    except: pass
     if target not in PACKAGES:
         sys.exit(f"Package {target} not found")
     if not check_installed(target):

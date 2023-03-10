@@ -113,9 +113,8 @@ def package_list():
         print()
 
     available_names = []
-    for p in PACKAGES:
-        try: available_names.append(PACKAGES[p]['shortname'])
-        except: available_names.append(p)
+    for p in PACKAGES: 
+        available_names.append(p)
     if available_names:
         print("%-*s %s" % (width_name, 'Available', 'Summary'))
         print("%-*s %s" % (width_name, ''.ljust(width_name,'-'), ''.ljust(width_desc,'-')))

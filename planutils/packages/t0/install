@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build t0.sif docker://hectorpal/t0-translation-based-planners:latest

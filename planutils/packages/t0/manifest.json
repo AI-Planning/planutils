@@ -1,0 +1,7 @@
+{
+    "name": "T0: Compiling Uncertainty Away in Conformant Planning Problems with Bounded Width",
+    "description": "$T_0$ conformant planner",
+    "homepage": "https://github.com/hectorpal/translation-based-planners",
+    "install-size": "243M",
+    "dependencies": []
+}

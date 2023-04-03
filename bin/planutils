@@ -17,10 +17,12 @@ if [ "$1" = "activate" ]; then
     # Enter the shell
     $SHELL --init-file <(echo "export PS1=\"$PS1\"")
 
+    # Clear history
+    history -cw
+
 # Else, call planutils via python
 else
     python3 -c "import planutils; planutils.main()" "$@"
+    exit $?
 fi
 
-# Clear history
-history -cw

@@ -16,11 +16,11 @@ def minimal_setup():
         settings.save({'installed': []})
 
 
-def setup():
+def setup(forced=False):
 
     if setup_done():
-        print("\nError: planutils is already setup. Setting up again will wipe all cached packages and settings.")
-        if input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
+        print("\nWarning: planutils is already setup. Setting up again will wipe all cached packages and settings.")
+        if forced or input("  Proceed? [y/N] ").lower() in ['y', 'yes']:
             os.system("rm -rf %s" % os.path.join(os.path.expanduser('~'), '.planutils'))
         else:
             return
@@ -101,6 +101,7 @@ def main():
 
     parser_list = subparsers.add_parser('list', help='list the available packages')
     parser_setup = subparsers.add_parser('setup', help='setup planutils for current user')
+    parser_setup.add_argument('-f', '--force', help='force setting up again (will wipe all cached packages and settings)', action='store_true')
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
     parser_show = subparsers.add_parser('show', help='show details about a particular package')
@@ -109,7 +110,7 @@ def main():
     args = parser.parse_args()
 
     if 'setup' == args.command:
-        setup()
+        setup(args.force)
         return
     else:
         minimal_setup()

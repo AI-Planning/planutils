@@ -17,7 +17,7 @@ setuptools.setup(name='planutils',
       author_email='',
       license='MIT',
       packages=['planutils'],
-      scripts=['bin/planutils'],
+      scripts=['bin/planutils','bin/planutils_activate'],
       classifiers=[
           "Programming Language :: Python :: 3",
           "License :: OSI Approved :: MIT License",

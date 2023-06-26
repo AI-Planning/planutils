@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Fetch the image
+
+apptainer pull --name cpddl.sif oras://registry.gitlab.com/danfis/cpddl:latest

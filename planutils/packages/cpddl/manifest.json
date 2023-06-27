@@ -1,0 +1,7 @@
+{
+    "name": "cpddl",
+    "description": "cpddl is a planning tool implementing a wide range of techniques such as pruning on the lifted level, translation to FDR, both lifted and ground state-space search with various heuristics, symbolic search with operator-potential heuristics and more.",
+    "homepage": "https://gitlab.com/danfis/cpddl",
+    "install-size": "95M",
+    "dependencies": []
+}

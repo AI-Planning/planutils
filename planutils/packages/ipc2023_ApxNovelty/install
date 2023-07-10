@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner29.git ApxNovelty_build
+cd ApxNovelty_build
+git checkout latest
+
+apptainer build ../ipc2023_ApxNovelty.sif Apptainer.ApxNovelty
+
+cd ..
+rm -rf ApxNovelty_build

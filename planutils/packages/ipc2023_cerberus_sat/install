@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner23.git cerberus_sat_build
+cd cerberus_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_cerberus_sat.sif Apptainer.cerberus_sat
+
+cd ..
+rm -rf cerberus_sat_build

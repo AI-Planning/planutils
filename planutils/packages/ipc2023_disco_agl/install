@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! -f $IPC_THIRD_PARTY/cplex_studio2211.linux_x86_64.bin ]; then
+    echo "This solver requires CPLEX to be installed. Please obtain a CPLEX license, download the Linux installer for version 22.11 and set up the environment variable IPC_THIRD_PARTY so that $IPC_THIRD_PARTY/cplex_studio2211.linux_x86_64.bin is the path of the installer. Afterwards run the installation again."
+    exit 1
+fi
+
+
+git clone https://github.com/ipc2023-classical/planner16.git disco_agl_build
+cd disco_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_disco_agl.sif Apptainer.disco_agl
+
+cd ..
+rm -rf disco_agl_build

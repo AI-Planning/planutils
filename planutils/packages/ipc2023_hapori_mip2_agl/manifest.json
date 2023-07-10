@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Hapori MIPlan All Data Random Order Agl",
+    "shortname": "hapori_mip2_agl",
+    "description": "Sequential portfolio of satisficing and agile IPC planners computed with the MIP formulation by Nunez, Borrajo and Linares (2015).",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "84M",
+    "dependencies": []
+}

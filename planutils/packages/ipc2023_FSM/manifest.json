@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: FSM",
+    "shortname": "FSM",
+    "description": "A learning-based planner for short-time sampling, training, and testing.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "1G",
+    "dependencies": []
+}

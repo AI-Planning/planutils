@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner8.git levitron_sat_build
+cd levitron_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_levitron_sat.sif Apptainer.levitron_sat
+
+cd ..
+rm -rf levitron_sat_build

@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: CEGAR ++",
+    "shortname": "cegarplusplus",
+    "description": "Pattern Databases for interesting patterns up to size 2, patterns computed with hill climbing and CEGAR, combined with domain abstractions and Cartesian abstractions computed with CEGAR in a maximum heuristic over SCP heuristics, generated through greedy computation of hybrid-optimized orders.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "54M",
+    "dependencies": []
+}

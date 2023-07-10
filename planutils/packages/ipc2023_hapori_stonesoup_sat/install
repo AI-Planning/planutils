@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner19.git hapori_stonesoup_sat_build
+cd hapori_stonesoup_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_hapori_stonesoup_sat.sif Apptainer.hapori_stonesoup_sat
+
+cd ..
+rm -rf hapori_stonesoup_sat_build

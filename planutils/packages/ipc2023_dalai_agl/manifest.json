@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: DALAI 2023 Agile",
+    "shortname": "dalai_agl",
+    "description": "Disjunctive Action Landmarks All In -- Path-dependent landmark heuristic search tailored to find solutions fast.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "53M",
+    "dependencies": []
+}

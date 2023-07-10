@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner28.git fdss_2023_agl_build
+cd fdss_2023_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_fdss_2023_agl.sif Apptainer.fdss_2023_agl
+
+cd ..
+rm -rf fdss_2023_agl_build

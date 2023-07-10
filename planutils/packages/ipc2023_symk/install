@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner3.git symk_build
+cd symk_build
+git checkout latest
+
+apptainer build ../ipc2023_symk.sif Apptainer.symk
+
+cd ..
+rm -rf symk_build

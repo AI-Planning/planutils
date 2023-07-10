@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: DiSCO",
+    "shortname": "disco_agl",
+    "description": "Agile planner based on Decoupled Search and COnjunctions.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "161M",
+    "dependencies": []
+}

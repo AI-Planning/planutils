@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Hapori MIPlan Optimal All Data",
+    "shortname": "hapori_mip2_opt",
+    "description": "Sequential portfolio of optimal IPC planners computed with the MIP formulation by Nunez, Borrajo and Linares (2015).",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "72M",
+    "dependencies": []
+}

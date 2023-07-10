@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: SymBD",
+    "shortname": "SymBD_2023_opt",
+    "description": "Symbolic Bidirectonal Blind Search",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "56M",
+    "dependencies": []
+}

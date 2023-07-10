@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: QDom-Lmcut",
+    "shortname": "dom_opt",
+    "description": "Dominance Pruning",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "55M",
+    "dependencies": []
+}

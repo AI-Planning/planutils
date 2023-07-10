@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner22.git tftm_argmax_sat_build
+cd tftm_argmax_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_tftm_argmax_sat.sif Apptainer.tftm_argmax_sat
+
+cd ..
+rm -rf tftm_argmax_sat_build

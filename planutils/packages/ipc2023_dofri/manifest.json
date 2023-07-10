@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Dofri",
+    "shortname": "dofri",
+    "description": "forward search with A* and the Saturated Post-Hoc optimization heuristic that selectively reuses previous SPhO LP solutions.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "111M",
+    "dependencies": []
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner34.git cegarplusplus_build
+cd cegarplusplus_build
+git checkout latest
+
+apptainer build ../ipc2023_cegarplusplus.sif Apptainer.cegarplusplus
+
+cd ..
+rm -rf cegarplusplus_build

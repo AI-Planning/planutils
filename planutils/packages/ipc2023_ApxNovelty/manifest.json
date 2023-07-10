@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Approximate Novelty",
+    "shortname": "ApxNovelty",
+    "description": "Approximate Best First Width Search with novelty approximation and goal count heuristics, f=<#w,#g>, leverages Fast Downward to ground the schematic representation of the planning problem",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "155M",
+    "dependencies": []
+}

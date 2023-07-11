@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner19.git hapori_epsdt_agl_build
+cd hapori_epsdt_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_hapori_epsdt_agl.sif Apptainer.hapori_epsdt_agl
+
+cd ..
+rm -rf hapori_epsdt_agl_build

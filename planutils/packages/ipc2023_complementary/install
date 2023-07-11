@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner7.git complementary_build
+cd complementary_build
+git checkout latest
+
+apptainer build ../ipc2023_complementary.sif Apptainer.complementary
+
+cd ..
+rm -rf complementary_build

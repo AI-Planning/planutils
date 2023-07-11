@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Hapori IBaCop2 Sat",
+    "shortname": "hapori_ibacop2_opt",
+    "description": "Sequential portfolio of optimal IPC planners computed on an instance-based fashion. A set of 3 planners are pre-selected based on PDDL task and heuristic features.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "142M",
+    "dependencies": []
+}

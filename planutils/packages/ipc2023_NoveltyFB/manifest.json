@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Forward Backward Novelty Search",
+    "shortname": "NoveltyFB",
+    "description": "Forward Backward Approximate BFWS with novelty approximation and goal count heuristics, f=<#w,#g>, see ICAPS 2021 papers on Approximate Novelty Search and Width-based backward search",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "155M",
+    "dependencies": []
+}

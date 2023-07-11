@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Forward Backward Anytime Novelty Search",
+    "shortname": "NoveltyFBAnytime",
+    "description": "The anytime configuration of the planner. It uses Forward Backward Novelty Search search to find the first satisficing plan. After which, it switches to lazy wastar with a upper bound on the plan cost, and continues to optimize the solutions until timeout.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "288M",
+    "dependencies": []
+}

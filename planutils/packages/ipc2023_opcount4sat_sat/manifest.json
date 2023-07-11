@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: OpCount4Sat - Satistificng",
+    "shortname": "opcount4sat_sat",
+    "description": "Operator Counting Heuristics for Satisficing Planning",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "53M",
+    "dependencies": []
+}

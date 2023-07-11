@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner19.git hapori_epslr_sat_build
+cd hapori_epslr_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_hapori_epslr_sat.sif Apptainer.hapori_epslr_sat
+
+cd ..
+rm -rf hapori_epslr_sat_build

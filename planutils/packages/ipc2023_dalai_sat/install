@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner4.git dalai_sat_build
+cd dalai_sat_build
+git checkout latest
+
+apptainer build ../ipc2023_dalai_sat.sif Apptainer.dalai_sat
+
+cd ..
+rm -rf dalai_sat_build

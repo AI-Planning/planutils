@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Grounding Schematic Representation with GRINGO for Width-based Search",
+    "shortname": "ApxNoveltyTarski",
+    "description": "Approximate Best First Width Search with novelty approximation and goal count heuristics, f=<#w,#g>, the planner leverages Tarski to ground the schematic representation of the planning problem, refer https://tarski.readthedocs.io/en/latest/notebooks/grounding-reachability-analysis.html",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "267M",
+    "dependencies": []
+}

@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: DALAI 2023 Satisficing",
+    "shortname": "dalai_sat",
+    "description": "Disjunctive Action Landmarks All In -- Path-dependent landmark heuristic search tailored to find some solution fast and improve improve it iteratively.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "53M",
+    "dependencies": []
+}

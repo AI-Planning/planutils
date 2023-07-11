@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner13.git fts_ms_opt_build
+cd fts_ms_opt_build
+git checkout latest
+
+apptainer build ../ipc2023_fts_ms_opt.sif Apptainer.fts_ms_opt
+
+cd ..
+rm -rf fts_ms_opt_build

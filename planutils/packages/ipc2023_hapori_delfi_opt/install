@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner19.git hapori_delfi_opt_build
+cd hapori_delfi_opt_build
+git checkout latest
+
+apptainer build ../ipc2023_hapori_delfi_opt.sif Apptainer.hapori_delfi_opt
+
+cd ..
+rm -rf hapori_delfi_opt_build

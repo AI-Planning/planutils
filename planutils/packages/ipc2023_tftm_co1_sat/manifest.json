@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: TFTM2",
+    "shortname": "tftm_co1_sat",
+    "description": "Planner based on the IJCAI 2021 paper The Fewer the Merrier: [Pruning Preferred Operators with Novelty](https://www.ijcai.org/proceedings/2021/0576.pdf).",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "41M",
+    "dependencies": []
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner22.git tftm_co1_agl_build
+cd tftm_co1_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_tftm_co1_agl.sif Apptainer.tftm_co1_agl
+
+cd ..
+rm -rf tftm_co1_agl_build

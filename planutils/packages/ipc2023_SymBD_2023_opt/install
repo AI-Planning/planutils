@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner14.git SymBD_2023_opt_build
+cd SymBD_2023_opt_build
+git checkout latest
+
+apptainer build ../ipc2023_SymBD_2023_opt.sif Apptainer.SymBD_2023_opt
+
+cd ..
+rm -rf SymBD_2023_opt_build

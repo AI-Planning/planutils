@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner8.git levitron_agl_build
+cd levitron_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_levitron_agl.sif Apptainer.levitron_agl
+
+cd ..
+rm -rf levitron_agl_build

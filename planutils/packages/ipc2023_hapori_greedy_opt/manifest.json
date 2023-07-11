@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Hapori Greedy Optimal",
+    "shortname": "hapori_greedy_opt",
+    "description": "Sequential portfolio of optimal IPC planners computed with the greedy offline approximation algorithm by Streeter and Smith (UAI 2008).",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "125M",
+    "dependencies": []
+}

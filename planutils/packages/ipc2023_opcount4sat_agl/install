@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner10.git opcount4sat_agl_build
+cd opcount4sat_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_opcount4sat_agl.sif Apptainer.opcount4sat_agl
+
+cd ..
+rm -rf opcount4sat_agl_build

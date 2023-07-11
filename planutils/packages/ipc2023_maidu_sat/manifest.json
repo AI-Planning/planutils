@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Scorpion Maidu Satisficing",
+    "shortname": "maidu_sat",
+    "description": "Version of the Scorpion planner using width-search algorithms",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "66M",
+    "dependencies": []
+}

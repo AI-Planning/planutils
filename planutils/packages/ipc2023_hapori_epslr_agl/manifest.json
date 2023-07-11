@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Hapori Explainable Planner Selection - Linear Regression Agile",
+    "shortname": "hapori_epslr_agl",
+    "description": "Planner selection portfolio as described in Explainable Planner Selection for Classical Planning (AAAI 2022) using Fawcetts et al (ICAPS 2014) PDDL features and linear regression.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "266M",
+    "dependencies": []
+}

@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Cerberus",
+    "shortname": "cerberus_agl",
+    "description": "Planner Cerberus from IPC 2018",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "41M",
+    "dependencies": []
+}

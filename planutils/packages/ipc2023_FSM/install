@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner20.git FSM_build
+cd FSM_build
+git checkout latest
+
+apptainer build ../ipc2023_FSM.sif Apptainer.FSM
+
+cd ..
+rm -rf FSM_build

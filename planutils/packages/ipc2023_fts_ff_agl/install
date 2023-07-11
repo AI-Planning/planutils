@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner13.git fts_ff_agl_build
+cd fts_ff_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_fts_ff_agl.sif Apptainer.fts_ff_agl
+
+cd ..
+rm -rf fts_ff_agl_build

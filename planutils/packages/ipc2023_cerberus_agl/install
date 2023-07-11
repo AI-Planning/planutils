@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner23.git cerberus_agl_build
+cd cerberus_agl_build
+git checkout latest
+
+apptainer build ../ipc2023_cerberus_agl.sif Apptainer.cerberus_agl
+
+cd ..
+rm -rf cerberus_agl_build

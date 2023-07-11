@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Levitron Agile",
+    "shortname": "levitron_agl",
+    "description": "Hybrid planner using both the grounded planner Scorpion Maidu and the lifted planner Powerlifted",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "127M",
+    "dependencies": []
+}

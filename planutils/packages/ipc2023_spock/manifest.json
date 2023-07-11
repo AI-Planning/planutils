@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Spock",
+    "shortname": "spock",
+    "description": "FDSS 2018 with action elimination. Removes redundant actions from each found plan to -potentially- rapidly find a cheaper plan.",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "54M",
+    "dependencies": []
+}

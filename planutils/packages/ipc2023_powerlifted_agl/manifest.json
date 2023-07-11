@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: Powerlifted Agile",
+    "shortname": "powerlifted_agl",
+    "description": "Powerlifted planner using a sequential portfolio configuration",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "122M",
+    "dependencies": []
+}

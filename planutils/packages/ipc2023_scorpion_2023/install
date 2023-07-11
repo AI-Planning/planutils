@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+git clone https://github.com/ipc2023-classical/planner25.git scorpion_2023_build
+cd scorpion_2023_build
+git checkout latest
+
+apptainer build ../ipc2023_scorpion_2023.sif Apptainer.scorpion_2023
+
+cd ..
+rm -rf scorpion_2023_build

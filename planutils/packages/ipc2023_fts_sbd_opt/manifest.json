@@ -1,0 +1,8 @@
+{
+    "name": "IPC 2023 Planner: FTSPlan",
+    "shortname": "fts_sbd_opt",
+    "description": "Optimal planner based on reformulation and search under the merge-and-shrink representation search. After reformulation uses symbolic bidirectional search",
+    "homepage": "https://ipc2023-classical.github.io/#participants",
+    "install-size": "55M",
+    "dependencies": []
+}

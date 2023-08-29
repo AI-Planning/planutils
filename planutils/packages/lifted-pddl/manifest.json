@@ -1,0 +1,7 @@
+{
+    "name": "Lifted PDDL: A lightweight framework for the efficient parsing and manipulation of PDDL in lifted form",
+    "description": "A lightweight parser that works on PDDL in its lifted form, i.e., without grounding it. It provides functionality for parsing a PDDL domain and problem, obtaining the list of applicable actions at a given state and getting the next state resulting from applying an action (successor function).",
+    "homepage": "https://github.com/AI-Planning/lifted-pddl/",
+    "install-size": "120K",
+    "dependencies": ["tarski"]
+}

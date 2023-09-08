@@ -106,7 +106,7 @@ def run_server(port, host):
 
 def package_remote_list():
 
-    package_url = settings.PAAS_SERVER + "/package"
+    package_url = settings.load()['PAAS_SERVER'] + "/package"
     r = requests.get(package_url)
     remote_packages = r.json()
 
@@ -119,8 +119,11 @@ def remote(target, options):
 
     # 1. check if the target is deployed
 
-    package_url = settings.PAAS_SERVER + "/package"
-    r = requests.get(package_url)
+    package_url = settings.load()['PAAS_SERVER'] + "/package"
+    try:
+        r = requests.get(package_url)
+    except requests.exceptions.ConnectionError:
+        sys.exit(f"Could not connect to the server at {settings.load()['PAAS_SERVER']}")
     remote_packages = r.json()
 
     remote_package = None
@@ -165,16 +168,16 @@ def remote(target, options):
 
     # 3. run the remote command
 
-    solve_url = '/'.join([settings.PAAS_SERVER, 'package', target, 'solve'])
+    solve_url = '/'.join([settings.load()['PAAS_SERVER'], 'package', target, 'solve'])
     r = requests.post(solve_url, json=json_options)
     if r.status_code != 200:
         sys.exit(f"Error running remote call: {r.text}")
 
-    result_url = f"{settings.PAAS_SERVER}/{r.json()['result']}"
+    result_url = f"{settings.load()['PAAS_SERVER']}/{r.json()['result']}"
 
     # call every 0.5s until the result is ready
     result = None
-    for _ in range(settings.PAAS_SERVER_LIMIT):
+    for _ in range(settings.load()['PAAS_SERVER_LIMIT']):
         r = requests.get(result_url)
         if (r.status_code == 200) and ('status' in r.json()) and (r.json()['status'] == 'ok'):
             result = r.json()['result']

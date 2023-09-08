@@ -104,6 +104,10 @@ def main():
     parser_setup.add_argument('-f', '--force', help='force setting up again (will wipe all cached packages and settings)', action='store_true')
     parser_upgrade = subparsers.add_parser('upgrade', help='upgrade all of the installed packages')
 
+    parser_configure = subparsers.add_parser('configure', help='configure planutils')
+    parser_configure.add_argument('-l', '--list', help='list the current configuration', action='store_true')
+    parser_configure.add_argument('-s', '--set', help='set a configuration option', nargs=2, metavar=('KEY', 'VALUE'))
+
     parser_show = subparsers.add_parser('show', help='show details about a particular package')
     parser_show.add_argument('package', help='package name', nargs='+')
 
@@ -114,6 +118,21 @@ def main():
         return
     else:
         minimal_setup()
+
+    if 'configure' == args.command:
+        if args.list:
+            s = settings.load()
+            print("\nCurrent configuration:")
+            for k in s:
+                print("  %s: %s" % (k, s[k]))
+            print()
+        elif args.set:
+            s = settings.load()
+            s[args.set[0]] = args.set[1]
+            settings.save(s)
+        else:
+            parser_configure.print_help()
+        return
 
     if 'check-installed' == args.command:
         from planutils.package_installation import check_installed

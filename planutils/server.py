@@ -111,7 +111,7 @@ def package_remote_list():
     remote_packages = r.json()
 
     print("\nDeployed:")
-    for p in remote_packages:
+    for p in remote_packages.values():
         arguments = " ".join(f'{{{a["name"]}}} ' for a in p['endpoint']['services']['solve']['args'])
         print("  %s: %s\n\tArguments: %s" % (p['package_name'], p['name'], arguments ))
 
@@ -126,11 +126,7 @@ def remote(target, options):
         sys.exit(f"Could not connect to the server at {settings.load()['PAAS_SERVER']}")
     remote_packages = r.json()
 
-    remote_package = None
-    for p in remote_packages:
-        if p['package_name'] == target:
-            remote_package = p
-            break
+    remote_package = remote_packages.get(target, None)
 
     if (remote_package is None) or ('solve' not in remote_package['endpoint']['services']):
         sys.exit(f"Package {target} is not remotely deployed")

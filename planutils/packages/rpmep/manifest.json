@@ -4,15 +4,22 @@
     "install-size": "255M",
     "dependencies": [],
     "endpoint": {
-      "services": {
-        "solve": {
-          "args": [{"name": "pdkbddl", "type": "file", "description": "PDKBDDL File"}],
-          "call":"{package_name} {pdkbddl} --keep-files",
-          "return": {
-            "type": "generic",
-            "files": "pdkb-*"
-          }
+        "services": {
+            "solve": {
+                "template": "planner",
+                "args": [
+                    {
+                        "name": "pdkbddl",
+                        "type": "file",
+                        "description": "PDKBDDL File"
+                    }
+                ],
+                "call": "{package_name} {pdkbddl} --keep-files",
+                "return": {
+                    "type": "generic",
+                    "files": "pdkb-*"
+                }
+            }
         }
-      }
     }
 }

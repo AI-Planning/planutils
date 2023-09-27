@@ -6,8 +6,8 @@
     "endpoint": {
       "services": {
         "solve": {
-          "template": "planner",
-          "call":"{package_name} {domain} {problem} --keep-files",
+          "args": [{"name": "pdkbddl", "type": "file", "description": "PDKBDDL File"}],
+          "call":"{package_name} {pdkbddl} --keep-files",
           "return": {
             "type": "generic",
             "files": "pdkb-*"

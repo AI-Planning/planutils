@@ -3,5 +3,13 @@
     "description": "A version of PRP capable of solving non-deterministic planning problems with partial observability and sensing. The process is always sound, and complete for simple contingent problems.",
     "homepage": "https://github.com/QuMuLab/planner-for-relevant-policies/wiki/PO-PRP",
     "install-size": "63M",
-    "dependencies": []
+    "dependencies": [],
+    "endpoint": {
+      "services": {
+        "solve": {
+          "template": "planner",
+          "call":"{package_name} {domain} {problem} ; chmod a+x compile_plan.sh ; ./compile_plan.sh"
+        }
+      }
+    }
 }

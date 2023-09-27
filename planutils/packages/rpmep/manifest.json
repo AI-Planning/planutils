@@ -6,7 +6,6 @@
     "endpoint": {
         "services": {
             "solve": {
-                "template": "planner",
                 "args": [
                     {
                         "name": "pdkbddl",
@@ -14,7 +13,7 @@
                         "description": "PDKBDDL File"
                     }
                 ],
-                "call": "{package_name} {pdkbddl} --keep-files",
+                "call": "rpmep {pdkbddl} --keep-files",
                 "return": {
                     "type": "generic",
                     "files": "pdkb-*"

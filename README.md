@@ -101,12 +101,12 @@ $
 
 ## 5. Add a new package
 ### Package Configuration
-1. Create a folder for new pacakeg, the package name will be the used to call the planner later
+1. Create a folder for the new package, the package name will be used to call the planner later
 2. Set up the `install`, `run`,  `uninstall`, and manifest file. You can find the template files under packages/TEMPLATE folder
 
-### Write Manifest file
+### Write a Manifest file
 
-Please create a manifest file named `manifest_compact.json` if you want to use predefined templates in the packages/TEMPLATE/SERVICE_TEMPLATE folder. The full `manifest.json` will be generated at the run time. You can overwrite the dafult template by restating the value of json fields. 
+Please create a manifest file named `manifest_compact.json` if you want to use predefined templates in the packages/TEMPLATE/SERVICE_TEMPLATE folder. The full `manifest.json` will be generated at the run time. You can overwrite the default template by restating the value of JSON fields. 
 
 You can also create a `manifest.json` file directly if you don't need the template.
 

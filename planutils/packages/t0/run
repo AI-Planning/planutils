@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# apptainer run -e $(dirname $0)/conformant-translator.sif -pl t0 $@
+planutils run conformant-translator -- -pl t0 $@

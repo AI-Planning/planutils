@@ -144,17 +144,19 @@ def remote(target, options):
         sys.exit(f"Call string does not match the remote call: {remote_package['endpoint']['services']['solve']['call']}")
 
     call_map = {}
+    index = 0
     for i, step in enumerate(call_parts[1:]):
         if '{' == step[0] and '}' == step[-1]:
             option = step[1:-1]
-            call_map[option] = options[i]
+            call_map[option] = options[index]
             if option not in args:
                 sys.exit(f"Option {option} from call string is not defined in the remote call: {remote_call}")
             if args[option]['type'] == 'file':
-                with open(options[i], 'r') as f:
+                with open(options[index], 'r') as f:
                     json_options[option] = f.read()
             else:
-                json_options[option] = options[i]
+                json_options[option] = options[index]
+            index += 1
 
     rcall = remote_call
     for k, v in call_map.items():

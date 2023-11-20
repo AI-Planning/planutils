@@ -2,6 +2,14 @@
     "name": "ENHSP: Expressive Numeric Heuristic Search Planner",
     "description": "Supports classical and numeric planning (PDDL2.1), optimal simple numeric planning, satisficing non-linear numeric planning, autonomous processes and discrete events (PDDL+), and more.",
     "homepage": "https://sites.google.com/view/enhsp",
-    "install-size": "20K",
-    "dependencies": ["enhsp-2019"]
+    "install-size": "138M",
+    "dependencies": [],
+    "endpoint": {
+      "services": {
+        "solve": {
+          "template": "planner",
+          "call":"{package_name} -o {domain} -f {problem} >> plan"
+        }
+      }
+    }
 }

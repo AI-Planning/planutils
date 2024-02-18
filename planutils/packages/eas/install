@@ -8,6 +8,7 @@ then
     exec sudo "$0" "$@"
     exit $?
   fi
+  apt update
   apt install -y pypy3-dev
 fi
 

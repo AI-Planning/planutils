@@ -11,7 +11,7 @@ then
   apt install -y pypy3-dev
 fi
 
-git clone git@github.com:melahi/enhanced-action-splitter.git
+git clone https://github.com/melahi/enhanced-action-splitter.git
 cd enhanced-action-splitter
 pypy3 -m pip install -r requirements.txt
 mv split.py split

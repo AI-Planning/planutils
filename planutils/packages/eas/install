@@ -14,6 +14,7 @@ fi
 
 git clone https://github.com/melahi/enhanced-action-splitter.git
 cd enhanced-action-splitter
+pypy3 -m pip install setuptools --upgrade
 pypy3 -m pip install -r requirements.txt
 mv split.py split
 mv merge_plan.py merge_plan

@@ -1,0 +1,6 @@
+{
+    "name": "Enhanced Action Splitter (EAS)",
+    "description": "Enhanced Action Splitter (EAS) efficiently splits PDDL action schemas into smaller actions suitable for grounding. This is particularly helpful when the number of grounded actions for action schemas becomes too large for grounding-based planners to handle, effectively enabling them to solve problems they otherwise couldn't.",
+    "install-size": "920K",
+    "dependencies": []
+}

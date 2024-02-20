@@ -8,7 +8,7 @@
     "services": {
       "solve": {
         "template": "planner",
-        "call":"{package_name} -o {domain} -f {problem} >> plan",
+        "call":"{package_name} {domain} {problem}",
         "return": {
           "type": "log",
           "files": "*plan*"

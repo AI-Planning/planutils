@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if ! (dpkg-query -s pypy3-dev &>/dev/null)
+then
+  if [ "$UID" -ne 0 ]
+  then
+    echo "installation requires root access"
+    exec sudo "$0" "$@"
+    exit $?
+  fi
+  apt update
+  apt install -y pypy3-dev
+fi
+
+git clone https://github.com/melahi/enhanced-action-splitter.git
+cd enhanced-action-splitter
+pypy3 -m pip install setuptools --upgrade
+pypy3 -m pip install -r requirements.txt
+mv split.py split
+mv merge_plan.py merge_plan

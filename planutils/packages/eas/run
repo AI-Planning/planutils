@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+if [[ "$1" == "" || "$1" == "-h" || "$1" == "--help" || "$1" == "help" ]]
+then
+  echo
+  echo "eas [help|<command>]"
+  echo
+  echo "<command> can be:"
+  echo "    split: Produces the split version of the problem instance."
+  echo "    merge_plan: Merges the plan for the split instance to construct a solution for the original problem"
+  echo
+  echo "To get specific help for <command>:"
+  echo "eas <command> -h"
+  echo
+else
+  $(dirname "$0")/enhanced-action-splitter/"$1" ${@:2}
+fi

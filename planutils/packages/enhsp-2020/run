@@ -1,7 +1,3 @@
 #!/bin/bash
 
-DOMAIN=$1
-PROBLEM=$2
-shift 2
-
-singularity run -e $(dirname $0)/enhsp-2020.sif -o $DOMAIN -f $PROBLEM >> plan $@
+singularity run -e $(dirname $0)/enhsp-2020.sif $@

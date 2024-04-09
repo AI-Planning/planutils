@@ -1,0 +1,7 @@
+{
+    "name": "Translator-based conformant planners. T0 and dDNNF-based",
+    "description": "Conformant planner",
+    "homepage": "https://github.com/hectorpal/translation-based-planners",
+    "install-size": "243M",
+    "dependencies": []
+}

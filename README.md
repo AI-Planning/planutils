@@ -1,13 +1,25 @@
 # planutils
 
-General library for setting up linux-based environments for developing, running, and evaluating planners.
+A general library for setting up Linux-based environments for developing, running, and evaluating planners.
 
+There are several ways to use planutils.
+The easiest ones, based on the provided Docker image, are explained below.
+If you use planutils for a publication, please cite the following paper:
+
+```
+@InProceedings{muise-et-al-icaps2022systemdemos,
+  author       = "Christian Muise and Florian Pommerening and Jendrik Seipp and Michael Katz",
+  title        = "Planutils: Bringing Planning to the Masses",
+  booktitle    = "{ICAPS} 2022 System Demonstrations",
+  year         = "2022"
+}
+```
 
 ## 1. Running the latest Docker release
 
-The released Docker image comes with the latest planutils pre-installed. Note that in order to
-run a number of the planners (all those that are based on singularity), you will need
-to run the docker with the `--privileged` option.
+The released Docker image comes with the latest planutils pre-installed.
+This means that in order to run the latest release, it is not necessary to clone this repository.
+Note that in order to run some of the planners (all those that are based on singularity), you will need to run Docker with the `--privileged` option.
 
 **Run the planutils container**
 ```sh
@@ -19,11 +31,9 @@ docker run -it --privileged aiplanning/planutils:latest bash
 planutils activate
 ```
 
-This means that in order to run the latest release, it is not necessary to clone this repository.
-
 ## 2. Making your own image with desired solvers
 
-Below is an example for creating your own Dockerfile based on the latest release, with pre-installed solvers
+Below is an example for creating your own Dockerfile based on the latest release, with pre-installed solvers.
 ```sh
 FROM aiplanning/planutils:latest
 
@@ -36,14 +46,14 @@ RUN planutils install -y smtplan
 ```
 
 ## 3. Running planutils from source
-You can also run the latest unreleased version. For this, clone this repository and run 
+You can also run the latest unreleased version. For this, clone this repository and run
 ```sh
 docker build . -t planutils-dev:latest
 ```
 
 ## 4. Usage
 
-### Example of currently working functionality
+### Example of current functionality
 
 ```
 $ lama domain.pddl problem.pddl
@@ -93,7 +103,6 @@ Installing Lab...
 Configuring Lab...
 Ready!
 Run eval.py to evaluate
-
 $
 ```
 
@@ -101,12 +110,12 @@ $
 
 ## 5. Add a new package
 ### Package Configuration
-1. Create a folder for new pacakeg, the package name will be the used to call the planner later
-2. Set up the `install`, `run`,  `uninstall`, and manifest file. You can find the template files under packages/TEMPLATE folder
+1. Create a folder for the new package, the folder name will be the used to call the planner later.
+2. Set up the `install`, `run`,  `uninstall`, and `manifest.json` files. You can find the template files under `packages/TEMPLATE`.
 
 ### Write Manifest file
 
-Please create a manifest file named `manifest_compact.json` if you want to use predefined templates in the packages/TEMPLATE/SERVICE_TEMPLATE folder. The full `manifest.json` will be generated at the run time. You can overwrite the dafult template by restating the value of json fields. 
+Create a manifest file named `manifest_compact.json` if you want to use predefined templates in the `packages/TEMPLATE/SERVICE_TEMPLATE` folder. The full `manifest.json` will be generated at run time. You can overwrite the default template by restating the value of some JSON fields.
 
 You can also create a `manifest.json` file directly if you don't need the template.
 
@@ -146,7 +155,7 @@ You can also create a `manifest.json` file directly if you don't need the templa
 ```
 **Define Args**
 
-There are four types of Args: `file`, `int`, `string` and,`categorical`. You can add default value for `int`,`string`, and `categorical` arguments
+There are four types of Args: `file`, `int`, `string` and,`categorical`. You can add default values for `int`,`string`, and `categorical` arguments.
 
 ```json
  "args": [
@@ -187,9 +196,9 @@ There are four types of Args: `file`, `int`, `string` and,`categorical`. You can
 ```
 **Define Return Types**
 
-There are three types of return data: `generic`, `json` and `log`. The `generic` type should be used for all the text based result, the `log` type should be used for planner like Optic and Tfd which didn't generate a proper plan, and the type `json` should used for plan in JSON format.
+There are three types of return data: `generic`, `json` and `log`. The `generic` type should be used for all text based results, the `log` type should be used for planners like Optic and Tfd which don't generate "proper" plans, and the `json` type should be used for plans in JSON format.
 
-For the value of `files`, you will have to write a [glob](https://docs.python.org/3/library/glob.html) pattern. Planning-as-service backend uses `glob` libary to find and return all the files that matched. 
+For the value of `files`, you will have to write a [glob](https://docs.python.org/3/library/glob.html) pattern. The planning-as-service backend uses the `glob` library to find and return all the files that matched.
 ```json
 "return": {
                     "type": "generic/log/json",

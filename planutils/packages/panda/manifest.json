@@ -1,0 +1,14 @@
+{
+    "name": "PANDA",
+    "description": "HTN Planner.",
+    "homepage": "https://panda-planner-dev.github.io/",
+    "install-size": "0M",
+    "dependencies": [],
+    "endpoint": {
+      "services": {
+        "solve": {
+          "template": "planner"
+        }
+      }
+    }
+}

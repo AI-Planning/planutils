@@ -1,0 +1,14 @@
+{
+    "name": "PANDA",
+    "description": "PANDA is a framework that combines different techniques related to Hierarchical Task Network (HTN) planning. PANDA is an acronym for Planning and Acting in a Network Decomposition Architecture. PANDA has been developed at the Institute of Artificial Intelligence at Ulm University headed by Susanne Biundo.",
+    "homepage": "https://panda-planner-dev.github.io/",
+    "install-size": "31M",
+    "dependencies": [],
+    "endpoint": {
+      "services": {
+        "solve": {
+          "template": "planner"
+        }
+      }
+    }
+}

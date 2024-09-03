@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build panda.sif docker://pandaplanner/panda:latest

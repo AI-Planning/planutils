@@ -1,3 +1,4 @@
 #!/bin/bash
 
-apptainer build enhsp.sif docker://enricos83/enhsp:latest
+# apptainer build enhsp.sif docker://enricos83/enhsp:latest
+apptainer pull --library https://library.sylabs.io enhsp.sif library://enricos83/enhsp/enhsp:latest

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 -m pip install kstar-planner==1.4.6

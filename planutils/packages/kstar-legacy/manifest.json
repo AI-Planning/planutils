@@ -1,0 +1,38 @@
+{
+  "name": "K* planner: integrating the K* algorithm into Fast Downward",
+  "description": "The first K∗ based solver for PDDL planning tasks; it is best suited for problems with very large solution set-size requirements (>1,000).",
+  "homepage": "https://github.com/ctpelok77/kstar",
+  "install-size": "36M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "args":[
+          {
+            "name": "search_algorithm",
+            "type": "categorical",
+            "description": "Search Algorithm",
+            "choices":[
+              {
+                "display_value":"Kstar Blind k=1",
+                "value":"kstar(blind(),k=1)"
+              },
+              {
+                "display_value":"Kstar Blind k=2",
+                "value":"kstar(blind(),k=2)"
+              }
+            ],
+            "default":"kstar(blind(),k=1)"
+          }
+        ],
+        "call":"{package_name} {domain} {problem} --search '{search_algorithm}'",
+        "return": {
+          "type": "generic",
+          "files": "found_plans/sas_plan.*"
+        }
+      }
+
+    }
+  }
+}

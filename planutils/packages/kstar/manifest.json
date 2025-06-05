@@ -8,7 +8,38 @@
     "services": {
       "solve": {
         "template": "planner",
-        "call":"{package_name} -k 10 -q 1.0 -H lmcut {domain} {problem} >> plan",
+        "args":[
+          {
+            "name": "number_of_plans",
+            "type": "int",
+            "description": "Number of Plans",
+            "default": 10
+          },
+          {
+            "name": "quality",
+            "type": "generic",
+            "description": "Quality bound",
+            "default": "1.0"
+          },
+          {
+            "name": "unordered",
+            "type": "categorical",
+            "description": "Unordered top-quality",
+            "choices":[
+              {
+                "display_value":"Unordered top-quality planner",
+                "value":"--unordered"
+              },
+              {
+                "display_value":"Top-quality planner",
+                "value":""
+              }
+            ],
+            "default":"--unordered"
+          }
+
+        ],
+        "call":"{package_name} -k {number_of_plans} -q {quality} -H lmcut {unordered} {domain} {problem} >> plan",
         "return": {
           "type": "log",
           "files": "*plan*"

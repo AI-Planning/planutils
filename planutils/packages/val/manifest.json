@@ -15,7 +15,7 @@
               "description": "plan to validate"
             }
           ],
-          "call":"{package_name} Validate -v {domain} {problem} {plan}",
+          "call":"{package_name} Validate -v {domain} {problem} {plan} > val.log 2>&1",
           "return": {
             "type": "log",
             "files": "val.log"

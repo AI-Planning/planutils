@@ -1,0 +1,8 @@
+{
+    "name": "The Powerlifted planning system",
+    "shortname": "pwl",
+    "description": "Powerlifted is a domain-independent classical planner that uses only lifted representations. The planner supports the STRIPS formalism, but extended with inequalities, types, and object creation (e.g., :new ?b - block).",
+    "homepage": "https://github.com/abcorrea/powerlifted",
+    "install-size": "227M",
+    "dependencies": []
+}

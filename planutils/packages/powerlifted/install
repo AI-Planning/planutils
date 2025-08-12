@@ -1,0 +1,3 @@
+#!/bin/bash
+
+apptainer build powerlifted.sif docker://abcorrea/powerlifted:latest

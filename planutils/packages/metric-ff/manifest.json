@@ -18,9 +18,20 @@
                     {
                         "name": "cost_minimization",
                         "description": "Whether or not to use cost-minimizing relaxed plans with A*.",
-                        "type": "boolean",
-                        "default": true
-                    }
+                        "type": "categorical",
+                        "default": 1,
+                        [
+                            {
+                            "display_value":
+                            "Use them [default]",
+                            "value": 1
+                                },
+                            {"display_value":
+                             "Do not use.",
+                             "value": 0
+                             }
+                        ]
+                    },
                     {
                         "name": "cost_bound",
                         "type": "float",

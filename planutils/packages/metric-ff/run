@@ -36,6 +36,7 @@ ERR=$WORK_DIR/ff.err
 
 args=""
 weight=""
+cost_min=1
 
 while getopts 'r:s:w:b:c:o:f:' opt; do
     case "$opt" in
@@ -74,7 +75,7 @@ if [ ${search} -lt 0 || ${search} -gt 5 ]; then
 fi
 # Handle arguments for optimization
 if [ ${search} -ge 3 ]; then
-    if [ ${cost_min} == "false" ]; then
+    if [ ! ${cost_min} ]; then
         args+=" -C"
     fi
     args+=" -w ${weight}"

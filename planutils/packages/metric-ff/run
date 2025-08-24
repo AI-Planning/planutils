@@ -34,10 +34,56 @@ trap cleanup EXIT
 OUT=$WORK_DIR/ff.out
 ERR=$WORK_DIR/ff.err
 
-DOMAIN=$1
-PROBLEM=$2
+args=""
+weight=""
+
+while getopts 'r:s:w:b:c:o:f:' opt; do
+    case "$opt" in
+        r)
+            args+=" -r ${OPTARG}"
+            ;;
+        s)
+            search="${OPTARG}"
+            args+=" -s ${OPTARG}"
+            ;;
+        w)
+            weight="${OPTARG}"
+            ;;
+        b)
+            bound="${OPTARG}"
+            ;;
+        c)
+            cost_min=${OPTARG}
+            ;;
+        o)
+            args+=" -o ${OPTARG}"
+            ;;
+        f)
+            args+=" -s ${OPTARG}"
+            ;;
+        ?)
+        echo "Unexpected argument flag: $opt" > $ERR
+        exit 1
+        ;;
+    esac
+done
+
+if [ ${search} -lt 0 || ${search} -gt 5 ]; then
+    echo "Invalid search configuration: ${search}" > $ERR
+    exit 1
+fi
+# Handle arguments for optimization
+if [ ${search} -ge 3 ]; then
+    if [ ${cost_min} == "false" ]; then
+        args+=" -C"
+    fi
+    args+=" -w ${weight}"
+    if [ "${bound}x" != "x" ]; then
+        args+=" -b ${bound}"
+fi
+        
 shift 2
-$FF -o $DOMAIN -f $PROBLEM $@ > $OUT 2>$ERR
+$FF ${args} > $OUT 2>$ERR
 # Getting plan
 grep '[0-9]:' $OUT | cut -d : -f 2- | \
   awk '{$1=$1;print}' | \

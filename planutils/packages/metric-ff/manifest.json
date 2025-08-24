@@ -1,14 +1,79 @@
 {
-  "name": "Metric Fast-Forward: extended with numerical state variables",
-  "description": "The system is an extension of the FF planner to numerical state variables, more precisely to PDDL2.1 level 2.",
-  "homepage": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
-  "install-size": "1.8M",
-  "dependencies": [],
-  "endpoint": {
-    "services": {
-      "solve": {
-        "template": "planner"
-      }
+    "name": "Metric Fast-Forward: extended with numerical state variables",
+    "description": "The system is an extension of the FF planner to numerical state variables, more precisely to PDDL2.1 level 2.",
+    "homepage": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
+    "install-size": "1.8M",
+    "dependencies": [],
+    "endpoint": {
+        "services": {
+            "solve": {
+                "template": "planner",
+                "args": [
+                    {
+                        "name": "random_seed",
+                        "type": "int",
+                        "description": "Random seed (for random restarts)",
+                        "default": 0
+                    },
+                    {
+                        "name": "cost_minimization",
+                        "description": "Whether or not to use cost-minimizing relaxed plans with A*.",
+                        "type": "boolean",
+                        "default": true
+                    }
+                    {
+                        "name": "cost_bound",
+                        "type": "float",
+                        "description": "Upper bound on solution cost (with cost minimization).",
+                    },
+                    {
+                        "name": "search_configuration",
+                        "type": "categorical",
+                        "description": "Search configuration.",
+                        "choices": [
+                            {
+                                "display_value": "Standard-FF: EHC+H then BFS (cost minimization: NO)",
+                                "value": 0
+                            },
+                            {
+                                "display_value": "BFS (cost minimization: NO)",
+                                "value": 1
+                            }
+                            {
+                                "display_value": "BFS + helpful actions pruning (cost minimization: NO)",
+                                "value": 2
+                            },
+                            {
+                                "display_value":
+                                "Weighted A* (cost minimization: YES)",
+                                "value": 3
+                            },
+                            {
+                                "display_value":
+                                "A*epsilon (cost minimization: YES)",
+                                "value": 4
+                            },
+                            {
+                                "display_value":
+                                "EHC + helpful actions pruning, then A*epsilon (cost minimization: YES)",
+                                "value": 5
+                            }
+                        ]
+                    },
+                    {
+                        "name": "weight",
+                        "default": 5,
+                        "description": "Weight for search configs in A*."
+                    }
+                ],
+                "call":
+                "{package_name} -r {random_seed} -s {search_configuration} -w {weight} -b {cost_bound} -c {cost_minimization} -o {domain} -f {problem} >> plan",
+                "return": {
+                    "type": "log",
+                    "files": "*plan*"
+                }
+            }
+        }
     }
-  }
 }
+

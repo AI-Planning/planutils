@@ -1,0 +1,29 @@
+{
+  "name": "Metric Fast-Forward 2.0: extended with numerical state variables and axioms",
+  "description": "The system is an extension of the FF planner to numerical state variables, more precisely to PDDL2.1 level 2.",
+  "homepage": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
+  "install-size": "1.3M",
+  "dependencies": [],
+  "endpoint": {
+    "services": {
+      "solve": {
+        "template": "planner",
+        "args": [
+          {
+            "description": "Search configuration [preset: s=0]; '+H': helpful actions pruning\n 0     Standard-FF: EHC+H then BFS (cost minimization: NO)\n 1     BFS (cost minimization: NO)\n 2     BFS+H (cost minimization: NO)\n 3     Weighted A* (cost minimization: YES)\n 4     A*epsilon (cost minimization: YES)\n 5     EHC+H then A*epsilon (cost minimization: YES)",
+            "name": "searchflag",
+            "type": "int",
+            "default": 5
+          },
+          {
+            "name": "weightval",
+            "description": "Set weight w for search configs 3,4,5 [preset: w=5]",
+            "type": "int",
+            "default": 5
+          }
+        ],
+        "call": "{package_name} {domain} {problem} -s {searchflag} -w {weightval}"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-wget -q 'https://github.com/siftech/metric-ff/releases/download/metric-ff-sift-2.0.2/metric-ff.gz'
+wget -q 'https://github.com/siftech/metric-ff/releases/download/v2.0.3/metric-ff.gz'
 gunzip metric-ff.gz
 chmod +x metric-ff

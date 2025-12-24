@@ -1,6 +1,6 @@
 {
   "name": "Metric Fast-Forward 2.0: extended with numerical state variables and axioms",
-  "description": "The system is an extension of the FF planner to numerical state variables and axioms, more precisely to PDDL2.1 level 2.",
+  "description": "The system is an extension of the FF planner to numerical state variables\n(fluents) and axioms (derived predicates),\nmore precisely to PDDL2.1 level 2.\nThe standard version of Metric-FF does not handle axioms.\nUse note: The output plan will be found in `results[\"output\"][\"problem.plan\"]`\n",
   "homepage": "https://fai.cs.uni-saarland.de/hoffmann/metric-ff.html",
   "install-size": "1.3M",
   "dependencies": [],

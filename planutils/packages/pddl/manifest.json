@@ -1,0 +1,54 @@
+{
+    "name": "PDDL: PDDL 3.1 syntax validator",
+    "description": "Tools for parsing and syntax-validating PDDL domains, problems, and plans using the AI-Planning/pddl parser.",
+    "homepage": "https://github.com/AI-Planning/pddl",
+    "install-size": "1M",
+    "dependencies": [],
+    "runnable": true,
+    "endpoint": {
+        "services": {
+            "validate_domain": {
+                "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    }
+                ],
+                "call": "pddl domain {domain} > pddl_domain.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_domain.log"
+                }
+            },
+            "validate_problem": {
+                "args": [
+                    {
+                        "name": "problem",
+                        "type": "file",
+                        "description": "problem file to validate"
+                    }
+                ],
+                "call": "pddl problem {problem} > pddl_problem.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_problem.log"
+                }
+            },
+            "validate_plan": {
+                "args": [
+                    {
+                        "name": "plan",
+                        "type": "file",
+                        "description": "plan file to validate"
+                    }
+                ],
+                "call": "pddl plan {plan} > pddl_plan.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_plan.log"
+                }
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@
           "call":"{package_name} {domain} {problem} {number_of_plans}",
           "return": {
             "type": "generic",
-            "files": "found_plans/done/sas_plan.*"
+            "files": "found_plans/sas_plan.*"
           }
         }
 

@@ -15,35 +15,50 @@
                         "description": "domain file to validate"
                     }
                 ],
-                "call": "pddl domain {domain} > pddl_domain.log 2>&1",
+                "call": "pddl {domain} > pddl_domain.log 2>&1",
                 "return": {
                     "type": "log",
                     "files": "pddl_domain.log"
                 }
             },
-            "validate_problem": {
+            "validate_task": {
                 "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    },
                     {
                         "name": "problem",
                         "type": "file",
                         "description": "problem file to validate"
                     }
                 ],
-                "call": "pddl problem {problem} > pddl_problem.log 2>&1",
+                "call": "pddl {domain} {problem} > pddl_task.log 2>&1",
                 "return": {
                     "type": "log",
-                    "files": "pddl_problem.log"
+                    "files": "pddl_task.log"
                 }
             },
             "validate_plan": {
                 "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    },
+                    {
+                        "name": "problem",
+                        "type": "file",
+                        "description": "problem file to validate"
+                    },
                     {
                         "name": "plan",
                         "type": "file",
                         "description": "plan file to validate"
                     }
                 ],
-                "call": "pddl plan {plan} > pddl_plan.log 2>&1",
+                "call": "pddl {domain} {problem} {plan} > pddl_plan.log 2>&1",
                 "return": {
                     "type": "log",
                     "files": "pddl_plan.log"

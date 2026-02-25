@@ -1,0 +1,69 @@
+{
+    "name": "PDDL: PDDL 3.1 syntax validator",
+    "description": "Tools for parsing and syntax-validating PDDL domains, problems, and plans using the AI-Planning/pddl parser.",
+    "homepage": "https://github.com/AI-Planning/pddl",
+    "install-size": "1M",
+    "dependencies": [],
+    "runnable": true,
+    "endpoint": {
+        "services": {
+            "validate_domain": {
+                "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    }
+                ],
+                "call": "pddl {domain} > pddl_domain.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_domain.log"
+                }
+            },
+            "validate_task": {
+                "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    },
+                    {
+                        "name": "problem",
+                        "type": "file",
+                        "description": "problem file to validate"
+                    }
+                ],
+                "call": "pddl {domain} {problem} > pddl_task.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_task.log"
+                }
+            },
+            "validate_plan": {
+                "args": [
+                    {
+                        "name": "domain",
+                        "type": "file",
+                        "description": "domain file to validate"
+                    },
+                    {
+                        "name": "problem",
+                        "type": "file",
+                        "description": "problem file to validate"
+                    },
+                    {
+                        "name": "plan",
+                        "type": "file",
+                        "description": "plan file to validate"
+                    }
+                ],
+                "call": "pddl {domain} {problem} {plan} > pddl_plan.log 2>&1",
+                "return": {
+                    "type": "log",
+                    "files": "pddl_plan.log"
+                }
+            }
+        }
+    }
+}

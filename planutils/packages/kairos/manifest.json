@@ -1,0 +1,7 @@
+{
+    "name": "Kairos",
+    "description": "Temporal, numeric and PDDL+ planner: PDDL 2.1 to 3.1, durative actions, timed initial literals, preferences and trajectory constraints, object fluents, processes, events and continuous effects, and planning without grounding for tasks too large to ground. Anytime; every plan is validated.",
+    "homepage": "https://github.com/PlanSys2/kairos",
+    "install-size": "33MB",
+    "dependencies": []
+}

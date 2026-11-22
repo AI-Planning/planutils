@@ -1,0 +1,3 @@
+#!/bin/bash
+
+singularity pull --name kairos.sif https://github.com/PlanSys2/kairos/releases/download/1.0.0/kairos-1.0.0.sif
